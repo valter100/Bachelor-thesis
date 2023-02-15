@@ -31,11 +31,12 @@ public class Movement : MonoBehaviour
         //velocity += acceleration;
         //velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed * Time.deltaTime;
         transform.position += transform.forward * Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
+        transform.position += transform.right * Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
 
         if (Input.GetMouseButton(1))
         {
             float xRotation = Input.GetAxis("Mouse X") * rotationSpeed * Mathf.Deg2Rad;
-            float yRotation = Input.GetAxis("Mouse Y") * rotationSpeed * Mathf.Deg2Rad;
+            float yRotation = Input.GetAxis("Mouse Y") * rotationSpeed * Mathf.Deg2Rad * -1;
 
             transform.Rotate(Vector3.up, xRotation);
             transform.Rotate(Vector3.right, yRotation);
