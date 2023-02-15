@@ -123,15 +123,17 @@ public class Tile : MonoBehaviour
 
     public void Select()
     {
-        previousColor = GetComponent<Renderer>().material.color;
+        //previousColor = GetComponent<Renderer>().material.color;
         transform.position += new Vector3(0, 0.5f, 0);
-        GetComponent<Renderer>().material.color = selectedColor;
+        GetComponent<Animator>().SetBool("Selected", true);
+        //GetComponent<Renderer>().material.color = selectedColor;
     }
 
     public void Deselect()
     {
         GetComponent<Renderer>().material.color = previousColor;
         transform.position = new Vector3(transform.position.x, height / 2, transform.position.z);
+        GetComponent<Animator>().SetBool("Selected", false);
     }
 
     public void SetPartOfSubgrid(Tile[,] _subgrid)
