@@ -15,7 +15,6 @@ public class Grid : MonoBehaviour
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
     [SerializeField] AI ai;
-    [SerializeField] MouseInput mouseInput;
     // Start is called before the first frame update
     void Start()
     {

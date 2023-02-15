@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,18 @@ public class AI : MonoBehaviour
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
 
+    StreamReader sr;
+    StreamWriter sw;
+
+    TextAsset memory;
+    string path;
     Grid grid;
+
 
     private void Start()
     {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
+        path = "Assets/TextFiles/memory.txt";
     }
 
     public enum ChatOption
@@ -28,6 +36,7 @@ public class AI : MonoBehaviour
     public void GiveTip(int tipIndex)
     {
         Toggle(true);
+        tipIndex = 0;
 
         if (tipIndex == 0)
         {
@@ -37,29 +46,33 @@ public class AI : MonoBehaviour
         {
             tipMessage.text = "I noticed you created your grid! Are you happy with how smooth the terrain is? Or do you want it smoother or rougher?";
         }
-
     }
 
     public void ChooseOption(int index)
     {
         chatOption = (ChatOption)index;
 
+        sw = new StreamWriter(path);
 
         if (index == 0)
         {
             grid.SetGridDimension(32, 32, 32);
+            sw.Write("GridDimensions: 32, 32, 32");
+            
         }
         else if (index == 1)
         {
             grid.SetGridDimension(64, 64, 64);
+            sw.Write("GridDimensions: 64, 64, 64");
         }
         else
         {
             grid.SetGridDimension(96, 96, 96);
+            sw.Write("GridDimensions: 96, 96, 96");
         }
 
+        sw.Close();
         Toggle(false);
-
     }
 
     void Toggle(bool state)
@@ -72,4 +85,5 @@ public class AI : MonoBehaviour
         image.gameObject.SetActive(state);
     }
 
+    
 }
