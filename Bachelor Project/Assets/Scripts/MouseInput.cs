@@ -45,10 +45,15 @@ public class MouseInput : MonoBehaviour
                     }
 
                     grid.CreateSubgrid(startCoordinates, endCoordinates);
+                    checkForInput = false;
+
+                   
                 }
             }
         }
     }
+
+    public void CheckForInput() => checkForInput = true;
 
     public Vector2 GetStartCoordinates() => startCoordinates;
     public Vector2 GetEndCoordinates() => endCoordinates;
