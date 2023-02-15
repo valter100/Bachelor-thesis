@@ -8,14 +8,16 @@ public class Tile : MonoBehaviour
     float height = 0;
     [SerializeField] List<Tile> adjacentTiles;
     [SerializeField] Grid grid;
+    Tile[,] subgrid;
     [SerializeField] float heightScale;
-    //bool partOfSubgrid;
+    [SerializeField] bool partOfSubgrid;
     bool visited;
     bool highlighted;
     Color highlightedColor;
     Color baseColor;
 
     Color previousColor;
+    Color selectedColor;
 
     private void Awake()
     {
@@ -94,12 +96,16 @@ public class Tile : MonoBehaviour
         this.baseColor = baseColor;
         this.highlightedColor = highlightedColor;
         GetComponent<Renderer>().material.color = baseColor;
+        selectedColor = baseColor;
+        selectedColor.a /= 2;
     }
 
     public void SetColor(Color color)
     {
         previousColor = color;
         GetComponent<Renderer>().material.color = color;
+        selectedColor = color;
+        selectedColor /= 2;
     }
 
     public void Highlight()
@@ -115,14 +121,42 @@ public class Tile : MonoBehaviour
         highlighted = false;
     }
 
-    //public void SetPartOfSubgrid(bool state)
-    //{
-    //    partOfSubgrid = state;
-    //}
+    public void Select()
+    {
+        previousColor = GetComponent<Renderer>().material.color;
+        transform.position += new Vector3(0, 0.5f, 0);
+        GetComponent<Renderer>().material.color = selectedColor;
+    }
 
+    public void Deselect()
+    {
+        GetComponent<Renderer>().material.color = previousColor;
+        transform.position = new Vector3(transform.position.x, height / 2, transform.position.z);
+    }
+
+    public void SetPartOfSubgrid(Tile[,] _subgrid)
+    {
+        partOfSubgrid = true;
+        subgrid = _subgrid;
+    }
+
+    public void RemoveFromSubgrid()
+    {
+        for(int i = 0; i < subgrid.GetLength(0); i++)
+        {
+            for(int j = 0; j < subgrid.GetLength(1); j++)
+            {
+                if (subgrid[i,j] == this)
+                {
+                    subgrid[i, j] = null;
+                }
+            }
+        }
+    }
     public List<Tile> AdjacentTiles() => adjacentTiles;
     public float Height() => height;
     public bool Highlighted() => highlighted;
-    //public bool PartOfSubgrid() => partOfSubgrid;
-    
+    public bool PartOfSubgrid() => partOfSubgrid;
+    public Tile[,] Subgrid() => subgrid;
+
 }

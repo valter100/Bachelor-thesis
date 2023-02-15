@@ -1,1 +1,1 @@
-GridDimensions: 64, 64, 64
+GridDimensions: 32, 32, 32

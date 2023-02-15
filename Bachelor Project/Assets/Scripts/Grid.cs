@@ -60,10 +60,6 @@ public class Grid : MonoBehaviour
         }
 
         ai.GiveTip(1);
-
-        //Create subgridList that spans a part of the grid that allows different settings
-        //Create the subgrid yourself by dragging or having the assistant provide one for you
-        //Mountainous grid that has higher height span to create more extreme terrain
     }
 
     public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
@@ -72,8 +68,13 @@ public class Grid : MonoBehaviour
 
         foreach(Tile tile in subgrid)
         {
+            if(tile.PartOfSubgrid())
+            {
+                tile.RemoveFromSubgrid();
+            }
+
             tile.SetColor(subgridColor);
-            //tile.SetPartOfSubgrid(true);
+            tile.SetPartOfSubgrid(subgrid);
         }
 
         subgridColor = Random.ColorHSV();

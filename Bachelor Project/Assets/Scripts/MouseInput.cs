@@ -6,44 +6,62 @@ using UnityEngine;
 public class MouseInput : MonoBehaviour
 {
     List<GameObject> highlightedGameObjects = new List<GameObject>();
-    [SerializeField] bool checkForInput;
+    [SerializeField] bool creatingSubgrid;
     bool hasStartCoord;
     [SerializeField] Grid grid;
+
+    Tile[,] selectedGrid;
 
     Vector2 startCoordinates, endCoordinates;
 
     void Start()
     {
-        checkForInput = false;
+        creatingSubgrid = false;
     }
 
     void Update()
     {
-        if (!checkForInput)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit tileHit;
-
-            if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
+            if (selectedGrid != null)
             {
-                if (tileHit.transform.gameObject.tag == "tile")
+                foreach (Tile tile in selectedGrid)
                 {
-                    startCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
-                    StartCoroutine("CreateSubgrid");
+                    if (tile != null)
+                        tile.Deselect();
                 }
-                Debug.Log("startCoordinates are: " + startCoordinates);
             }
-            else
-                return;
         }
 
+        Tile clickedTile = GetTileFromMousePos();
+
+        if (!clickedTile)
+            return;
+
+        if (Input.GetMouseButtonDown(0) && creatingSubgrid)
+        {
+            startCoordinates = clickedTile.GetCoordinates();
+            StartCoroutine("CreateSubgrid");
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            if (clickedTile.PartOfSubgrid())
+            {
+                selectedGrid = clickedTile.Subgrid(); //Work from here
+
+                foreach (Tile tile in selectedGrid)
+                {
+                    if (tile != null)
+                        tile.Select();
+                }
+            }
+        }
     }
 
     public IEnumerator CreateSubgrid()
     {
+        Tile[,] highlightedTiles = null;
+
         while (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -60,7 +78,7 @@ public class MouseInput : MonoBehaviour
                 {
                     endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
                 }
-                Tile[,] highlightedTiles = grid.GetTilesBetween(startCoordinates, endCoordinates);
+                highlightedTiles = grid.GetTilesBetween(startCoordinates, endCoordinates);
 
                 foreach (Tile tile in highlightedTiles)
                 {
@@ -72,14 +90,39 @@ public class MouseInput : MonoBehaviour
             yield return null;
         }
 
-        grid.CreateSubgrid(startCoordinates, endCoordinates);
+        if (highlightedTiles.Length > 0)
+        {
+            grid.CreateSubgrid(startCoordinates, endCoordinates);
+        }
+        else
+        {
 
-        checkForInput = false;
+        }
+
+        creatingSubgrid = false;
 
         yield return 0;
     }
 
-    public void CheckForInput() => checkForInput = true;
+    public Tile GetTileFromMousePos()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit tileHit;
+
+        if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
+        {
+            if (tileHit.transform.gameObject.tag == "tile")
+            {
+                Tile clickedTile = tileHit.transform.gameObject.GetComponent<Tile>();
+
+                return clickedTile;
+            }
+        }
+
+        return null;
+    }
+
+    public void CheckForInput() => creatingSubgrid = true;
 
     public Vector2 GetStartCoordinates() => startCoordinates;
     public Vector2 GetEndCoordinates() => endCoordinates;
