@@ -14,11 +14,13 @@ public class Grid : MonoBehaviour
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
+    [SerializeField] Color subgridColor;
     [SerializeField] AI ai;
     // Start is called before the first frame update
     void Start()
     {
         ai.GiveTip(0);
+        subgridColor = Random.ColorHSV();
     }
 
     private void Update()
@@ -67,6 +69,14 @@ public class Grid : MonoBehaviour
     public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
     {
         Tile[,] subgrid = GetTilesBetween(startCoordinates, endCoordinates);
+
+        foreach(Tile tile in subgrid)
+        {
+            tile.SetColor(subgridColor);
+            //tile.SetPartOfSubgrid(true);
+        }
+
+        subgridColor = Random.ColorHSV();
 
         subgridList.Add(subgrid);
         numberOfSubgrids = subgridList.Count;

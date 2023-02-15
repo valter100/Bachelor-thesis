@@ -9,10 +9,13 @@ public class Tile : MonoBehaviour
     [SerializeField] List<Tile> adjacentTiles;
     [SerializeField] Grid grid;
     [SerializeField] float heightScale;
+    //bool partOfSubgrid;
     bool visited;
     bool highlighted;
     Color highlightedColor;
     Color baseColor;
+
+    Color previousColor;
 
     private void Awake()
     {
@@ -22,6 +25,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
         grid = FindObjectOfType<Grid>();
+        previousColor = baseColor;
     }
 
     public void SetAdjacentTiles(Grid grid)
@@ -92,20 +96,33 @@ public class Tile : MonoBehaviour
         GetComponent<Renderer>().material.color = baseColor;
     }
 
+    public void SetColor(Color color)
+    {
+        previousColor = color;
+        GetComponent<Renderer>().material.color = color;
+    }
+
     public void Highlight()
     {
+        previousColor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = highlightedColor;
         highlighted = true;
     }
 
-    public void ChangeToBaseColor()
+    public void UnHighlight()
     {
-        GetComponent<Renderer>().material.color = baseColor;
+        GetComponent<Renderer>().material.color = previousColor;
         highlighted = false;
     }
+
+    //public void SetPartOfSubgrid(bool state)
+    //{
+    //    partOfSubgrid = state;
+    //}
 
     public List<Tile> AdjacentTiles() => adjacentTiles;
     public float Height() => height;
     public bool Highlighted() => highlighted;
+    //public bool PartOfSubgrid() => partOfSubgrid;
     
 }

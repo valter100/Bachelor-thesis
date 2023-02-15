@@ -38,23 +38,6 @@ public class MouseInput : MonoBehaviour
             }
             else
                 return;
-
-            //else if (hasStartCoord)
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit tileHit;
-
-            //    if (Physics.Raycast(ray, out tileHit, 100))
-            //    {
-            //        if (tileHit.transform.gameObject.tag == "tile")
-            //            endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
-            //        Debug.Log("endCoordinates are: " + endCoordinates);
-            //    }
-
-            //    grid.CreateSubgrid(startCoordinates, endCoordinates);
-            //    checkForInput = false;
-            //    hasStartCoord = false;
-            //}
         }
 
     }
@@ -68,7 +51,7 @@ public class MouseInput : MonoBehaviour
 
             foreach (Tile tile in grid.GetGrid())
             {
-                tile.ChangeToBaseColor();
+                tile.UnHighlight();
             }
 
             if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
@@ -77,9 +60,6 @@ public class MouseInput : MonoBehaviour
                 {
                     endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
                 }
-                //else
-                //    yield return null;
-
                 Tile[,] highlightedTiles = grid.GetTilesBetween(startCoordinates, endCoordinates);
 
                 foreach (Tile tile in highlightedTiles)
@@ -93,11 +73,6 @@ public class MouseInput : MonoBehaviour
         }
 
         grid.CreateSubgrid(startCoordinates, endCoordinates);
-
-        foreach(Tile tile in grid.GetTilesBetween(startCoordinates, endCoordinates))
-        {
-            tile.ChangeToBaseColor();
-        }
 
         checkForInput = false;
 
