@@ -8,10 +8,13 @@ public class Grid : MonoBehaviour
     [SerializeField] Vector3 mapDimensions;
     [SerializeField] float tileBuffer;
     Tile[,] grid;
+    List<Tile[,]> subgridList = new List<Tile[,]>();
+    [SerializeField] int numberOfSubgrids;
     bool perlin;
 
     [SerializeField] Color baseTileColor;
     [SerializeField] AI ai;
+    [SerializeField] MouseInput mouseInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class Grid : MonoBehaviour
         {
             foreach(Tile tile in grid)
             {
+                subgridList.Clear();
                 Destroy(tile.gameObject);
             }
         }
@@ -50,9 +54,46 @@ public class Grid : MonoBehaviour
 
         ai.GiveTip();
 
-        //Create subgrids that spans a part of the grid that allows different settings
+        //Create subgridList that spans a part of the grid that allows different settings
         //Create the subgrid yourself by dragging or having the assistant provide one for you
         //Mountainous grid that has higher height span to create more extreme terrain
+    }
+
+    public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
+    {
+        int sizeX, sizeY;
+        sizeX = (int)Mathf.Abs(startCoordinates.x - endCoordinates.x);
+        sizeY = (int)Mathf.Abs(startCoordinates.y - endCoordinates.y);
+
+        Tile[,] subgrid = new Tile[sizeX, sizeY];
+
+        int i = 0;
+        int j = 0;
+
+        for (int x = (int)startCoordinates.x; x < (int)endCoordinates.x; x++)
+        {
+            for (int y = (int)startCoordinates.y; y < (int)endCoordinates.y; y++)
+            {
+                subgrid[i,j] = grid[x,y];
+                j++;
+            }
+            i++;
+            j = 0;
+        }
+
+        subgridList.Add(subgrid);
+        numberOfSubgrids = subgridList.Count;
+    }
+
+    public Tile[,] GetSubgrid(int index)
+    {
+        if (subgridList.Count < index)
+        {
+            Debug.Log("Index is out of bounds. No subgrid to return");
+            return null;
+        }
+
+        return subgridList[index];
     }
 
     public Tile[,] GetGrid() => grid;

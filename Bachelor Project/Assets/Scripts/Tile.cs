@@ -46,6 +46,8 @@ public class Tile : MonoBehaviour
         coordinates = new Vector2(x, y);
     }
 
+    public Vector2 GetCoordinates() => coordinates; 
+
     public void SetHeight(bool perlin)
     {
         if (perlin)
