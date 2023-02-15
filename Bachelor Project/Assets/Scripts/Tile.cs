@@ -10,6 +10,9 @@ public class Tile : MonoBehaviour
     [SerializeField] Grid grid;
     [SerializeField] float heightScale;
     bool visited;
+    bool highlighted;
+    Color highlightedColor;
+    Color baseColor;
 
     private void Awake()
     {
@@ -82,11 +85,27 @@ public class Tile : MonoBehaviour
         transform.localScale += new Vector3(0, height, 0);
         transform.position += new Vector3(0, height / 2, 0);
     }
-    public void SetColor(Color color)
+    public void SetColors(Color baseColor, Color highlightedColor)
     {
-        GetComponent<Renderer>().material.color = color;
+        this.baseColor = baseColor;
+        this.highlightedColor = highlightedColor;
+        GetComponent<Renderer>().material.color = baseColor;
     }
+
+    public void Highlight()
+    {
+        GetComponent<Renderer>().material.color = highlightedColor;
+        highlighted = true;
+    }
+
+    public void ChangeToBaseColor()
+    {
+        GetComponent<Renderer>().material.color = baseColor;
+        highlighted = false;
+    }
+
     public List<Tile> AdjacentTiles() => adjacentTiles;
     public float Height() => height;
+    public bool Highlighted() => highlighted;
     
 }

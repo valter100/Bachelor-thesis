@@ -2255,17 +2255,17 @@ PrefabInstance:
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
@@ -2322,6 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe86c78e64bbf94a8d96b782c081144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkForInput: 0
   grid: {fileID: 1343692163}
 --- !u!1001 &4241007526318205351
 PrefabInstance:

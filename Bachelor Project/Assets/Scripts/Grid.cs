@@ -13,6 +13,7 @@ public class Grid : MonoBehaviour
     bool perlin;
 
     [SerializeField] Color baseTileColor;
+    [SerializeField] Color highlightedTileColor;
     [SerializeField] AI ai;
     [SerializeField] MouseInput mouseInput;
     // Start is called before the first frame update
@@ -47,7 +48,7 @@ public class Grid : MonoBehaviour
                 grid[i, j].transform.parent = gameObject.transform;
                 grid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
                 grid[i, j].SetCoordinates(i, j);
-                grid[i, j].SetColor(baseTileColor);
+                grid[i, j].SetColors(baseTileColor, highlightedTileColor);
             }
         }
 
@@ -66,25 +67,7 @@ public class Grid : MonoBehaviour
 
     public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
     {
-        int sizeX, sizeY;
-        sizeX = (int)Mathf.Abs(startCoordinates.x - endCoordinates.x);
-        sizeY = (int)Mathf.Abs(startCoordinates.y - endCoordinates.y);
-
-        Tile[,] subgrid = new Tile[sizeX, sizeY];
-
-        int i = 0;
-        int j = 0;
-
-        for (int x = (int)startCoordinates.x; x < (int)endCoordinates.x; x++)
-        {
-            for (int y = (int)startCoordinates.y; y < (int)endCoordinates.y; y++)
-            {
-                subgrid[i,j] = grid[x,y];
-                j++;
-            }
-            i++;
-            j = 0;
-        }
+        Tile[,] subgrid = GetTilesBetween(startCoordinates, endCoordinates);
 
         subgridList.Add(subgrid);
         numberOfSubgrids = subgridList.Count;
@@ -107,5 +90,45 @@ public class Grid : MonoBehaviour
     public void SetGridDimension(int x, int y, int z)
     {
         mapDimensions = new Vector3(x, y, z);
+    }
+
+    public Tile[,] GetTilesBetween(Vector2 startCoordinates, Vector2 endCoordinates)
+    {
+        int sizeX, sizeY;
+        sizeX = (int)Mathf.Abs(startCoordinates.x - endCoordinates.x);
+        sizeY = (int)Mathf.Abs(startCoordinates.y - endCoordinates.y);
+
+        Tile[,] tempGrid = new Tile[sizeX, sizeY];
+
+        int i = 0;
+        int j = 0;
+
+        int startX = (int)startCoordinates.x;
+        int endX = (int)endCoordinates.x;
+        int startY = (int)startCoordinates.y;
+        int endY = (int)endCoordinates.y;
+        
+        if(startX > endX)
+        {
+            (startX, endX) = (endX, startX);
+        }
+
+        if(startY > endY)
+        {
+            (startY, endY) = (endY, startY);
+        }
+
+        for (int x = startX; x < endX; x++)
+        {
+            for (int y = startY; y < endY; y++)
+            {
+                tempGrid[i, j] = grid[x, y];
+                j++;
+            }
+            i++;
+            j = 0;
+        }
+
+        return tempGrid;
     }
 }
