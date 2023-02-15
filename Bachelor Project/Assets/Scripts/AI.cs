@@ -13,9 +13,11 @@ public class AI : MonoBehaviour
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
 
+    Grid grid;
+
     private void Start()
     {
-        Toggle(false);
+        grid = GameObject.Find("Grid").GetComponent<Grid>();
     }
 
     public enum ChatOption
@@ -23,10 +25,18 @@ public class AI : MonoBehaviour
         one, two, three
     }
 
-    public void GiveTip()
+    public void GiveTip(int tipIndex)
     {
         Toggle(true);
-        tipMessage.text = "Hey! I noticed you created your grid! Are you happy with how smooth the terrain is? Or do you want it smoother or rougher?";
+
+        if (tipIndex == 0)
+        {
+            tipMessage.text = "Hey there partner! It's time for us to start constructing our first grid! What size do you want the grid to be?";
+        }
+        else
+        {
+            tipMessage.text = "I noticed you created your grid! Are you happy with how smooth the terrain is? Or do you want it smoother or rougher?";
+        }
 
     }
 
@@ -34,7 +44,19 @@ public class AI : MonoBehaviour
     {
         chatOption = (ChatOption)index;
 
-        //Do button effect
+
+        if (index == 0)
+        {
+            grid.SetGridDimension(32, 32, 32);
+        }
+        else if (index == 1)
+        {
+            grid.SetGridDimension(64, 64, 64);
+        }
+        else
+        {
+            grid.SetGridDimension(96, 96, 96);
+        }
 
         Toggle(false);
 

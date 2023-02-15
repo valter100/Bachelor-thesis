@@ -113,4 +113,4 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   adjacentTiles: []
   grid: {fileID: 0}
-  heightScale: 0.4
+  heightScale: 0.5

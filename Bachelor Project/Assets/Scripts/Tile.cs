@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] Vector2 coordinates;
-    float height;
+    float height = 0;
     [SerializeField] List<Tile> adjacentTiles;
     [SerializeField] Grid grid;
     [SerializeField] float heightScale;
@@ -55,8 +55,24 @@ public class Tile : MonoBehaviour
 
         if(adjacentTiles.Count > 0)
         {
-            float clampLow = adjacentTiles[0].Height() - heightScale;
-            float clampHigh = adjacentTiles[0].Height() + heightScale;
+            float totalHeight = 0;
+            int tilesCounted = 0;
+            foreach(Tile tile in adjacentTiles)
+            {
+                foreach(Tile adjacentTile in tile.adjacentTiles)
+                {
+                    if(tile.height > 0)
+                    {
+                        totalHeight += tile.Height();
+                        tilesCounted++;
+                    }
+                }
+            }
+
+            float averageHeight = totalHeight / tilesCounted;
+
+            float clampLow =  averageHeight - heightScale;
+            float clampHigh = averageHeight + heightScale;
 
             height = Mathf.Clamp(height, clampLow, clampHigh);
         }

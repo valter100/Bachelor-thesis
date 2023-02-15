@@ -15,7 +15,12 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ai.GiveTip(0);
+    }
+
+    private void Update()
+    {
+
     }
 
     public void CreateGrid()
@@ -48,7 +53,7 @@ public class Grid : MonoBehaviour
             tile.SetHeight(perlin);
         }
 
-        ai.GiveTip();
+        ai.GiveTip(1);
 
         //Create subgrids that spans a part of the grid that allows different settings
         //Create the subgrid yourself by dragging or having the assistant provide one for you
@@ -57,4 +62,9 @@ public class Grid : MonoBehaviour
 
     public Tile[,] GetGrid() => grid;
     public Tile getTileByCoordinate(int x, int y) => grid[x, y];
+
+    public void SetGridDimension(int x, int y, int z)
+    {
+        mapDimensions = new Vector3(x, y, z);
+    }
 }
