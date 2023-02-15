@@ -7,6 +7,7 @@ public class MouseInput : MonoBehaviour
 {
     List<GameObject> highlightedGameObjects= new List<GameObject>();
     bool checkForInput;
+    bool hasStartCoord;
     [SerializeField] Grid grid;
 
     Vector2 startCoordinates, endCoordinates;
@@ -22,18 +23,20 @@ public class MouseInput : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if(startCoordinates == null)
+                if(!hasStartCoord)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit tileHit;
 
-                    if (Physics.Raycast(ray, out tileHit, 100))
+                    if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
                     {
                         if(tileHit.transform.gameObject.tag == "tile")
                         startCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
+                        Debug.Log("startCoordinates are: " + startCoordinates); 
+                        hasStartCoord = true;
                     }
                 }
-                else if(endCoordinates == null)
+                else if(hasStartCoord)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit tileHit;
@@ -41,13 +44,13 @@ public class MouseInput : MonoBehaviour
                     if (Physics.Raycast(ray, out tileHit, 100))
                     {
                         if (tileHit.transform.gameObject.tag == "tile")
-                            endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
+                        endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
+                        Debug.Log("endCoordinates are: " + endCoordinates);
                     }
 
                     grid.CreateSubgrid(startCoordinates, endCoordinates);
                     checkForInput = false;
-
-                   
+                    hasStartCoord = false;
                 }
             }
         }
