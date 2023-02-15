@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     //[SerializeField] Vector3 maxAcceleration;
 
     //[SerializeField] Vector3 velocity;
-    //[SerializeField] float movement
+    //[SerializeField] float movement;
     void Start()
     {
         
@@ -30,15 +30,17 @@ public class Movement : MonoBehaviour
 
         //velocity += acceleration;
         //velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed * Time.deltaTime;
-        //transform.position += transform.forward * velocity.magnitude;
+        transform.position += transform.forward * Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
             float xRotation = Input.GetAxis("Mouse X") * rotationSpeed * Mathf.Deg2Rad;
             float yRotation = Input.GetAxis("Mouse Y") * rotationSpeed * Mathf.Deg2Rad;
 
             transform.Rotate(Vector3.up, xRotation);
             transform.Rotate(Vector3.right, yRotation);
+
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
         }
     }
 }
