@@ -125,7 +125,7 @@ public class Tile : MonoBehaviour
     {
         //previousColor = GetComponent<Renderer>().material.color;
         transform.position += new Vector3(0, 0.5f, 0);
-        GetComponent<Animator>().SetBool("Selected", true);
+        //GetComponent<Animator>().SetBool("Selected", true);
         //GetComponent<Renderer>().material.color = selectedColor;
     }
 
@@ -133,7 +133,7 @@ public class Tile : MonoBehaviour
     {
         GetComponent<Renderer>().material.color = previousColor;
         transform.position = new Vector3(transform.position.x, height / 2, transform.position.z);
-        GetComponent<Animator>().SetBool("Selected", false);
+        //GetComponent<Animator>().SetBool("Selected", false);
     }
 
     public void SetPartOfSubgrid(Tile[,] _subgrid)
@@ -160,5 +160,6 @@ public class Tile : MonoBehaviour
     public bool Highlighted() => highlighted;
     public bool PartOfSubgrid() => partOfSubgrid;
     public Tile[,] Subgrid() => subgrid;
+    public Color Color() => GetComponent<Renderer>().material.color; 
 
 }

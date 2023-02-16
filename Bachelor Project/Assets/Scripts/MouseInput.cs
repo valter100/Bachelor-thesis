@@ -9,8 +9,9 @@ public class MouseInput : MonoBehaviour
     [SerializeField] bool creatingSubgrid;
     bool hasStartCoord;
     [SerializeField] Grid grid;
-
+    Tile clickedTile;
     Tile[,] selectedGrid;
+    [SerializeField] Color selectedGridColor;
 
     Vector2 startCoordinates, endCoordinates;
 
@@ -21,39 +22,50 @@ public class MouseInput : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (selectedGrid != null)
-            {
-                foreach (Tile tile in selectedGrid)
-                {
-                    if (tile != null)
-                        tile.Deselect();
-                }
-            }
-        }
+        clickedTile = GetTileFromMousePos();
 
-        Tile clickedTile = GetTileFromMousePos();
-
-        if (!clickedTile)
+        if (!clickedTile) //If no tile was clicked, we end the update
             return;
+
+        //if (Input.GetMouseButtonDown(0) && !clickedTile.PartOfSubgrid()) //If left button is clicked and the tile is not part of a subgrid
+        //{
+        //    if (selectedGrid != null) //If we already has a subgrid selected
+        //    {
+        //        DeselectSubgrid(); //then we deselect the subgrid
+        //    }
+        //}
+        //else if (Input.GetMouseButtonDown(0) && clickedTile.PartOfSubgrid() && selectedGrid != null) //if user clicks on a tile and its part of a subgrid and we already have a subgrid selected
+        //{
+        //    if (clickedTile.Subgrid() == selectedGrid) //if the tile we pressed is part of the already selected subgrid
+        //    {
+        //        DeselectSubgrid(); //We deselect the grid and end the update
+        //        return;
+        //    }
+        //}
+
 
         if (Input.GetMouseButtonDown(0) && creatingSubgrid)
         {
             startCoordinates = clickedTile.GetCoordinates();
             StartCoroutine("CreateSubgrid");
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButtonDown(0)) //If we press the left mouse button
         {
-            if (clickedTile.PartOfSubgrid())
+            if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
             {
-                selectedGrid = clickedTile.Subgrid(); //Work from here
-
-                foreach (Tile tile in selectedGrid)
+                if (clickedTile.Subgrid() == selectedGrid) //and the tile's subgrid is the already selected grid
                 {
-                    if (tile != null)
-                        tile.Select();
+                    DeselectSubgrid(); //We deselect the grid and end the update
+                    return;
                 }
+                else
+                {
+                    SelectSubgrid(); //We select the tile's subgrid
+                }
+            }
+            else
+            {
+                DeselectSubgrid();
             }
         }
     }
@@ -84,7 +96,6 @@ public class MouseInput : MonoBehaviour
                 {
                     tile.Highlight();
                 }
-
             }
 
             yield return null;
@@ -126,4 +137,31 @@ public class MouseInput : MonoBehaviour
 
     public Vector2 GetStartCoordinates() => startCoordinates;
     public Vector2 GetEndCoordinates() => endCoordinates;
+
+    public void DeselectSubgrid()
+    {
+        if (selectedGrid == null)
+            return;
+
+        foreach (Tile tile in selectedGrid)
+        {
+            if (tile != null)
+                tile.Deselect();
+        }
+        selectedGridColor = Color.white;
+        selectedGrid = null;
+    }
+
+    public void SelectSubgrid()
+    {
+        DeselectSubgrid();
+
+        selectedGrid = clickedTile.Subgrid(); //Work from here
+        foreach (Tile tile in selectedGrid)
+        {
+            if (tile != null)
+                tile.Select();
+        }
+        selectedGridColor = clickedTile.Color();
+    }
 }
