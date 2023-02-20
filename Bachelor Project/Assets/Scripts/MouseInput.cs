@@ -62,7 +62,7 @@ public class MouseInput : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit tileHit;
 
-            foreach (Tile tile in grid.GetGrid())
+            foreach (Tile tile in grid.GetBaseGrid())
             {
                 tile.UnHighlight();
             }
@@ -87,10 +87,6 @@ public class MouseInput : MonoBehaviour
         if (highlightedTiles.Length > 0)
         {
             grid.CreateSubgrid(startCoordinates, endCoordinates);
-        }
-        else
-        {
-
         }
 
         creatingSubgrid = false;
@@ -133,6 +129,8 @@ public class MouseInput : MonoBehaviour
         }
         selectedGridColor = Color.white;
         selectedGrid = null;
+
+        grid.SetSelectedGrid(grid.GetBaseGrid());
     }
 
     public void SelectSubgrid()
@@ -146,5 +144,7 @@ public class MouseInput : MonoBehaviour
                 tile.Select();
         }
         selectedGridColor = clickedTile.Color();
+
+        grid.SetSelectedGrid(selectedGrid);
     }
 }

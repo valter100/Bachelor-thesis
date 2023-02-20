@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class AI : MonoBehaviour
 {
+    [SerializeField] List<Step> steps = new List<Step>();
+    [SerializeField] int currentStepIndex;
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
@@ -29,19 +31,11 @@ public class AI : MonoBehaviour
         one, two, three
     }
 
-    public void GiveTip(int tipIndex)
+    public void GiveTip(Step currentStep)
     {
         Toggle(true);
-        tipIndex = 0;
 
-        if (tipIndex == 0)
-        {
-            tipMessage.text = "Hey there partner! It's time for us to start constructing our first grid! What size do you want the grid to be?";
-        }
-        else
-        {
-            tipMessage.text = "I noticed you created your grid! Are you happy with how smooth the terrain is? Or do you want it smoother or rougher?";
-        }
+        tipMessage.text = currentStep.Question();
     }
 
     public void ChooseOption(int index)

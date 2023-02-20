@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13378161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13378162}
+  - component: {fileID: 13378163}
+  m_Layer: 0
+  m_Name: CreateSubgrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13378162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13378161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130742867}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13378163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13378161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10de9e7565b08dc4b84d66c448d0662b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clappy: {fileID: 0}
+  index: 1
+  question: 
+  grid: {fileID: 0}
 --- !u!1 &84961773
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,9 +255,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1343692163}
-        m_TargetAssemblyTypeName: Grid, Assembly-CSharp
-        m_MethodName: CreateGrid
+      - m_Target: {fileID: 160407805}
+        m_TargetAssemblyTypeName: CreateGrid, Assembly-CSharp
+        m_MethodName: DoAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -257,6 +305,136 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84961773}
   m_CullTransparentMesh: 1
+--- !u!1 &130742866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130742867}
+  m_Layer: 0
+  m_Name: Steps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130742867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130742866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 160407804}
+  - {fileID: 13378162}
+  - {fileID: 134968191}
+  m_Father: {fileID: 1986185356}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &134968189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134968191}
+  - component: {fileID: 134968190}
+  m_Layer: 0
+  m_Name: SmoothGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &134968190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134968189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48877ad9644fec64697e7b6dea0f78a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clappy: {fileID: 0}
+  index: 2
+  question: How smooth do you want the grid to be?
+  grid: {fileID: 0}
+--- !u!4 &134968191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134968189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130742867}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &160407803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160407804}
+  - component: {fileID: 160407805}
+  m_Layer: 0
+  m_Name: CreateGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &160407804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160407803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130742867}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160407805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160407803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456e810c1fae5b94193901985edb489b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clappy: {fileID: 0}
+  index: 0
+  question: What size do you want the grid to be?
+  grid: {fileID: 0}
 --- !u!4 &226754362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
@@ -2049,6 +2227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e293bfee9ff53468cc65ff0c970f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  steps:
+  - {fileID: 160407805}
+  - {fileID: 13378163}
+  - {fileID: 134968190}
+  currentStepIndex: 0
   tipMessage: {fileID: 2098312161}
   image: {fileID: 1792671636}
   answerAmount: 3
@@ -2067,7 +2250,8 @@ Transform:
   m_LocalPosition: {x: 26.722113, y: -4.346683, z: 29.69132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 130742867}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2228,7 +2412,7 @@ PrefabInstance:
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: acceleration
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
@@ -2253,7 +2437,7 @@ PrefabInstance:
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: maxMovementSpeed
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
@@ -2427,6 +2611,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3074435729238588853, guid: 71d204425a44bbf489ad7e239a9e903b,
         type: 3}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: mapDimensions.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: mapDimensions.z
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400293, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: m_Name

@@ -7,10 +7,12 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject tile;
     [SerializeField] Vector3 mapDimensions;
     [SerializeField] float tileBuffer;
-    Tile[,] grid;
+    Tile[,] baseGrid;
+    Tile[,] selectedGrid;
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
     bool perlin;
+
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
@@ -19,7 +21,6 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ai.GiveTip(0);
         subgridColor = Random.ColorHSV();
     }
 
@@ -30,45 +31,43 @@ public class Grid : MonoBehaviour
 
     public void CreateGrid()
     {
-        if(grid != null)
+        if (baseGrid != null)
         {
-            foreach(Tile tile in grid)
+            foreach (Tile tile in baseGrid)
             {
                 subgridList.Clear();
                 Destroy(tile.gameObject);
             }
         }
 
-        grid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
+        baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
 
         for (int i = 0; i < mapDimensions.x; i++)
         {
             for (int j = 0; j < mapDimensions.z; j++)
             {
-                grid[i, j] = Instantiate(tile, new Vector3(i, 0, j) + new Vector3(i * tileBuffer, 0, j * tileBuffer), Quaternion.identity).GetComponent<Tile>(); //Add Height later
-                grid[i, j].transform.parent = gameObject.transform;
-                grid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
-                grid[i, j].SetCoordinates(i, j);
-                grid[i, j].SetColors(baseTileColor, highlightedTileColor);
+                baseGrid[i, j] = Instantiate(tile, new Vector3(i, 0, j) + new Vector3(i * tileBuffer, 0, j * tileBuffer), Quaternion.identity).GetComponent<Tile>(); //Add Height later
+                baseGrid[i, j].transform.parent = gameObject.transform;
+                baseGrid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
+                baseGrid[i, j].SetCoordinates(i, j);
+                baseGrid[i, j].SetColors(baseTileColor, highlightedTileColor);
             }
         }
 
-        foreach (Tile tile in grid)
+        foreach (Tile tile in baseGrid)
         {
             tile.SetAdjacentTiles(this);
             tile.SetHeight(perlin);
         }
-
-        ai.GiveTip(1);
     }
 
     public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
     {
         Tile[,] subgrid = GetTilesBetween(startCoordinates, endCoordinates);
 
-        foreach(Tile tile in subgrid)
+        foreach (Tile tile in subgrid)
         {
-            if(tile.PartOfSubgrid())
+            if (tile.PartOfSubgrid())
             {
                 tile.RemoveFromSubgrid();
             }
@@ -97,12 +96,17 @@ public class Grid : MonoBehaviour
         return subgridList[index];
     }
 
-    public Tile[,] GetGrid() => grid;
-    public Tile getTileByCoordinate(int x, int y) => grid[x, y];
+    public Tile[,] GetBaseGrid() => baseGrid;
+    public Tile getTileByCoordinate(int x, int y) => baseGrid[x, y];
 
     public void SetGridDimension(int x, int y, int z)
     {
         mapDimensions = new Vector3(x, y, z);
+    }
+
+    public void SetSelectedGrid(Tile[,] newGridSelected)
+    {
+        selectedGrid = newGridSelected;
     }
 
     public Tile[,] GetTilesBetween(Vector2 startCoordinates, Vector2 endCoordinates)
@@ -120,13 +124,13 @@ public class Grid : MonoBehaviour
         int endX = (int)endCoordinates.x;
         int startY = (int)startCoordinates.y;
         int endY = (int)endCoordinates.y;
-        
-        if(startX > endX)
+
+        if (startX > endX)
         {
             (startX, endX) = (endX, startX);
         }
 
-        if(startY > endY)
+        if (startY > endY)
         {
             (startY, endY) = (endY, startY);
         }
@@ -135,7 +139,7 @@ public class Grid : MonoBehaviour
         {
             for (int y = startY; y < endY; y++)
             {
-                tempGrid[i, j] = grid[x, y];
+                tempGrid[i, j] = baseGrid[x, y];
                 j++;
             }
             i++;
@@ -147,17 +151,17 @@ public class Grid : MonoBehaviour
 
     public void RemoveEmptySubgrids()
     {
-        for(int i = 0; i < subgridList.Count; i++)
+        for (int i = 0; i < subgridList.Count; i++)
         {
             bool containsTile = false;
 
-            foreach(Tile tile in subgridList[i])
+            foreach (Tile tile in subgridList[i])
             {
                 if (tile != null)
                     containsTile = true;
             }
 
-            if(!containsTile)
+            if (!containsTile)
             {
                 Debug.Log("Subgrid removed");
 
@@ -166,5 +170,11 @@ public class Grid : MonoBehaviour
             }
 
         }
+    }
+
+    public void SmoothGrid()
+    {
+        foreach (Tile tile in selectedGrid)
+            tile.SetHeight(false);
     }
 }
