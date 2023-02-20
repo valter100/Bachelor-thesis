@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed;
+    [SerializeField] float currentSpeed;
+    [SerializeField] float maxMovementSpeed;
     [SerializeField] float rotationSpeed;
-    //[SerializeField] Vector3 acceleration;
+    [SerializeField] float acceleration;
     //[SerializeField] Vector3 deacceleration;
 
     //[SerializeField] Vector3 minAcceleration;
@@ -16,23 +17,12 @@ public class Movement : MonoBehaviour
     //[SerializeField] float movement;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //acceleration += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed * Time.deltaTime;
-
-        //acceleration += deacceleration * Time.deltaTime;
-
-        //acceleration = Vector3.ClampMagnitude(acceleration, maxAcceleration.magnitude);
-
-        //velocity += acceleration;
-        //velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * movementSpeed * Time.deltaTime;
-        transform.position += transform.forward * Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
-        transform.position += transform.right * Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
-
         if (Input.GetMouseButton(1))
         {
             float xRotation = Input.GetAxis("Mouse X") * rotationSpeed * Mathf.Deg2Rad;
@@ -43,5 +33,15 @@ public class Movement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
         }
+
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            currentSpeed += acceleration * Time.deltaTime;
+        else
+            currentSpeed -= acceleration * Time.deltaTime * 2;
+
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxMovementSpeed);
+
+        transform.position += transform.forward * Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
+        transform.position += transform.right * Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
     }
 }

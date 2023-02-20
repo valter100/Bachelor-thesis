@@ -27,23 +27,6 @@ public class MouseInput : MonoBehaviour
         if (!clickedTile) //If no tile was clicked, we end the update
             return;
 
-        //if (Input.GetMouseButtonDown(0) && !clickedTile.PartOfSubgrid()) //If left button is clicked and the tile is not part of a subgrid
-        //{
-        //    if (selectedGrid != null) //If we already has a subgrid selected
-        //    {
-        //        DeselectSubgrid(); //then we deselect the subgrid
-        //    }
-        //}
-        //else if (Input.GetMouseButtonDown(0) && clickedTile.PartOfSubgrid() && selectedGrid != null) //if user clicks on a tile and its part of a subgrid and we already have a subgrid selected
-        //{
-        //    if (clickedTile.Subgrid() == selectedGrid) //if the tile we pressed is part of the already selected subgrid
-        //    {
-        //        DeselectSubgrid(); //We deselect the grid and end the update
-        //        return;
-        //    }
-        //}
-
-
         if (Input.GetMouseButtonDown(0) && creatingSubgrid)
         {
             startCoordinates = clickedTile.GetCoordinates();

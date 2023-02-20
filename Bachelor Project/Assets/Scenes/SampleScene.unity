@@ -2214,6 +2214,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
+      propertyPath: acceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
+        type: 3}
       propertyPath: movementSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -2231,6 +2236,11 @@ PrefabInstance:
         type: 3}
       propertyPath: deacceleration.z
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
+        type: 3}
+      propertyPath: maxMovementSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8043195172600272878, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
@@ -2322,8 +2332,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe86c78e64bbf94a8d96b782c081144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkForInput: 0
+  creatingSubgrid: 0
   grid: {fileID: 1343692163}
+  selectedGridColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &4241007526318205351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2391,6 +2402,18 @@ PrefabInstance:
       propertyPath: ai
       value: 
       objectReference: {fileID: 1986185355}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: tile
+      value: 
+      objectReference: {fileID: 5679689452796600457, guid: 2bd454fae910a114c949336aad6b97ba,
+        type: 3}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 3074435729238588853, guid: 71d204425a44bbf489ad7e239a9e903b,
+        type: 3}
     - target: {fileID: 4241007527122400293, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: m_Name

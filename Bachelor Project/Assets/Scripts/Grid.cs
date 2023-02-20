@@ -80,6 +80,9 @@ public class Grid : MonoBehaviour
         subgridColor = Random.ColorHSV();
 
         subgridList.Add(subgrid);
+
+        RemoveEmptySubgrids();
+
         numberOfSubgrids = subgridList.Count;
     }
 
@@ -140,5 +143,28 @@ public class Grid : MonoBehaviour
         }
 
         return tempGrid;
+    }
+
+    public void RemoveEmptySubgrids()
+    {
+        for(int i = 0; i < subgridList.Count; i++)
+        {
+            bool containsTile = false;
+
+            foreach(Tile tile in subgridList[i])
+            {
+                if (tile != null)
+                    containsTile = true;
+            }
+
+            if(!containsTile)
+            {
+                Debug.Log("Subgrid removed");
+
+                subgridList.RemoveAt(i);
+                i--;
+            }
+
+        }
     }
 }
