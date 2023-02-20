@@ -14,18 +14,14 @@ public class AI : MonoBehaviour
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
 
-    StreamReader sr;
-    StreamWriter sw;
-
-    TextAsset memory;
-    string path;
+    TextHandler textHandler;
     Grid grid;
 
 
     private void Start()
     {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
-        path = "Assets/TextFiles/memory.txt";
+        textHandler = gameObject.GetComponent<TextHandler>();
     }
 
     public enum ChatOption
@@ -52,26 +48,25 @@ public class AI : MonoBehaviour
     {
         chatOption = (ChatOption)index;
 
-        sw = new StreamWriter(path);
+
 
         if (index == 0)
         {
             grid.SetGridDimension(32, 32, 32);
-            sw.Write("GridDimensions: 32, 32, 32");
-            
+
+
         }
         else if (index == 1)
         {
             grid.SetGridDimension(64, 64, 64);
-            sw.Write("GridDimensions: 64, 64, 64");
         }
         else
         {
             grid.SetGridDimension(96, 96, 96);
-            sw.Write("GridDimensions: 96, 96, 96");
+
         }
 
-        sw.Close();
+        
         Toggle(false);
     }
 
