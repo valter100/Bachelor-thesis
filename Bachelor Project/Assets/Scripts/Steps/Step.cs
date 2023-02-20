@@ -8,6 +8,7 @@ public abstract class Step : MonoBehaviour
     [SerializeField] protected int index;
     [SerializeField] protected string question;
     [SerializeField] protected Grid grid;
+    protected TextHandler textHandler;
 
     protected virtual void Start()
     {
@@ -21,4 +22,9 @@ public abstract class Step : MonoBehaviour
     }
     public int Index() => index;
     public string Question() => question;
+
+    private void SetQuestion()
+    {
+        question = textHandler.GetQuestion(index);
+    }
 }
