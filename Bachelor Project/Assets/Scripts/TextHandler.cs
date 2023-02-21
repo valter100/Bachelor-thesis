@@ -43,24 +43,38 @@ public class TextHandler : MonoBehaviour
             {
                 var line = sr.ReadLine();
 
-                //if(line.IsNullOrWhiteSpace()) continue;
+                if(IsNullOrWhiteSpace(line)) continue;
 
-                if (!startFound) startFound = line.Contains(startSearchString);
+                if (!startFound) startFound = line.Contains("index" + index.ToString());
 
                 if (startFound)
                 {
-                    bool isEnd = line.Contains(endSearchString);
+                    bool isEnd = line.Contains("index" + (index + 1).ToString());
 
                     if (!isEnd) lines.Add(line);
 
                     if(isEnd) break;
                 }
-               
             }
         }
+        sr.Close();
 
-        sr.Close(); 
+        foreach (string s in lines)
+        {
+            question += s;
+            Debug.Log(s);
+        }
 
         return question;
+    }
+
+    private bool IsNullOrWhiteSpace(string line)
+    {
+        for (int i = 0; i < line.Length; i++)
+        {
+            if (!line[i].Equals("") && !line[i].Equals(" ")) return false;
+        }
+
+        return true;
     }
 }

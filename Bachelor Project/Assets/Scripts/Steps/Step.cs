@@ -13,7 +13,9 @@ public abstract class Step : MonoBehaviour
     protected virtual void Start()
     {
         clappy = FindObjectOfType<AI>();
-        grid = GameObject.Find("Grid").GetComponent<Grid>();   
+        grid = GameObject.Find("Grid").GetComponent<Grid>();
+        textHandler = clappy.gameObject.GetComponent<TextHandler>();
+        SetQuestion();
     }
 
     public virtual void DoAction()
