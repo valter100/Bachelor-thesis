@@ -8,6 +8,9 @@ public abstract class Step : MonoBehaviour
     [SerializeField] protected int index;
     [SerializeField] protected string question;
     [SerializeField] protected Grid grid;
+    [SerializeField] protected bool giveAdvice;
+
+    [SerializeField] protected List<GameObject> UIElements;
 
     protected virtual void Start()
     {
@@ -21,4 +24,12 @@ public abstract class Step : MonoBehaviour
     }
     public int Index() => index;
     public string Question() => question;
+
+    public void SetUIActive(bool state)
+    {
+        foreach(GameObject UIElement in UIElements)
+        {
+            UIElement.SetActive(state);
+        }
+    }
 }

@@ -57,7 +57,7 @@ public class Tile : MonoBehaviour
 
     public Vector2 GetCoordinates() => coordinates; 
 
-    public void SetHeight(bool perlin)
+    public void SetHeight(bool perlin, int heightDifference)
     {
         if (perlin)
             height = Mathf.PerlinNoise(coordinates.x, coordinates.y) * heightScale;
@@ -70,6 +70,9 @@ public class Tile : MonoBehaviour
             int tilesCounted = 0;
             foreach(Tile tile in adjacentTiles)
             {
+                if (tile.subgrid != subgrid)
+                    continue;
+
                 foreach(Tile adjacentTile in tile.adjacentTiles)
                 {
                     if(tile.height > 0)
@@ -86,6 +89,7 @@ public class Tile : MonoBehaviour
             float clampHigh = averageHeight + heightScale;
 
             height = Mathf.Clamp(height, clampLow, clampHigh);
+            height += heightDifference;
         }
 
         transform.localScale += new Vector3(0, height, 0);

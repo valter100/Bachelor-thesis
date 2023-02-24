@@ -57,14 +57,13 @@ public class Grid : MonoBehaviour
         foreach (Tile tile in baseGrid)
         {
             tile.SetAdjacentTiles(this);
-            tile.SetHeight(perlin);
+            tile.SetHeight(perlin, 0);
         }
+
+
     }
-
-    public void CreateSubgrid(Vector2 startCoordinates, Vector2 endCoordinates)
+    public void CreateSubgrid(Tile[,] subgrid)
     {
-        Tile[,] subgrid = GetTilesBetween(startCoordinates, endCoordinates);
-
         foreach (Tile tile in subgrid)
         {
             if (tile.PartOfSubgrid())
@@ -107,7 +106,13 @@ public class Grid : MonoBehaviour
     public void SetSelectedGrid(Tile[,] newGridSelected)
     {
         selectedGrid = newGridSelected;
+
+
+        FindObjectOfType<GridSelect>().SetUIActive(selectedGrid != baseGrid);
+        FindObjectOfType<GridSelect>().DoAction();
     }
+
+    public Tile[,] SelectedGrid() => selectedGrid;
 
     public Tile[,] GetTilesBetween(Vector2 startCoordinates, Vector2 endCoordinates)
     {
@@ -175,6 +180,33 @@ public class Grid : MonoBehaviour
     public void SmoothGrid()
     {
         foreach (Tile tile in selectedGrid)
-            tile.SetHeight(false);
+            tile.SetHeight(false, 0);
+    }
+
+    public void DeselectSubgrid()
+    {
+        if (selectedGrid == null)
+            return;
+
+        foreach (Tile tile in selectedGrid)
+        {
+            if (tile != null)
+                tile.Deselect();
+        }
+
+        SetSelectedGrid(baseGrid);
+    }
+
+    public void SelectSubgrid(Tile[,] subgrid)
+    {
+        DeselectSubgrid();
+        SetSelectedGrid(subgrid);
+
+        foreach (Tile tile in selectedGrid)
+        {
+            if (tile != null)
+                tile.Select();
+        }
+
     }
 }

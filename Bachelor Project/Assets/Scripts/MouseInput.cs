@@ -8,7 +8,7 @@ public class MouseInput : MonoBehaviour
     List<GameObject> highlightedGameObjects = new List<GameObject>();
     [SerializeField] bool creatingSubgrid;
     bool hasStartCoord;
-    [SerializeField] Grid grid;
+    [SerializeField] Grid baseGrid;
     Tile clickedTile;
     Tile[,] selectedGrid;
     [SerializeField] Color selectedGridColor;
@@ -22,12 +22,20 @@ public class MouseInput : MonoBehaviour
 
     void Update()
     {
+        if (clickedTile)
+            clickedTile.UnHighlight();
+
         clickedTile = GetTileFromMousePos();
 
         if (!clickedTile) //If no tile was clicked, we end the update
             return;
 
-        if (Input.GetMouseButtonDown(0) && creatingSubgrid)
+
+        if (creatingSubgrid && !Input.GetMouseButton(0))
+        {
+            clickedTile.Highlight();
+        }
+        else if (Input.GetMouseButtonDown(0) && creatingSubgrid)
         {
             startCoordinates = clickedTile.GetCoordinates();
             StartCoroutine("CreateSubgrid");
@@ -62,7 +70,7 @@ public class MouseInput : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit tileHit;
 
-            foreach (Tile tile in grid.GetBaseGrid())
+            foreach (Tile tile in baseGrid.GetBaseGrid())
             {
                 tile.UnHighlight();
             }
@@ -73,7 +81,7 @@ public class MouseInput : MonoBehaviour
                 {
                     endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
                 }
-                highlightedTiles = grid.GetTilesBetween(startCoordinates, endCoordinates);
+                highlightedTiles = baseGrid.GetTilesBetween(startCoordinates, endCoordinates + new Vector2(1,1));
 
                 foreach (Tile tile in highlightedTiles)
                 {
@@ -84,13 +92,12 @@ public class MouseInput : MonoBehaviour
             yield return null;
         }
 
-        if (highlightedTiles.Length > 0)
+        if (highlightedTiles.Length > 0 || highlightedTiles.LongLength > 0)
         {
-            grid.CreateSubgrid(startCoordinates, endCoordinates);
+            baseGrid.CreateSubgrid(highlightedTiles);
         }
 
         creatingSubgrid = false;
-
         yield return 0;
     }
 
@@ -119,32 +126,17 @@ public class MouseInput : MonoBehaviour
 
     public void DeselectSubgrid()
     {
-        if (selectedGrid == null)
-            return;
-
-        foreach (Tile tile in selectedGrid)
-        {
-            if (tile != null)
-                tile.Deselect();
-        }
         selectedGridColor = Color.white;
         selectedGrid = null;
 
-        grid.SetSelectedGrid(grid.GetBaseGrid());
+        baseGrid.DeselectSubgrid();
     }
 
     public void SelectSubgrid()
     {
-        DeselectSubgrid();
+        baseGrid.SelectSubgrid(clickedTile.Subgrid());
 
-        selectedGrid = clickedTile.Subgrid(); //Work from here
-        foreach (Tile tile in selectedGrid)
-        {
-            if (tile != null)
-                tile.Select();
-        }
+        selectedGrid = clickedTile.Subgrid();
         selectedGridColor = clickedTile.Color();
-
-        grid.SetSelectedGrid(selectedGrid);
     }
 }
