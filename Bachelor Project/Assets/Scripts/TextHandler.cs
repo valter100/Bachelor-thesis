@@ -11,6 +11,9 @@ public class TextHandler : MonoBehaviour
     StreamReader sr;
     StreamWriter sw;
 
+    string startSearchString, endSearchString;
+    
+
     void Awake()
     {
         aPath = "Assets/TextFiles/answers.txt";
@@ -25,5 +28,39 @@ public class TextHandler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string GetQuestion(int index)
+    {
+        string question = "";
+        List<string> lines = new List<string>();
+
+        using (sr = new StreamReader(qPath))
+        {
+            bool startFound = false;
+
+            while (!sr.EndOfStream)
+            {
+                var line = sr.ReadLine();
+
+                //if(line.IsNullOrWhiteSpace()) continue;
+
+                if (!startFound) startFound = line.Contains(startSearchString);
+
+                if (startFound)
+                {
+                    bool isEnd = line.Contains(endSearchString);
+
+                    if (!isEnd) lines.Add(line);
+
+                    if(isEnd) break;
+                }
+               
+            }
+        }
+
+        sr.Close(); 
+
+        return question;
     }
 }
