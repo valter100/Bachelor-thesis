@@ -15,11 +15,6 @@ public class MouseInput : MonoBehaviour
 
     Vector2 startCoordinates, endCoordinates;
 
-    void Start()
-    {
-        creatingSubgrid = false;
-    }
-
     void Update()
     {
         if (clickedTile)
@@ -30,17 +25,23 @@ public class MouseInput : MonoBehaviour
         if (!clickedTile) //If no tile was clicked, we end the update
             return;
 
+<<<<<<< Updated upstream
 
         if (creatingSubgrid && !Input.GetMouseButton(0))
         {
             clickedTile.Highlight();
         }
         else if (Input.GetMouseButtonDown(0) && creatingSubgrid)
+=======
+        if (Input.GetMouseButtonDown(0) && creatingSubgrid)
+>>>>>>> Stashed changes
         {
             startCoordinates = clickedTile.GetCoordinates();
             StartCoroutine("CreateSubgrid");
+            return;
         }
-        else if (Input.GetMouseButtonDown(0)) //If we press the left mouse button
+
+        if (Input.GetMouseButtonDown(0)) //If we press the left mouse button
         {
             if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
             {
@@ -54,9 +55,9 @@ public class MouseInput : MonoBehaviour
                     SelectSubgrid(); //We select the tile's subgrid
                 }
             }
-            else
+            else //If we did not click on a tile that is a part of a subgrid
             {
-                DeselectSubgrid();
+                DeselectSubgrid(); //We try to deselect the currently selected subgrid
             }
         }
     }
@@ -94,7 +95,11 @@ public class MouseInput : MonoBehaviour
 
         if (highlightedTiles.Length > 0 || highlightedTiles.LongLength > 0)
         {
+<<<<<<< Updated upstream
             baseGrid.CreateSubgrid(highlightedTiles);
+=======
+            grid.CreateSubgrid(startCoordinates, endCoordinates);
+>>>>>>> Stashed changes
         }
 
         creatingSubgrid = false;
