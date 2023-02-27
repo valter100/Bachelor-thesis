@@ -1,19 +1,26 @@
 
 index0 
-hello mr.X
-what are you
-doing
+Howdie! I see you are trying to create some terrain! Would you like some help with that?
+Please help me clappy!
+Get out of my face!
+I'll let you live, but you're on thin ice...
 index1
-i am not 
-a
-peach
-index2  
-what
-are you then
-?
-index3 
-i am 
-a rotten 
-tomato with the desire to
-DIE
+Well that looks cool! How do you like the hightdifference?
+Rougher
+Smoother
+I like it
+index2
+bla
+bla
+bla
+bla
+index3
+bla
+bla
+bla
+bla
 index4
+bla
+bla
+bla
+bla
