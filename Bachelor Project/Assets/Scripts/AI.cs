@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -33,9 +34,15 @@ public class AI : MonoBehaviour
 
     public void GiveTip(Step currentStep)
     {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Options(i);
+        }
+
         Toggle(true);
 
         tipMessage.text = currentStep.Question();
+
     }
 
     public void ChooseOption(int index)
@@ -43,20 +50,16 @@ public class AI : MonoBehaviour
         chatOption = (ChatOption)index;
 
 
-
         if (index == 0)
         {
-            grid.SetGridDimension(32, 32, 32);
-
 
         }
         else if (index == 1)
         {
-            grid.SetGridDimension(64, 64, 64);
+           
         }
         else
         {
-            grid.SetGridDimension(96, 96, 96);
 
         }
 

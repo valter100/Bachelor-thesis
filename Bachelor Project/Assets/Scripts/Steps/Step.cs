@@ -7,6 +7,7 @@ public abstract class Step : MonoBehaviour
     [SerializeField] protected AI clappy;
     [SerializeField] protected int index;
     [SerializeField] protected string question;
+    protected List<string> options = new List<string>();
     [SerializeField] protected Grid grid;
     [SerializeField] protected bool giveAdvice;
 
@@ -15,7 +16,10 @@ public abstract class Step : MonoBehaviour
     protected virtual void Start()
     {
         clappy = FindObjectOfType<AI>();
-        grid = GameObject.Find("Grid").GetComponent<Grid>();   
+        grid = GameObject.Find("Grid").GetComponent<Grid>();
+        textHandler = clappy.gameObject.GetComponent<TextHandler>();
+        SetQuestion();
+        SetOptions();
     }
 
     public virtual void DoAction()
@@ -24,6 +28,16 @@ public abstract class Step : MonoBehaviour
     }
     public int Index() => index;
     public string Question() => question;
+    public string Options(int index)
+    {
+        if (index > options.Count)
+        {
+            Debug.Log("Index out of bounds. Check Options for the step index " + index);
+            return null;
+        }
+
+        return options[index];
+    }
 
     public void SetUIActive(bool state)
     {
@@ -31,5 +45,10 @@ public abstract class Step : MonoBehaviour
         {
             UIElement.SetActive(state);
         }
+    }
+
+    private void SetOptions()
+    {
+        options = textHandler.GetOptions(index);
     }
 }
