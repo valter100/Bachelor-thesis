@@ -10,7 +10,7 @@ public abstract class Step : MonoBehaviour
     protected List<string> options = new List<string>();
     [SerializeField] protected Grid grid;
     [SerializeField] protected bool giveAdvice;
-
+    TextHandler textHandler;
     [SerializeField] protected List<GameObject> UIElements;
 
     protected virtual void Start()
@@ -45,6 +45,11 @@ public abstract class Step : MonoBehaviour
         {
             UIElement.SetActive(state);
         }
+    }
+
+    private void SetQuestion()
+    {
+        question = textHandler.GetQuestion(index);
     }
 
     private void SetOptions()

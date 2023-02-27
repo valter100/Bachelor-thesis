@@ -25,16 +25,12 @@ public class MouseInput : MonoBehaviour
         if (!clickedTile) //If no tile was clicked, we end the update
             return;
 
-<<<<<<< Updated upstream
 
         if (creatingSubgrid && !Input.GetMouseButton(0))
         {
             clickedTile.Highlight();
         }
         else if (Input.GetMouseButtonDown(0) && creatingSubgrid)
-=======
-        if (Input.GetMouseButtonDown(0) && creatingSubgrid)
->>>>>>> Stashed changes
         {
             startCoordinates = clickedTile.GetCoordinates();
             StartCoroutine("CreateSubgrid");
@@ -95,11 +91,7 @@ public class MouseInput : MonoBehaviour
 
         if (highlightedTiles.Length > 0 || highlightedTiles.LongLength > 0)
         {
-<<<<<<< Updated upstream
             baseGrid.CreateSubgrid(highlightedTiles);
-=======
-            grid.CreateSubgrid(startCoordinates, endCoordinates);
->>>>>>> Stashed changes
         }
 
         creatingSubgrid = false;
