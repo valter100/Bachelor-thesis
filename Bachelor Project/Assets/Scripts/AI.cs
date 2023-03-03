@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class AI : MonoBehaviour
 {
     [SerializeField] List<Step> steps = new List<Step>();
-    [SerializeField] int currentStepIndex;
+    [SerializeField] Step activeStep;
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
@@ -34,15 +34,15 @@ public class AI : MonoBehaviour
 
     public void GiveTip(Step currentStep)
     {
+        tipMessage.text = currentStep.Question();
+        activeStep = currentStep;
+
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Options(i);
+            buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Option(i);
         }
 
         Toggle(true);
-
-        tipMessage.text = currentStep.Question();
-
     }
 
     public void ChooseOption(int index)
@@ -52,7 +52,7 @@ public class AI : MonoBehaviour
 
         if (index == 0)
         {
-
+           
         }
         else if (index == 1)
         {
@@ -60,9 +60,11 @@ public class AI : MonoBehaviour
         }
         else
         {
-
+            
         }
-        
+
+        textHandler.SaveAnswers(activeStep.Index(), index, activeStep.Option(index));
+
         Toggle(false);
     }
 

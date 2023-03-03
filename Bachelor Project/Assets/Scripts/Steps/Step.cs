@@ -28,16 +28,7 @@ public abstract class Step : MonoBehaviour
     }
     public int Index() => index;
     public string Question() => question;
-    public string Options(int index)
-    {
-        if (index > options.Count)
-        {
-            Debug.Log("Index out of bounds. Check Options for the step index " + index);
-            return null;
-        }
-
-        return options[index];
-    }
+    public string Option(int index) => options[index];
 
     public void SetUIActive(bool state)
     {

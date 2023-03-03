@@ -1,1 +1,5 @@
-GridDimensions: 32, 32, 32
+question:0/ answerIndex:1/ answer:Get out of my face!
+question:1/ answerIndex:0/ answer:Rougher
+question:0/ answerIndex:2/ answer:I'll let you live, but you're on thin ice...
+question:1/ answerIndex:1/ answer:Smoother
+question:4/ answerIndex:2/ answer:bla

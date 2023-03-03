@@ -1,26 +1,47 @@
 
 index0 
-Howdie! I see you are trying to create some terrain! Would you like some help with that?
-Please help me clappy!
+Hey there! I see you are trying to create some terrain! Would you like some help with that?
+Please help me Clappy!
 Get out of my face!
 I'll let you live, but you're on thin ice...
 index1
-Well that looks cool! How do you like the hightdifference?
-Rougher
-Smoother
-I like it
+Well that looks cool! Do you like it or do you want a new one?
+New one please!
+Keep it!
+Leave me alone... Creep!!
 index2
-bla
-bla
-bla
-bla
+Do you like subgrids just as much as I do?
+Sure do Clappy-o!
+Pls shut up...
+Meh....
 index3
-bla
-bla
-bla
-bla
+Let's get that terrain real smoooooth
+I like it the way it is!
+Yes Clappy make it smooth
+Actually, i like it rougher!
 index4
+I see you selected a subgrid, want me to help you with it?
+Make it Desert
+Make it Forest
+Make it Sea
+index5
 bla
 bla
 bla
 bla
+index6
+bla
+bla
+bla
+bla
+index7
+bla
+bla
+bla
+bla
+index8
+bla
+bla
+bla
+bla
+index9

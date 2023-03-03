@@ -101,6 +101,16 @@ public class TextHandler : MonoBehaviour
         return options;
     }
 
+    public void SaveAnswers(int index, int answerIndex, string answer)
+    {
+        using (FileStream fs = new FileStream(aPath, FileMode.Append, FileAccess.Write))
+        using (sw = new StreamWriter(fs))
+
+        sw.WriteLine("question:" + index + "/ answerIndex:" + answerIndex + "/ answer:" + answer);
+
+        sw.Close();
+    }
+
     private bool IsNullOrWhiteSpace(string line)
     {
         for (int i = 0; i < line.Length; i++)
