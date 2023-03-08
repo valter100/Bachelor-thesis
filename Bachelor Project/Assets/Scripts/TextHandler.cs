@@ -106,7 +106,7 @@ public class TextHandler : MonoBehaviour
         using (FileStream fs = new FileStream(aPath, FileMode.Append, FileAccess.Write))
         using (sw = new StreamWriter(fs))
 
-        sw.WriteLine("question:" + index + "/ answerIndex:" + answerIndex + "/ answer:" + answer);
+        sw.WriteLine("questionIndex:" + index + "/ answerIndex:" + answerIndex + "/ answer:" + answer);
 
         sw.Close();
     }
@@ -119,5 +119,12 @@ public class TextHandler : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void ResetClappysMemory()
+    {
+        sw = new StreamWriter(aPath);
+        sw.WriteLine();
+        sw.Close();
     }
 }
