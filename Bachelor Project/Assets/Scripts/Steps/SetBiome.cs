@@ -14,12 +14,16 @@ public class SetBiome : Step
 
     public void ChangeBiome(int biomeIndex)
     {
-        Tile[,] subgrid = grid.SelectedGrid();
-
-        foreach (Tile tile in subgrid)
+        foreach (Tile[,] subgrid in grid.SelectedGrids())
         {
-            tile.SetColor(biomeColors[biomeIndex]);
-            tile.SetHeight(false, heightDifference[biomeIndex]);
+            foreach (Tile tile in subgrid)
+            {
+                if (tile == null)
+                    continue;
+
+                tile.SetColor(biomeColors[biomeIndex]);
+                tile.SetHeight(heightDifference[biomeIndex]);
+            }
         }
     }
 }

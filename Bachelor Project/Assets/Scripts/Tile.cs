@@ -57,7 +57,15 @@ public class Tile : MonoBehaviour
 
     public Vector2 GetCoordinates() => coordinates; 
 
-    public void SetHeight(bool perlin, int heightDifference)
+    public void SetHeight(float height)
+    {
+        height = Mathf.RoundToInt(height);
+
+        transform.localScale = new Vector3(transform.localScale.x,  Mathf.Clamp(height, 1, Mathf.Infinity) , transform.localScale.z);
+        transform.position = new Vector3(transform.position.x, grid.transform.position.y + (height), transform.position.z);
+    }
+
+    public void SetHeightWithSmoothing(bool perlin, float heightDifference)
     {
         if (perlin)
             height = Mathf.PerlinNoise(coordinates.x, coordinates.y) * heightScale;
@@ -68,14 +76,14 @@ public class Tile : MonoBehaviour
         {
             float totalHeight = 0;
             int tilesCounted = 0;
-            foreach(Tile tile in adjacentTiles)
+            foreach (Tile tile in adjacentTiles)
             {
                 if (tile.subgrid != subgrid)
                     continue;
 
                 foreach(Tile adjacentTile in tile.adjacentTiles)
                 {
-                    if(tile.height > 0)
+                    if (tile.height > 0)
                     {
                         totalHeight += tile.Height();
                         tilesCounted++;
@@ -90,6 +98,8 @@ public class Tile : MonoBehaviour
 
             height = Mathf.Clamp(height, clampLow, clampHigh);
             height += heightDifference;
+
+            height = Mathf.RoundToInt(height);
         }
 
         transform.localScale += new Vector3(0, height, 0);
@@ -127,17 +137,13 @@ public class Tile : MonoBehaviour
 
     public void Select()
     {
-        //previousColor = GetComponent<Renderer>().material.color;
         transform.position += new Vector3(0, 0.5f, 0);
-        //GetComponent<Animator>().SetBool("Selected", true);
-        //GetComponent<Renderer>().material.color = selectedColor;
     }
 
     public void Deselect()
     {
         GetComponent<Renderer>().material.color = previousColor;
         transform.position = new Vector3(transform.position.x, height / 2, transform.position.z);
-        //GetComponent<Animator>().SetBool("Selected", false);
     }
 
     public void SetPartOfSubgrid(Tile[,] _subgrid)

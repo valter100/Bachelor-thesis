@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
     [SerializeField] Vector3 mapDimensions;
     [SerializeField] float tileBuffer;
     Tile[,] baseGrid;
-    Tile[,] selectedGrid;
+    List<Tile[,]> selectedGrids = new List<Tile[,]>();
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
     bool perlin;
@@ -57,7 +57,7 @@ public class Grid : MonoBehaviour
         foreach (Tile tile in baseGrid)
         {
             tile.SetAdjacentTiles(this);
-            tile.SetHeight(perlin, 0);
+            tile.SetHeightWithSmoothing(perlin, 0);
         }
 
 
@@ -103,16 +103,23 @@ public class Grid : MonoBehaviour
         mapDimensions = new Vector3(x, y, z);
     }
 
-    public void SetSelectedGrid(Tile[,] newGridSelected)
+    public void AddSelectedGrid(Tile[,] newGridSelected)
     {
-        selectedGrid = newGridSelected;
+        FindObjectOfType<GridSelect>().SetUIActive(selectedGrids.Count != 0);
 
-
-        FindObjectOfType<GridSelect>().SetUIActive(selectedGrid != baseGrid);
+        selectedGrids.Add(newGridSelected);
         FindObjectOfType<GridSelect>().DoAction();
+
     }
 
-    public Tile[,] SelectedGrid() => selectedGrid;
+    public List<Tile[,]> SelectedGrids()
+    {
+        List<Tile[,]> tempList = selectedGrids;
+
+        tempList.Remove(baseGrid);
+
+        return tempList;
+    }
 
     public Tile[,] GetTilesBetween(Vector2 startCoordinates, Vector2 endCoordinates)
     {
@@ -179,34 +186,50 @@ public class Grid : MonoBehaviour
 
     public void SmoothGrid()
     {
-        foreach (Tile tile in selectedGrid)
-            tile.SetHeight(false, 0);
+        foreach (Tile[,] subgrid in selectedGrids)
+        {
+            foreach (Tile tile in subgrid)
+                tile.SetHeightWithSmoothing(false, 0);
+        }
     }
 
-    public void DeselectSubgrid()
+    public void DeselectSubgrids()
     {
-        if (selectedGrid == null)
+        if (selectedGrids.Count == 0)
             return;
 
-        foreach (Tile tile in selectedGrid)
+        for (int i = 0; i < selectedGrids.Count; i++)
         {
-            if (tile != null)
-                tile.Deselect();
+            foreach (Tile tile in selectedGrids[i])
+            {
+                if (tile != null)
+                    tile.Deselect();
+            }
+            selectedGrids.RemoveAt(i--);
         }
 
-        SetSelectedGrid(baseGrid);
+        FindObjectOfType<GridSelect>().SetUIActive(false);
+
+        AddSelectedGrid(baseGrid);
     }
 
     public void SelectSubgrid(Tile[,] subgrid)
     {
-        DeselectSubgrid();
-        SetSelectedGrid(subgrid);
+        AddSelectedGrid(subgrid);
 
-        foreach (Tile tile in selectedGrid)
+        foreach (Tile tile in subgrid)
         {
             if (tile != null)
                 tile.Select();
         }
 
+    }
+
+    public void SetAllTilesToHeight(float height, Tile[,] targetedGrid)
+    {
+        foreach (Tile tile in targetedGrid)
+        {
+            tile.SetHeight(height);
+        }
     }
 }
