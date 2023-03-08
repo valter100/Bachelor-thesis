@@ -1,0 +1,26 @@
+
+index0 
+Howdie! I see you are trying to create some terrain! Would you like some help with that?
+Please help me clappy!
+Get out of my face!
+I'll let you live, but you're on thin ice...
+index1
+Well that looks cool! How do you like the hightdifference?
+Rougher
+Smoother
+I like it
+index2
+bla
+bla
+bla
+bla
+index3
+bla
+bla
+bla
+bla
+index4
+bla
+bla
+bla
+bla
