@@ -10,7 +10,7 @@ public class MouseInput : MonoBehaviour
     bool hasStartCoord;
     [SerializeField] Grid baseGrid;
     Tile clickedTile;
-    Tile[,] selectedGrid;
+    List<Tile[,]> selectedGrids = new List<Tile[,]>();
     [SerializeField] Color selectedGridColor;
 
     Vector2 startCoordinates, endCoordinates;
@@ -25,12 +25,12 @@ public class MouseInput : MonoBehaviour
         if (!clickedTile) //If no tile was clicked, we end the update
             return;
 
-
         if (creatingSubgrid && !Input.GetMouseButton(0))
         {
             clickedTile.Highlight();
         }
-        else if (Input.GetMouseButtonDown(0) && creatingSubgrid)
+
+        if (Input.GetMouseButtonDown(0) && creatingSubgrid)
         {
             startCoordinates = clickedTile.GetCoordinates();
             StartCoroutine("CreateSubgrid");
@@ -41,13 +41,18 @@ public class MouseInput : MonoBehaviour
         {
             if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
             {
-                if (clickedTile.Subgrid() == selectedGrid) //and the tile's subgrid is the already selected grid
+                if(selectedGrids.Contains(clickedTile.Subgrid()))
                 {
                     DeselectSubgrid(); //We deselect the grid and end the update
                     return;
                 }
-                else
+                else if(!selectedGrids.Contains(clickedTile.Subgrid()) && Input.GetKey(KeyCode.LeftShift))
                 {
+                    SelectSubgrid();
+                }
+                else if(!selectedGrids.Contains(clickedTile.Subgrid()) && !Input.GetKey(KeyCode.LeftShift))
+                {
+                    DeselectSubgrid();
                     SelectSubgrid(); //We select the tile's subgrid
                 }
             }
@@ -124,16 +129,16 @@ public class MouseInput : MonoBehaviour
     public void DeselectSubgrid()
     {
         selectedGridColor = Color.white;
-        selectedGrid = null;
+        selectedGrids.Clear();
 
-        baseGrid.DeselectSubgrid();
+        baseGrid.DeselectSubgrids();
     }
 
     public void SelectSubgrid()
     {
         baseGrid.SelectSubgrid(clickedTile.Subgrid());
 
-        selectedGrid = clickedTile.Subgrid();
+        selectedGrids.Add(clickedTile.Subgrid());
         selectedGridColor = clickedTile.Color();
     }
 }

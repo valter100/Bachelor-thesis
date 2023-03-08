@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxMovementSpeed);
 
+        //if(Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0 && acceleration > 0)
+        //    transform.position += transform.forward * currentSpeed * Time.deltaTime;
+
         transform.position += transform.forward * Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
         transform.position += transform.right * Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
     }

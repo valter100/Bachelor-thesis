@@ -114,7 +114,7 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   adjacentTiles: []
   grid: {fileID: 0}
-  heightScale: 0.5
+  heightScale: 1
   partOfSubgrid: 0
 --- !u!95 &5114467612921622574
 Animator:
