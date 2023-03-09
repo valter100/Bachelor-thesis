@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class TextHandler : MonoBehaviour
@@ -8,11 +10,11 @@ public class TextHandler : MonoBehaviour
     TextAsset questions, answers;
     string aPath, qPath;
 
+
     StreamReader sr;
     StreamWriter sw;
-
-    string startSearchString, endSearchString;
     
+    List<Vector2> userData = new List<Vector2>();
 
     void Awake()
     {
@@ -22,7 +24,7 @@ public class TextHandler : MonoBehaviour
 
     void Start()
     {
-        
+        ReadUserData();
     }
 
     void Update()
@@ -106,7 +108,7 @@ public class TextHandler : MonoBehaviour
         using (FileStream fs = new FileStream(aPath, FileMode.Append, FileAccess.Write))
         using (sw = new StreamWriter(fs))
 
-        sw.WriteLine("questionIndex:" + index + "/ answerIndex:" + answerIndex + "/ answer:" + answer);
+        sw.WriteLine("questionIndex:" + index + "/answerIndex:" + answerIndex + "/answer:" + answer);
 
         sw.Close();
     }
@@ -126,5 +128,42 @@ public class TextHandler : MonoBehaviour
         sw = new StreamWriter(aPath);
         sw.WriteLine();
         sw.Close();
+    }
+
+    private void ReadUserData()
+    {
+        List<string> lines = new List<string>();
+
+        using (FileStream fs = new FileStream(aPath, FileMode.Open, FileAccess.Read))
+        using (sr = new StreamReader(fs))
+        {
+            while (!sr.EndOfStream)
+            {
+                var line = sr.ReadLine();
+                lines.Add(line);
+            }
+        }
+        sr.Close();
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            string line;
+            line = lines[i];
+            List<float> values = new List<float>();
+
+            if (IsNullOrWhiteSpace(line)) continue;
+
+            Regex regex = new Regex(@"[0-9]+");
+            var matches = regex.Matches(line);
+
+            foreach (Match match in matches)
+            {
+                values.Add(float.Parse(match.Value));
+            }
+           
+            Vector2 data = new Vector2(values[0], values[1]);
+
+            userData.Add(data);
+        }
     }
 }
