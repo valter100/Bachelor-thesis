@@ -22,10 +22,16 @@ public abstract class Step : MonoBehaviour
         SetOptions();
     }
 
+    public virtual void GiveTip()
+    {
+        clappy.GiveTip(this);
+    }
+
     public virtual void DoAction()
     {
         clappy.GiveTip(this);
     }
+
     public int Index() => index;
     public string Question() => question;
     public string Option(int index) => options[index];

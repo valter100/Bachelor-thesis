@@ -16,7 +16,12 @@ public class StartStep : Step
 
         //Activate clappy and animate him to appear
 
-        DoAction();
+        GiveTip();
+    }
+
+    public override void GiveTip()
+    {
+        base.GiveTip();
     }
 
     public override void DoAction()
