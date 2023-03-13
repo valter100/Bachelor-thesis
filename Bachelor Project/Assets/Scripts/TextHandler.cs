@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class TextHandler : MonoBehaviour
     StreamWriter sw;
     
     List<Vector2> userData = new List<Vector2>();
+    Dictionary<int, List<int>> userDataMatrix = new Dictionary<int, List<int>>();
 
     void Awake()
     {
@@ -25,6 +27,7 @@ public class TextHandler : MonoBehaviour
     void Start()
     {
         ReadUserData();
+        DebugDictionary();
     }
 
     void Update()
@@ -164,6 +167,42 @@ public class TextHandler : MonoBehaviour
             Vector2 data = new Vector2(values[0], values[1]);
 
             userData.Add(data);
+        }
+
+        AddValuesToDictionary();
+    }
+
+    private void AddValuesToDictionary()
+    {
+        foreach(Vector2 vec in userData)
+        {
+            int x, y;
+            x = (int)vec.x;
+            y = (int)vec.y;
+
+            if (userDataMatrix.ContainsKey(x))
+            {
+                userDataMatrix[x].Add(y);
+                continue;
+            }
+
+            List<int> value = new List<int>();
+            value.Add(y);
+
+            userDataMatrix.Add(x, value);
+        }
+    }
+
+    private void DebugDictionary()
+    {
+        for (int i = 0; i < userDataMatrix.Count; i++)
+        {
+            if (!userDataMatrix.ContainsKey(i)) continue;
+
+            for (int j = 0; j < userDataMatrix[i].Count; j++)
+            {
+                Debug.Log("Key " + i + " / Value " + userDataMatrix[i][j]);
+            }
         }
     }
 }
