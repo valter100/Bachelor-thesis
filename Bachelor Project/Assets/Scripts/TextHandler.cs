@@ -27,7 +27,7 @@ public class TextHandler : MonoBehaviour
     void Start()
     {
         ReadUserData();
-        DebugDictionary();
+        //DebugDictionary(); if we use a loop to go through values, make sure it wont skip. Can not simply use "count" function
     }
 
     void Update()
