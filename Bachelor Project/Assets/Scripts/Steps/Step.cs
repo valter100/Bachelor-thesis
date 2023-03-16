@@ -12,6 +12,7 @@ public abstract class Step : MonoBehaviour
     [SerializeField] protected bool giveAdvice;
     TextHandler textHandler;
     [SerializeField] protected List<GameObject> UIElements;
+    protected List<int> userAnswers = new List<int>();
 
     protected virtual void Start()
     {
@@ -20,6 +21,7 @@ public abstract class Step : MonoBehaviour
         textHandler = clappy.gameObject.GetComponent<TextHandler>();
         SetQuestion();
         SetOptions();
+        GetUserAnswers();
     }
 
     public virtual void GiveTip()
@@ -52,5 +54,10 @@ public abstract class Step : MonoBehaviour
     private void SetOptions()
     {
         options = textHandler.GetOptions(index);
+    }
+
+    private void GetUserAnswers()
+    {
+        userAnswers = textHandler.GetAnswerData(index);
     }
 }
