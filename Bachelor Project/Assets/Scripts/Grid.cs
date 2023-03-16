@@ -13,6 +13,7 @@ public class Grid : MonoBehaviour
     List<Tile[,]> selectedGrids = new List<Tile[,]>();
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
+    bool locked;
 
 
     [SerializeField] Color baseTileColor;
@@ -63,23 +64,13 @@ public class Grid : MonoBehaviour
                     )));
         }
 
-        //for (int i = 0; i < mapDimensions.x; i++)
-        //{
-        //    for (int j = 0; j < mapDimensions.z; j++)
-        //    {
-        //        baseGrid[i, j] = Instantiate(tile, new Vector3(i, 0, j) + new Vector3(i * tileBuffer, 0, j * tileBuffer), Quaternion.identity).GetComponent<Tile>(); //Add Height later
-        //        baseGrid[i, j].transform.parent = gameObject.transform;
-        //        baseGrid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
-        //        baseGrid[i, j].SetCoordinates(i, j);
-        //        baseGrid[i, j].SetColors(baseTileColor, highlightedTileColor);
-        //    }
-        //}
-
         StartCoroutine(_CreateGridRow(0));
     }
 
     IEnumerator _CreateGridRow(int i)
     {
+        locked = true;
+
         for (int j = 0; j < mapDimensions.z; j++)
         {
             baseGrid[i, j] = Instantiate(tile, Vector3.zero, Quaternion.identity).GetComponent<Tile>();
@@ -98,7 +89,7 @@ public class Grid : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
 
             StartCoroutine(_PositionGridRow(i));
             StartCoroutine(_CreateGridRow(i + 1));
@@ -111,7 +102,12 @@ public class Grid : MonoBehaviour
         {
             baseGrid[x, z].gameObject.transform.position = new Vector3(baseGrid[x, z].GetCoordinates().x, 0, baseGrid[x, z].GetCoordinates().y) + new Vector3(x * tileBuffer, 0, z * tileBuffer);
             baseGrid[x, z].SetHeightWithSmoothing(0);
+            baseGrid[x, z].StartSpawnAnimation();
+
+            yield return new WaitForSeconds(0.1f);
         }
+
+        locked = false;
 
         yield return null;
     }
@@ -159,9 +155,8 @@ public class Grid : MonoBehaviour
 
     public void AddSelectedGrid(Tile[,] newGridSelected)
     {
-        FindObjectOfType<GridSelect>().SetUIActive(selectedGrids.Count != 0);
-
         selectedGrids.Add(newGridSelected);
+        FindObjectOfType<GridSelect>().SetUIActive(SelectedGrids().Count > 0);
         FindObjectOfType<GridSelect>().DoAction();
 
     }
@@ -256,12 +251,12 @@ public class Grid : MonoBehaviour
 
     public void DeselectSubgrids()
     {
-        if (selectedGrids.Count == 0)
+        if (selectedGrids.Count == 0 || locked)
             return;
 
-        for (int i = 0; i < selectedGrids.Count; i++)
+        for (int i = 0; i < SelectedGrids().Count; i++)
         {
-            foreach (Tile tile in selectedGrids[i])
+            foreach (Tile tile in SelectedGrids()[i])
             {
                 if (tile != null)
                     tile.Deselect();
@@ -276,6 +271,9 @@ public class Grid : MonoBehaviour
 
     public void SelectSubgrid(Tile[,] subgrid)
     {
+        if (locked)
+            return;
+
         AddSelectedGrid(subgrid);
 
         foreach (Tile tile in subgrid)
@@ -300,12 +298,18 @@ public class Grid : MonoBehaviour
 
         Color gridColor = Color.white;
         bool foundColor = false;
+        int newBiomeIndex = 0;
         for (int i = 0; i < SelectedGrids()[0].GetLength(0); i++)
         {
             for (int j = 0; j < SelectedGrids()[0].GetLength(1); j++)
             {
                 if (SelectedGrids()[0][i, j] != null)
                 {
+                    if (SelectedGrids()[0][i, j].BiomeIndex() > 0)
+                    {
+                        newBiomeIndex = SelectedGrids()[0][i, j].BiomeIndex();
+                    }
+
                     gridColor = SelectedGrids()[0][0, 0].Color();
                     foundColor = true;
                     break;
@@ -360,6 +364,11 @@ public class Grid : MonoBehaviour
         foreach (Tile[,] grid in SelectedGrids())
         {
             tilesBeforeMerge += grid.Length;
+
+            if (grid[0,0].BiomeIndex() != newBiomeIndex)
+            {
+                FindObjectOfType<SetBiome>().ChangeBiomeOnSpecificGrid(grid, newBiomeIndex);
+            }
 
             foreach (Tile tile in grid)
             {
@@ -425,5 +434,11 @@ public class Grid : MonoBehaviour
 
     }
 
+    public void SetLocked(bool state)
+    {
+        locked = state;
+    }
+
     public Vector2 MapDimensions() => mapDimensions;
+    public bool Locked() => locked;
 }

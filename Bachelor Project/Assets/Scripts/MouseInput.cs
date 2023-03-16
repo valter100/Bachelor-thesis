@@ -18,6 +18,9 @@ public class MouseInput : MonoBehaviour
 
     void Update()
     {
+        if (baseGrid.Locked())
+            return;
+
         if (clickedTile)
             clickedTile.UnHighlight();
 

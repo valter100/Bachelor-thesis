@@ -15,8 +15,11 @@ public class Tile : MonoBehaviour
 
     [SerializeField] Vector3 closestPeak;
     [SerializeField] float closestDistance;
+    [SerializeField] GameObject placedObject;
+    [SerializeField] int biomeIndex;
     int peakHeight;
     bool visited;
+    [SerializeField] bool impassable;
     bool highlighted;
     Color highlightedColor;
     Color baseColor;
@@ -32,7 +35,6 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Animator>().Play("Created");
         previousColor = baseColor;
     }
 
@@ -72,63 +74,54 @@ public class Tile : MonoBehaviour
 
     public void SetHeight(float height)
     {
-        //height = Mathf.RoundToInt(height);
-
         transform.localScale = new Vector3(1, Mathf.Clamp(height, 1, Mathf.Infinity), 1);
         transform.position = new Vector3(coordinates.x, height, coordinates.y);
     }
 
     public void SetHeightWithSmoothing(float heightDifference)
     {
-        //height = Random.Range(0, 10) * heightScale;
-
-        //if (adjacentTiles.Count > 0) // if the tile has adjacent tiles
-        //{
-        //    float totalHeight = 0;
-        //    int tilesCounted = 0;
-        //    foreach (Tile tile in adjacentTiles)
-        //    {
-        //        //if (tile.subgrid != subgrid) //Skip if the tiles are not in the same subgrid
-        //        //    continue;
-
-        //        //foreach (Tile adjacentTile in tile.adjacentTiles)
-        //        //{
-        //        //    if (tile.height > 0)
-        //        //    {
-        //        //        totalHeight += tile.Height();
-        //        //        tilesCounted++;
-        //        //    }
-        //        //}
-
-        //        if (tile.height > 0)
-        //        {
-        //            totalHeight += tile.Height();
-        //            tilesCounted++;
-        //        }
-        //    }
-
-
-        //    float averageHeight = totalHeight / tilesCounted;
-
-        //    float clampLow = averageHeight - heightScale;
-        //    float clampHigh = averageHeight + heightScale;
-
-        //    height = Mathf.Clamp(height, clampLow, clampHigh);
-        //    height += heightDifference;
-
-        //    height = Mathf.RoundToInt(height);
-        //}
-
-        int heightFactor = (int)((grid.MapDimensions().x / 3) / Mathf.Clamp(closestDistance, 1, closestDistance));
-
+        int heightFactor = (int)((grid.MapDimensions().x / peakHeight * 1.4f) / Mathf.Clamp(closestDistance, 1, closestDistance));
         height = (int)(heightFactor * heightScale);
 
-        height = Mathf.Clamp(height, 0, peakHeight);
-        height++;
+        height = Mathf.Clamp(height, 0, peakHeight) + 1;
 
         transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
-        transform.position += new Vector3(0, height, 0);
+        transform.position += new Vector3(0, height - (float)(transform.localScale.y * 0.5), 0);
     }
+
+    public void StartSpawnAnimation()
+    {
+        StartCoroutine(spawnAnimation());
+    }
+
+    IEnumerator spawnAnimation()
+    {
+        float progress = 0;
+
+        Vector3 goalPosition = transform.position;
+        transform.position += new Vector3(0, 3, 0);
+        Vector3 startPosition = transform.position;
+
+        while (progress < 1)
+        {
+            if(1 - progress < 0.1)
+            {
+                progress = 1;
+            }
+
+            transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
+            transform.localScale = new Vector3(progress, transform.localScale.y, progress);
+
+            progress += Time.deltaTime * 3;
+            yield return 0;
+        }
+
+        transform.localScale = new Vector3(1, transform.localScale.y, 1);
+        transform.position = goalPosition;
+
+        yield return null;
+    }
+
     public void SetColors(Color baseColor, Color highlightedColor)
     {
         this.baseColor = baseColor;
@@ -136,6 +129,11 @@ public class Tile : MonoBehaviour
         GetComponent<Renderer>().material.color = baseColor;
         selectedColor = baseColor;
         selectedColor.a /= 2;
+    }
+
+    public void SetBiome(int newIndex)
+    {
+        biomeIndex = newIndex;
     }
 
     public void SetColor(Color color)
@@ -168,7 +166,7 @@ public class Tile : MonoBehaviour
     public void Deselect()
     {
         GetComponent<Renderer>().material.color = previousColor;
-        transform.position = new Vector3(transform.position.x, height / 2, transform.position.z);
+        transform.position -= new Vector3(0, 0.5f, 0);
     }
 
     public void SetPartOfSubgrid(Tile[,] _subgrid)
@@ -207,10 +205,52 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    public void PlaceObjectOnTile(GameObject go)
+    {
+        GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y/2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
+
+        placedObject = instantiatedGo;
+        placedObject.transform.parent = transform;
+        impassable = true;
+        StartCoroutine(PlaceObjects());
+    }
+
+    IEnumerator PlaceObjects()
+    {
+        float progress = 0;
+
+        Vector3 goalPosition = placedObject.transform.position;
+        placedObject.transform.position += new Vector3(0, 2, 0);
+        Vector3 startPosition = placedObject.transform.position;
+
+        while (progress < 1)
+        {
+            if (1 - progress < 0.1)
+            {
+                progress = 1;
+            }
+
+            placedObject.transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
+
+            progress += Time.deltaTime * 2;
+            yield return 0;
+        }
+
+
+        yield return null;
+    }
+
+    public GameObject PlacedObject() => placedObject;
     //public void DeactiveAnimator()
     //{
     //    GetComponent<Animator>().enabled = false;
     //}
+
+    public void SetImpassable(bool state)
+    {
+        impassable = state;
+    }
 
     public List<Tile> AdjacentTiles() => adjacentTiles;
     public float Height() => height;
@@ -218,5 +258,7 @@ public class Tile : MonoBehaviour
     public bool PartOfSubgrid() => partOfSubgrid;
     public Tile[,] Subgrid() => subgrid;
     public Color Color() => GetComponent<Renderer>().material.color;
+    public bool Impassable() => impassable;
+    public int BiomeIndex() => biomeIndex;
 
 }
