@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
@@ -11,17 +13,23 @@ public class Grid : MonoBehaviour
     List<Tile[,]> selectedGrids = new List<Tile[,]>();
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
-    bool perlin;
 
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
     [SerializeField] Color subgridColor;
     [SerializeField] AI ai;
+
+    [SerializeField] List<Vector3> peakPositions = new List<Vector3>();
+
+    [Header("Peaks")]
+    [SerializeField] int peakHeight;
+    [SerializeField] int peakHeightRange;
+    [SerializeField] int peakAmount;
     // Start is called before the first frame update
     void Start()
     {
-        subgridColor = Random.ColorHSV();
+        subgridColor = UnityEngine.Random.ColorHSV();
     }
 
     private void Update()
@@ -35,33 +43,79 @@ public class Grid : MonoBehaviour
         {
             foreach (Tile tile in baseGrid)
             {
-                subgridList.Clear();
                 Destroy(tile.gameObject);
             }
+            subgridList.Clear();
+            peakPositions.Clear();
         }
+
+        //int tilesCreatedEachFrame = 1;
 
         baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
 
-        for (int i = 0; i < mapDimensions.x; i++)
+        for(int i = 0; i < peakAmount; i++)
         {
-            for (int j = 0; j < mapDimensions.z; j++)
-            {
-                baseGrid[i, j] = Instantiate(tile, new Vector3(i, 0, j) + new Vector3(i * tileBuffer, 0, j * tileBuffer), Quaternion.identity).GetComponent<Tile>(); //Add Height later
-                baseGrid[i, j].transform.parent = gameObject.transform;
-                baseGrid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
-                baseGrid[i, j].SetCoordinates(i, j);
-                baseGrid[i, j].SetColors(baseTileColor, highlightedTileColor);
-            }
+            peakPositions.Add(
+                new Vector3(
+                    (int)UnityEngine.Random.Range(0, mapDimensions.x),
+                    peakHeight + UnityEngine.Random.Range(-peakHeightRange, peakHeightRange),
+                    (int)UnityEngine.Random.Range(0, mapDimensions.z
+                    )));
         }
 
-        foreach (Tile tile in baseGrid)
-        {
-            tile.SetAdjacentTiles(this);
-            tile.SetHeightWithSmoothing(perlin, 0);
-        }
+        //for (int i = 0; i < mapDimensions.x; i++)
+        //{
+        //    for (int j = 0; j < mapDimensions.z; j++)
+        //    {
+        //        baseGrid[i, j] = Instantiate(tile, new Vector3(i, 0, j) + new Vector3(i * tileBuffer, 0, j * tileBuffer), Quaternion.identity).GetComponent<Tile>(); //Add Height later
+        //        baseGrid[i, j].transform.parent = gameObject.transform;
+        //        baseGrid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
+        //        baseGrid[i, j].SetCoordinates(i, j);
+        //        baseGrid[i, j].SetColors(baseTileColor, highlightedTileColor);
+        //    }
+        //}
 
-
+        StartCoroutine(_CreateGridRow(0));
     }
+
+    IEnumerator _CreateGridRow(int i)
+    {
+        for (int j = 0; j < mapDimensions.z; j++)
+        {
+            baseGrid[i, j] = Instantiate(tile, Vector3.zero, Quaternion.identity).GetComponent<Tile>();
+            baseGrid[i, j].SetCoordinates(i, j);
+            baseGrid[i, j].transform.parent = gameObject.transform;
+            baseGrid[i, j].gameObject.name = (i + 1) + "," + (j + 1);
+            baseGrid[i, j].SetColors(baseTileColor, highlightedTileColor);
+            baseGrid[i, j].SetAdjacentTiles(this);
+            baseGrid[i, j].FindClosestPeak(peakPositions);
+        }
+
+        if (i == mapDimensions.x -1)
+        {
+            StartCoroutine(_PositionGridRow(i));
+            yield return null;
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.05f);
+
+            StartCoroutine(_PositionGridRow(i));
+            StartCoroutine(_CreateGridRow(i + 1));
+        }
+    }
+
+    IEnumerator _PositionGridRow(int x)
+    {
+        for (int z = 0; z < mapDimensions.z; z++)
+        {
+            baseGrid[x, z].gameObject.transform.position = new Vector3(baseGrid[x, z].GetCoordinates().x, 0, baseGrid[x, z].GetCoordinates().y) + new Vector3(x * tileBuffer, 0, z * tileBuffer);
+            baseGrid[x, z].SetHeightWithSmoothing(0);
+        }
+
+        yield return null;
+    }
+
     public void CreateSubgrid(Tile[,] subgrid)
     {
         foreach (Tile tile in subgrid)
@@ -75,7 +129,7 @@ public class Grid : MonoBehaviour
             tile.SetPartOfSubgrid(subgrid);
         }
 
-        subgridColor = Random.ColorHSV();
+        subgridColor = UnityEngine.Random.ColorHSV();
 
         subgridList.Add(subgrid);
 
@@ -119,6 +173,11 @@ public class Grid : MonoBehaviour
         tempList.Remove(baseGrid);
 
         return tempList;
+    }
+
+    public void UpdateGridAmount()
+    {
+        numberOfSubgrids = subgridList.Count;
     }
 
     public Tile[,] GetTilesBetween(Vector2 startCoordinates, Vector2 endCoordinates)
@@ -182,6 +241,8 @@ public class Grid : MonoBehaviour
             }
 
         }
+
+        UpdateGridAmount();
     }
 
     public void SmoothGrid()
@@ -189,7 +250,7 @@ public class Grid : MonoBehaviour
         foreach (Tile[,] subgrid in selectedGrids)
         {
             foreach (Tile tile in subgrid)
-                tile.SetHeightWithSmoothing(false, 0);
+                tile.SetHeightWithSmoothing(0);
         }
     }
 
@@ -232,4 +293,137 @@ public class Grid : MonoBehaviour
             tile.SetHeight(height);
         }
     }
+
+    public void MergeSubgrids()
+    {
+        //Step 1: Find the color of the first selected subgrid
+
+        Color gridColor = Color.white;
+        bool foundColor = false;
+        for (int i = 0; i < SelectedGrids()[0].GetLength(0); i++)
+        {
+            for (int j = 0; j < SelectedGrids()[0].GetLength(1); j++)
+            {
+                if (SelectedGrids()[0][i, j] != null)
+                {
+                    gridColor = SelectedGrids()[0][0, 0].Color();
+                    foundColor = true;
+                    break;
+                }
+            }
+            if (foundColor)
+                break;
+        }
+
+        //step 2: calculate the size of the new Tile[,]
+
+        int smallestX = 10000;
+        int smallestY = 10000;
+        int largestX = 0;
+        int largestY = 0;
+
+        foreach (Tile[,] grid in SelectedGrids())
+        {
+            foreach (Tile tile in grid)
+            {
+                if (tile == null)
+                    continue;
+
+                if (tile.GetCoordinates().x < smallestX)
+                    smallestX = (int)tile.GetCoordinates().x;
+                if (tile.GetCoordinates().y < smallestY)
+                    smallestY = (int)tile.GetCoordinates().y;
+
+                if (tile.GetCoordinates().x > largestX)
+                    largestX = (int)tile.GetCoordinates().x;
+                if (tile.GetCoordinates().y > largestY)
+                    largestY = (int)tile.GetCoordinates().y;
+            }
+        }
+
+
+        //step 3: create a new Tile[,] with every tile from all the selected subgrids
+        int subgridXSize = largestX - smallestX;
+        int subgridYSize = largestY - smallestY;
+
+        Tile[,] newSubgrid = new Tile[subgridXSize, subgridYSize];
+
+        int tilesBeforeMerge = 0;
+
+        int currentWidthIndex = 0;
+        int currentHeightIndex = 0;
+
+        Debug.Log("Subgrid Size: X: " + subgridXSize + " Y: " + subgridYSize);
+
+        List<Tile> selectedTiles = new List<Tile>();
+
+        foreach (Tile[,] grid in SelectedGrids())
+        {
+            tilesBeforeMerge += grid.Length;
+
+            foreach (Tile tile in grid)
+            {
+                if (selectedTiles.Contains(tile))
+                    continue;
+                selectedTiles.Add(tile);
+
+                try
+                {
+                    newSubgrid[currentWidthIndex++, currentHeightIndex] = tile;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex);
+                    Debug.Log("X: " + currentWidthIndex + " Y: " + currentHeightIndex);
+                }
+
+                if (currentWidthIndex == subgridXSize)
+                {
+                    currentWidthIndex = 0;
+                    currentHeightIndex++;
+                }
+
+            }
+        }
+
+        Debug.Log("Number of tiles before Merge: " + tilesBeforeMerge);
+        Debug.Log("Number of Tiles in new subgrid: " + newSubgrid.Length);
+
+
+        //step 4: Remove all the selected subgrids from the subgrid list
+        for (int i = 0; i < subgridList.Count; i++)
+        {
+            for (int j = 0; j < SelectedGrids().Count; j++)
+            {
+                if (subgridList[i] == SelectedGrids()[j])
+                {
+                    subgridList.Remove(SelectedGrids()[j]);
+                    i--;
+                    break;
+                }
+            }
+        }
+
+        //step 5: clear the selectedGrids list
+        SelectedGrids().Clear();
+
+        //Step 6: Add the new subgrid to the subgrid list and selected list
+        subgridList.Add(newSubgrid);
+        selectedGrids.Add(newSubgrid);
+        UpdateGridAmount();
+
+        //Step 7: Apply that color to every tile in the new Tile[,]
+        foreach (Tile tile in newSubgrid)
+        {
+            if (tile != null)
+            {
+                tile.SetColor(gridColor);
+                tile.SetPartOfSubgrid(newSubgrid);
+            }
+        }
+
+
+    }
+
+    public Vector2 MapDimensions() => mapDimensions;
 }

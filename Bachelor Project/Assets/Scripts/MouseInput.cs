@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseInput : MonoBehaviour
 {
@@ -110,7 +111,7 @@ public class MouseInput : MonoBehaviour
 
         if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
         {
-            if (tileHit.transform.gameObject.tag == "tile")
+            if (tileHit.transform.gameObject.tag == "tile" && !EventSystem.current.IsPointerOverGameObject())
             {
                 Tile clickedTile = tileHit.transform.gameObject.GetComponent<Tile>();
 
@@ -136,6 +137,9 @@ public class MouseInput : MonoBehaviour
 
     public void SelectSubgrid()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         baseGrid.SelectSubgrid(clickedTile.Subgrid());
 
         selectedGrids.Add(clickedTile.Subgrid());
