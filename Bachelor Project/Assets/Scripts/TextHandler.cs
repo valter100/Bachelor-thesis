@@ -14,7 +14,7 @@ public class TextHandler : MonoBehaviour
 
     StreamReader sr;
     StreamWriter sw;
-    
+
     List<Vector2> userData = new List<Vector2>();
     Dictionary<int, List<int>> userDataMatrix = new Dictionary<int, List<int>>();
 
@@ -22,17 +22,17 @@ public class TextHandler : MonoBehaviour
     {
         aPath = "Assets/TextFiles/answers.txt";
         qPath = "Assets/TextFiles/questions.txt";
+        ReadUserData();
     }
 
     void Start()
     {
-        ReadUserData();
-        //DebugDictionary(); if we use a loop to go through values, make sure it wont skip. Can not simply use "count" function
+     
     }
 
     void Update()
     {
-        
+
     }
 
     public string GetQuestion(int index)
@@ -48,7 +48,7 @@ public class TextHandler : MonoBehaviour
             {
                 var line = sr.ReadLine();
 
-                if(IsNullOrWhiteSpace(line)) continue;
+                if (IsNullOrWhiteSpace(line)) continue;
 
                 if (!startFound) startFound = line.Contains("index" + index.ToString());
 
@@ -58,7 +58,7 @@ public class TextHandler : MonoBehaviour
 
                     if (!isEnd && !line.Contains("index" + index.ToString())) lines.Add(line);
 
-                    if(isEnd) break;
+                    if (isEnd) break;
                 }
             }
         }
@@ -111,7 +111,7 @@ public class TextHandler : MonoBehaviour
         using (FileStream fs = new FileStream(aPath, FileMode.Append, FileAccess.Write))
         using (sw = new StreamWriter(fs))
 
-        sw.WriteLine("questionIndex:" + index + "/answerIndex:" + answerIndex + "/answer:" + answer);
+            sw.WriteLine("questionIndex:" + index + "/answerIndex:" + answerIndex + "/answer:" + answer);
 
         sw.Close();
     }
@@ -163,7 +163,7 @@ public class TextHandler : MonoBehaviour
             {
                 values.Add(float.Parse(match.Value));
             }
-           
+
             Vector2 data = new Vector2(values[0], values[1]);
 
             userData.Add(data);
@@ -174,7 +174,7 @@ public class TextHandler : MonoBehaviour
 
     private void AddValuesToDictionary()
     {
-        foreach(Vector2 vec in userData)
+        foreach (Vector2 vec in userData)
         {
             int x, y;
             x = (int)vec.x;
@@ -193,16 +193,10 @@ public class TextHandler : MonoBehaviour
         }
     }
 
-    private void DebugDictionary()
+    public List<int> GetAnswerData(int index)
     {
-        for (int i = 0; i < userDataMatrix.Count; i++)
-        {
-            if (!userDataMatrix.ContainsKey(i)) continue;
+        if (!userDataMatrix.ContainsKey(index)) return null;
 
-            for (int j = 0; j < userDataMatrix[i].Count; j++)
-            {
-                Debug.Log("Key " + i + " / Value " + userDataMatrix[i][j]);
-            }
-        }
+        return userDataMatrix[index];
     }
 }
