@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
-    public override void DoAction()
+    public override void GiveTip()
     {
-        base.DoAction();
+        base.GiveTip();
+    }
 
+    public override void DoAction(int actionIndex)
+    {
+        if (actionIndex == 0)
+        {
+
+        }
+        if (actionIndex == 1)
+        {
+
+        }
+        if (actionIndex == 2)
+        {
+
+        }
         grid.CreateGrid();
     }
 }
