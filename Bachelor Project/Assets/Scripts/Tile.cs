@@ -79,6 +79,9 @@ public class Tile : MonoBehaviour
     {
         transform.localScale = new Vector3(1, Mathf.Clamp(height, 1, Mathf.Infinity), 1);
         transform.position = new Vector3(coordinates.x, height, coordinates.y);
+
+        //oldPosition = transform.position;
+        //oldScale = transform.localScale;
     }
 
     public void SetHeightWithSmoothing(float heightDifference)
@@ -90,6 +93,9 @@ public class Tile : MonoBehaviour
 
         transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
         transform.position += new Vector3(0, height - (float)(transform.localScale.y * 0.5), 0);
+
+        //oldPosition = transform.position;
+        //oldScale = transform.localScale;
     }
 
     public void StartSpawnAnimation()
@@ -138,8 +144,11 @@ public class Tile : MonoBehaviour
     {
         if(!rememberOldTransform)
         {
-            transform.localScale = oldScale;
-            transform.position = oldPosition;
+            if(oldPosition != Vector3.zero && oldScale != Vector3.zero)
+            {
+                transform.localScale = oldScale;
+                transform.position = oldPosition;
+            }
         }
         else
         {
