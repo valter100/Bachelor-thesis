@@ -24,8 +24,19 @@ public class StartStep : Step
         base.GiveTip();
     }
 
-    public override void DoAction()
+    public override void DoAction(int actionIndex)
     {
-        base.DoAction();
+        if (actionIndex == 0)
+        {
+
+        }
+        if (actionIndex == 1)
+        {
+
+        }
+        if (actionIndex == 2)
+        {
+            //clappy.SetINactive();
+        }
     }
 }

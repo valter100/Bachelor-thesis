@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class CreateSubgrid : Step
 {
-    public override void DoAction()
+    public override void GiveTip()
+    {
+        base.GiveTip();
+    }
+
+    public override void DoAction(int actionIndex)
     {
         //grid.CreateSubgrid();
+        if (actionIndex == 0)
+        {
+
+        }
+        if (actionIndex == 1)
+        {
+
+        }
+        if (actionIndex == 2)
+        {
+
+        }
     }
 }

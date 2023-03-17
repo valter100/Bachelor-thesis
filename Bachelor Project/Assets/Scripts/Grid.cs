@@ -108,7 +108,7 @@ public class Grid : MonoBehaviour
         FindObjectOfType<GridSelect>().SetUIActive(selectedGrids.Count != 0);
 
         selectedGrids.Add(newGridSelected);
-        FindObjectOfType<GridSelect>().DoAction();
+        FindObjectOfType<GridSelect>().GiveTip();
 
     }
 
