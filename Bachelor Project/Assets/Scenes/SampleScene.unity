@@ -1772,9 +1772,15 @@ MonoBehaviour:
   giveAdvice: 0
   UIElements: []
   placementChance: 30
+  standardObjects:
+  - {fileID: 1000013614005390, guid: 92ccf046714297a4dbafba82df1ede90, type: 3}
+  - {fileID: 1000012479800594, guid: b37434a4debc2bd4d9421e16ae0b6c32, type: 3}
+  - {fileID: 1000010816859490, guid: 2b9f6a93ccc124648a3a4deed073229c, type: 3}
+  - {fileID: 1000010390582904, guid: 44dd30aa1038ede428391ed11a001e2e, type: 3}
+  - {fileID: 1239899964475738, guid: d70bfc9ca1687034695891ef252ebeba, type: 3}
+  - {fileID: 1962701846625652, guid: 21bec17ac3f03cb4d8187d61304bd3a6, type: 3}
+  - {fileID: 1014424084807444, guid: b51967fce87b176468ecd81d4e69f243, type: 3}
   forestObjects:
-  - {fileID: 1000012883012200, guid: 608039e08bea7024cb746377388c5548, type: 3}
-  - {fileID: 1000010998238436, guid: 01ce724ee701f644b821fe7f6e1c0021, type: 3}
   - {fileID: 1000013614005390, guid: 92ccf046714297a4dbafba82df1ede90, type: 3}
   - {fileID: 1000012813170466, guid: 035a6f7d53152c7408148cfc541054c3, type: 3}
   - {fileID: 1000014001585208, guid: b737289edfd7b4a4ba303ec83b85d00d, type: 3}
@@ -1787,8 +1793,29 @@ MonoBehaviour:
   - {fileID: 1000011359340144, guid: e958123e28858854a9eac540b1200b14, type: 3}
   - {fileID: 1000013914375452, guid: 84b961d6358729b40ae600ea63541538, type: 3}
   - {fileID: 1000011755428546, guid: aa21bb3bc8b69f04fb3f383aafc0725d, type: 3}
-  seaObjects: []
-  desertObjects: []
+  seaObjects:
+  - {fileID: 1098411115154460, guid: f5cf0b3941f3c62428648dd390a692e4, type: 3}
+  - {fileID: 1962701846625652, guid: 21bec17ac3f03cb4d8187d61304bd3a6, type: 3}
+  - {fileID: 1239899964475738, guid: d70bfc9ca1687034695891ef252ebeba, type: 3}
+  - {fileID: 1417386805192760, guid: c90ecda60ec650842a6e79dde1a30853, type: 3}
+  - {fileID: 1654076912766160, guid: a9b2fab59ae9c1c47adf565fa69cb993, type: 3}
+  - {fileID: 1859414899516494, guid: 5987d05442388b34289d01f7e54b0daf, type: 3}
+  - {fileID: 1996593989257286, guid: dc1a0cf21d77d9841ad6c2667ec49b92, type: 3}
+  - {fileID: 1202763152371764, guid: 4ee01157406a1eb4799be30fbe6bd6bc, type: 3}
+  - {fileID: 1014424084807444, guid: b51967fce87b176468ecd81d4e69f243, type: 3}
+  - {fileID: 1060157917754950, guid: 5f5b7b885ce39f14fbb273834ace0052, type: 3}
+  - {fileID: 1356528920716648, guid: 73b3df9026d712849aa4023711ca6f4c, type: 3}
+  - {fileID: 1869114976262722, guid: 9d7ff193c0e6fc042ae16bd760068a43, type: 3}
+  desertObjects:
+  - {fileID: 1000012883012200, guid: 608039e08bea7024cb746377388c5548, type: 3}
+  - {fileID: 1000010998238436, guid: 01ce724ee701f644b821fe7f6e1c0021, type: 3}
+  - {fileID: 1000010390582904, guid: 44dd30aa1038ede428391ed11a001e2e, type: 3}
+  - {fileID: 1000010453597566, guid: 5e8857688fe80244896aee47b8a06a0a, type: 3}
+  - {fileID: 1000012161219806, guid: 124b96de3a9ddc14ea43e569a9325d4e, type: 3}
+  - {fileID: 1000012599779874, guid: 6306b247ccf04cd4f81944a3dfe10d5e, type: 3}
+  - {fileID: 1000010612138840, guid: cd14d1f275656c04389ceeadc1880e69, type: 3}
+  - {fileID: 1000011707776254, guid: d671d5b780e3ac348b2c5da8321919bf, type: 3}
+  - {fileID: 1000010816859490, guid: 2b9f6a93ccc124648a3a4deed073229c, type: 3}
 --- !u!1 &822678861
 GameObject:
   m_ObjectHideFlags: 0

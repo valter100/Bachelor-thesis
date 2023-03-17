@@ -7,28 +7,41 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] Vector2 coordinates;
     [SerializeField] float height = 0;
-    [SerializeField] List<Tile> adjacentTiles;
-    [SerializeField] Grid grid;
-    Tile[,] subgrid;
     [SerializeField] float heightScale;
-    [SerializeField] bool partOfSubgrid;
+    
+    List<Tile> adjacentTiles;
+    Grid grid;
+    Tile[,] subgrid;
+    bool partOfSubgrid;
 
-    [SerializeField] Vector3 closestPeak;
-    [SerializeField] float closestDistance;
-    [SerializeField] GameObject placedObject;
-    [SerializeField] int biomeIndex;
+    Vector3 closestPeak;
+    float closestDistance;
+    GameObject placedObject;
+    int biomeIndex;
     int peakHeight;
+    
     bool visited;
-    [SerializeField] bool impassable;
+    bool impassable;
     bool highlighted;
+
     Color highlightedColor;
     Color baseColor;
-
     Color previousColor;
     Color selectedColor;
 
-    [SerializeField] Vector3 oldPosition;
-    [SerializeField] Vector3 oldScale;
+    Color oldBaseColor;
+    Color oldPreviousColor;
+    Color oldSelectedColor;
+
+    Vector3 oldPosition;
+    Vector3 oldScale;
+
+    //Pathfinding variables
+    [Header("Pathfinding")]
+    [SerializeField] float fValue;
+    [SerializeField] float gValue;
+    [SerializeField] float hValue;
+    [SerializeField] Tile parent;
 
     private void Awake()
     {
@@ -47,7 +60,7 @@ public class Tile : MonoBehaviour
         {
             for (int j = -1; j <= 0; j++)
             {
-                if (i == 0 && j == 0) continue;
+                if (i == j) continue;
 
                 try
                 {
@@ -131,13 +144,38 @@ public class Tile : MonoBehaviour
         yield return null;
     }
 
+    public void SetToOldColor()
+    {
+        baseColor = oldBaseColor;
+        GetComponent<Renderer>().material.color = baseColor;
+        selectedColor = oldSelectedColor;
+        previousColor = oldPreviousColor;
+        selectedColor.a /= 2;
+    }
+
     public void SetColors(Color baseColor, Color highlightedColor)
     {
+        oldBaseColor = baseColor;
+        oldPreviousColor = previousColor;
+        oldSelectedColor = selectedColor;
+
         this.baseColor = baseColor;
         this.highlightedColor = highlightedColor;
         GetComponent<Renderer>().material.color = baseColor;
         selectedColor = baseColor;
         selectedColor.a /= 2;
+    }
+    public void SetColor(Color color)
+    {
+        oldBaseColor = baseColor;
+        oldPreviousColor = previousColor;
+        oldSelectedColor = selectedColor;
+
+        baseColor = color;
+        previousColor = color;
+        GetComponent<Renderer>().material.color = color;
+        selectedColor = color;
+        selectedColor /= 2;
     }
 
     public void SetBiome(int newIndex, bool rememberOldTransform)
@@ -159,14 +197,6 @@ public class Tile : MonoBehaviour
         biomeIndex = newIndex;
     }
 
-    public void SetColor(Color color)
-    {
-        baseColor = color;
-        previousColor = color;
-        GetComponent<Renderer>().material.color = color;
-        selectedColor = color;
-        selectedColor /= 2;
-    }
 
     public void Highlight()
     {
@@ -270,6 +300,10 @@ public class Tile : MonoBehaviour
     {
         impassable = state;
     }
+    public void SetF(float value) { fValue = value; }
+    public void SetG(float value) { gValue = value; }
+    public void SetH(float value) { hValue = value; }
+    public void SetParent(Tile newParent) { parent = newParent; }
 
     public List<Tile> AdjacentTiles() => adjacentTiles;
     public float Height() => height;
@@ -279,5 +313,9 @@ public class Tile : MonoBehaviour
     public Color Color() => GetComponent<Renderer>().material.color;
     public bool Impassable() => impassable;
     public int BiomeIndex() => biomeIndex;
+    public float F() => fValue;
+    public float G() => gValue;
+    public float H() => hValue;
+    public Tile Parent() => parent;
 
 }
