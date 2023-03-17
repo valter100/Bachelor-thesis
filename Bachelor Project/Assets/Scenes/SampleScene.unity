@@ -395,7 +395,7 @@ MonoBehaviour:
       - m_Target: {fileID: 160407805}
         m_TargetAssemblyTypeName: CreateGrid, Assembly-CSharp
         m_MethodName: DoAction
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1787,6 +1787,8 @@ MonoBehaviour:
   - {fileID: 1000011359340144, guid: e958123e28858854a9eac540b1200b14, type: 3}
   - {fileID: 1000013914375452, guid: 84b961d6358729b40ae600ea63541538, type: 3}
   - {fileID: 1000011755428546, guid: aa21bb3bc8b69f04fb3f383aafc0725d, type: 3}
+  seaObjects: []
+  desertObjects: []
 --- !u!1 &822678861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,12 +4750,12 @@ PrefabInstance:
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: mapDimensions.x
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: mapDimensions.z
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}

@@ -5,7 +5,21 @@ using UnityEngine;
 public class HandleObjects : Step
 {
     [SerializeField] float placementChance;
+
+    List<List<GameObject>> biomeObjects = new List<List<GameObject>>();
+    [SerializeField] List<GameObject> standardObjects = new List<GameObject>();
     [SerializeField] List<GameObject> forestObjects = new List<GameObject>();
+    [SerializeField] List<GameObject> seaObjects = new List<GameObject>();
+    [SerializeField] List<GameObject> desertObjects = new List<GameObject>();
+
+    protected override void Start()
+    {
+        base.Start();
+        biomeObjects.Add(standardObjects);
+        biomeObjects.Add(desertObjects);
+        biomeObjects.Add(seaObjects);
+        biomeObjects.Add(forestObjects);
+    }
 
     public void PlaceObjectsAction()
     {
@@ -46,8 +60,10 @@ public class HandleObjects : Step
 
                 if (random < placementChance)
                 {
-                    int objectIndex = Random.Range(0, forestObjects.Count);
-                    tile.PlaceObjectOnTile(forestObjects[objectIndex]);
+                    int listIndex = tile.BiomeIndex();
+                    List<GameObject> list = biomeObjects[listIndex];
+                    int objectIndex = Random.Range(0, list.Count);
+                    tile.PlaceObjectOnTile(list[objectIndex]);
                     yield return new WaitForSeconds(0.025f);
                 }
             }
