@@ -28,15 +28,15 @@ public class StartStep : Step
     {
         if (actionIndex == 0)
         {
-
+            
         }
         if (actionIndex == 1)
         {
-
+            clappy.SetInactive();
         }
         if (actionIndex == 2)
         {
-            //clappy.SetINactive();
+            
         }
     }
 }

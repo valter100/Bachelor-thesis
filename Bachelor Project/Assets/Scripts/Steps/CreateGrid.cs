@@ -23,6 +23,10 @@ public class CreateGrid : Step
         {
 
         }
+    }
+
+    public void CreateNewGrid()
+    {
         grid.CreateGrid();
     }
 }
