@@ -4738,12 +4738,12 @@ PrefabInstance:
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakAmount
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakHeight
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
@@ -4758,7 +4758,7 @@ PrefabInstance:
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakHeightRange
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400293, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}

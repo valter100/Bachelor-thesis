@@ -27,6 +27,9 @@ public class Tile : MonoBehaviour
     Color previousColor;
     Color selectedColor;
 
+    [SerializeField] Vector3 oldPosition;
+    [SerializeField] Vector3 oldScale;
+
     private void Awake()
     {
         grid = FindObjectOfType<Grid>();
@@ -131,8 +134,19 @@ public class Tile : MonoBehaviour
         selectedColor.a /= 2;
     }
 
-    public void SetBiome(int newIndex)
+    public void SetBiome(int newIndex, bool rememberOldTransform)
     {
+        if(!rememberOldTransform)
+        {
+            transform.localScale = oldScale;
+            transform.position = oldPosition;
+        }
+        else
+        {
+            oldScale = transform.localScale;
+            oldPosition = transform.position;
+        }
+
         biomeIndex = newIndex;
     }
 
@@ -242,10 +256,6 @@ public class Tile : MonoBehaviour
     }
 
     public GameObject PlacedObject() => placedObject;
-    //public void DeactiveAnimator()
-    //{
-    //    GetComponent<Animator>().enabled = false;
-    //}
 
     public void SetImpassable(bool state)
     {

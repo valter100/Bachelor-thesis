@@ -25,7 +25,7 @@ public class SetBiome : Step
                 if(tile.PlacedObject())
                     Destroy(tile.PlacedObject());
 
-                tile.SetBiome(biomeIndex);
+                tile.SetBiome(biomeIndex, true);
                 tile.SetColor(biomeColors[biomeIndex]);
                 tile.SetHeight(heightDifference[biomeIndex]);
                 tile.SetImpassable(biomeImpassable[biomeIndex]);
@@ -43,7 +43,7 @@ public class SetBiome : Step
             if (tile.PlacedObject())
                 Destroy(tile.PlacedObject());
 
-            tile.SetBiome(biomeIndex);
+            tile.SetBiome(biomeIndex, true);
             tile.SetColor(biomeColors[biomeIndex]);
             tile.SetHeight(heightDifference[biomeIndex]);
             tile.SetImpassable(biomeImpassable[biomeIndex]);
@@ -59,7 +59,9 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
+                tile.SetBiome(biomeIndex, false);
                 tile.SetColor(biomeColors[biomeIndex]);
+                tile.SetImpassable(biomeImpassable[biomeIndex]);
             }
         }
     }
