@@ -29,9 +29,9 @@ public abstract class Step : MonoBehaviour
         clappy.GiveTip(this);
     }
 
-    public virtual void DoAction()
+    public virtual void DoAction(int áctionIndex)
     {
-        clappy.GiveTip(this);
+       
     }
 
     public int Index() => index;

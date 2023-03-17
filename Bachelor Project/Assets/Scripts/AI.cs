@@ -77,6 +77,4 @@ public class AI : MonoBehaviour
 
         image.gameObject.SetActive(state);
     }
-
-    
 }

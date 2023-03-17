@@ -4,5 +4,24 @@ using UnityEngine;
 
 public class GridSelect : Step
 {
-    
+    public override void GiveTip()
+    {
+        base.GiveTip();
+    }
+
+    public override void DoAction(int actionIndex)
+    {
+        if (actionIndex == 0)
+        {
+
+        }
+        if (actionIndex == 1)
+        {
+
+        }
+        if (actionIndex == 2)
+        {
+
+        }
+    }
 }
