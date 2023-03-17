@@ -394,8 +394,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 160407805}
         m_TargetAssemblyTypeName: CreateGrid, Assembly-CSharp
-        m_MethodName: DoAction
-        m_Mode: 3
+        m_MethodName: CreateNewGrid
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1772,6 +1772,7 @@ MonoBehaviour:
   giveAdvice: 0
   UIElements: []
   placementChance: 30
+  standardObjects: []
   forestObjects:
   - {fileID: 1000012883012200, guid: 608039e08bea7024cb746377388c5548, type: 3}
   - {fileID: 1000010998238436, guid: 01ce724ee701f644b821fe7f6e1c0021, type: 3}
