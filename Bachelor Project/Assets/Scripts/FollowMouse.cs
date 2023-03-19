@@ -8,10 +8,27 @@ public class FollowMouse : MonoBehaviour
     [SerializeField] bool placed;
     [SerializeField] bool isStart;
 
+    Tile clickedTile;
+
+    private void OnEnable()
+    {
+        Step.OnStepStart += DestroyUnplaced;
+    }
+
+    private void OnDisable()
+    {
+        Step.OnStepStart -= DestroyUnplaced;
+    }
+
     void Update()
     {
         if (placed)
             return;
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            Destroy(gameObject);
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit tileHit;
@@ -20,15 +37,17 @@ public class FollowMouse : MonoBehaviour
         {
             if (tileHit.transform.gameObject.tag == "tile" && !EventSystem.current.IsPointerOverGameObject())
             {
-                Tile clickedTile = tileHit.transform.gameObject.GetComponent<Tile>();
-
-                Debug.Log("Hit tile: " + clickedTile.gameObject.name);
+                clickedTile = tileHit.transform.gameObject.GetComponent<Tile>();
 
                 if (!clickedTile.PlacedObject() && !clickedTile.Impassable())
                 {
                     transform.position = clickedTile.transform.position + new Vector3(0, clickedTile.transform.localScale.y / 2, 0) + new Vector3(0, transform.localScale.y / 2, 0);
+
                     if (Input.GetMouseButtonDown(0))
-                        placed = true;
+                    {
+                        SetPlaced(true);
+                        clickedTile.PlaceObjectOnTile(gameObject, false);
+                    }
 
                     if (placed && isStart)
                     {
@@ -48,5 +67,12 @@ public class FollowMouse : MonoBehaviour
     public void SetPlaced(bool state)
     {
         placed = state;
+        if (state == true)
+            Step.OnStepStart -= DestroyUnplaced;
+    }
+
+    public void DestroyUnplaced()
+    {
+        Destroy(gameObject);
     }
 }

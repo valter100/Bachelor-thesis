@@ -37,16 +37,18 @@ public class Tile : MonoBehaviour
     Vector3 oldScale;
 
     //Pathfinding variables
-    [Header("Pathfinding")]
-    [SerializeField] float fValue;
-    [SerializeField] float gValue;
-    [SerializeField] float hValue;
-    [SerializeField] Tile parent;
+    float fValue;
+    float gValue;
+    float hValue;
+    Tile parent;
+
+    [SerializeField] float difficultyLevel;
 
     private void Awake()
     {
         grid = FindObjectOfType<Grid>();
         adjacentTiles = new List<Tile>();
+        biomeIndex = 0;
     }
 
     void Start()
@@ -90,11 +92,9 @@ public class Tile : MonoBehaviour
 
     public void SetHeight(float height)
     {
-        transform.localScale = new Vector3(1, Mathf.Clamp(height, 1, Mathf.Infinity), 1);
-        transform.position = new Vector3(coordinates.x, height, coordinates.y);
-
-        //oldPosition = transform.position;
-        //oldScale = transform.localScale;
+        transform.localScale = new Vector3(1, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 1);
+        transform.position = new Vector3(transform.position.x, height - (float)(transform.localScale.y * 0.5), transform.position.z);
+        this.height = height;
     }
 
     public void SetHeightWithSmoothing(float heightDifference)
@@ -106,9 +106,6 @@ public class Tile : MonoBehaviour
 
         transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
         transform.position += new Vector3(0, height - (float)(transform.localScale.y * 0.5), 0);
-
-        //oldPosition = transform.position;
-        //oldScale = transform.localScale;
     }
 
     public void StartSpawnAnimation()
@@ -259,23 +256,31 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void PlaceObjectOnTile(GameObject go)
+    public void InstantiateObjectOnTile(GameObject go)
     {
         GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y/2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
 
         placedObject = instantiatedGo;
         placedObject.transform.parent = transform;
         impassable = true;
-        StartCoroutine(PlaceObjects());
+        StartCoroutine(PlaceObjects(placedObject));
     }
 
-    IEnumerator PlaceObjects()
+    public void PlaceObjectOnTile(GameObject go, bool _impassable)
+    {
+        go.transform.position = transform.position + new Vector3(0, transform.localScale.y / 2, 0);
+        go.transform.parent = transform;
+        impassable = _impassable;
+        StartCoroutine(PlaceObjects(go));
+    }
+
+    IEnumerator PlaceObjects(GameObject go)
     {
         float progress = 0;
 
-        Vector3 goalPosition = placedObject.transform.position;
-        placedObject.transform.position += new Vector3(0, 2, 0);
-        Vector3 startPosition = placedObject.transform.position;
+        Vector3 goalPosition = go.transform.position;
+        go.transform.position += new Vector3(0, 2, 0);
+        Vector3 startPosition = go.transform.position;
 
         while (progress < 1)
         {
@@ -284,7 +289,7 @@ public class Tile : MonoBehaviour
                 progress = 1;
             }
 
-            placedObject.transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
+            go.transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
 
             progress += Time.deltaTime * 2;
             yield return 0;
@@ -292,6 +297,62 @@ public class Tile : MonoBehaviour
 
 
         yield return null;
+    }
+
+    public void BumpAnimation()
+    {
+        StartCoroutine(_BumpAnimation());
+    }
+
+    IEnumerator _BumpAnimation()
+    {
+        float progress = 0;
+
+        Vector3 startPosition = transform.position;
+        Vector3 goalPosition = startPosition + new Vector3(0, 0.5f, 0);
+
+        while (progress < 1)
+        {
+            if (1 - progress < 0.1f)
+            {
+                progress = 1;
+            }
+
+            transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
+
+            progress += Time.deltaTime * 3;
+            yield return 0;
+        }
+
+        progress = 0;
+
+        (startPosition, goalPosition) = (goalPosition, startPosition);
+
+        while (progress < 1)
+        {
+            if (1 - progress < 0.1f)
+            {
+                progress = 1;
+            }
+
+            transform.position = Vector3.Lerp(startPosition, goalPosition, progress);
+
+            progress += Time.deltaTime * 3;
+            yield return 0;
+        }
+
+
+        yield return null;
+    }
+
+    public void CalculateDifficultyLevel()
+    {
+        difficultyLevel = height;
+    }
+
+    public void AddDifficulty(float addedDifficulty)
+    {
+        difficultyLevel+=addedDifficulty;
     }
 
     public GameObject PlacedObject() => placedObject;

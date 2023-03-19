@@ -25,4 +25,11 @@ public class CreateSubgrid : Step
 
         }
     }
+
+    public void StartCreateSubgrid()
+    {
+        StartStep();
+
+        FindObjectOfType<MouseInput>().CreatingSubgrid();
+    }
 }

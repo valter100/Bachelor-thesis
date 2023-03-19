@@ -26,6 +26,8 @@ public class HandleObjects : Step
         if (grid.Locked())
             return;
 
+        StartStep();
+
         StartCoroutine(PlaceObjectsOverTime());
     }
 
@@ -33,6 +35,8 @@ public class HandleObjects : Step
     {
         if (grid.Locked())
             return;
+
+        StartStep();
 
         StartCoroutine(RemoveObjectsOverTime());
     }
@@ -63,7 +67,7 @@ public class HandleObjects : Step
                     int listIndex = tile.BiomeIndex();
                     List<GameObject> list = biomeObjects[listIndex];
                     int objectIndex = Random.Range(0, list.Count);
-                    tile.PlaceObjectOnTile(list[objectIndex]);
+                    tile.InstantiateObjectOnTile(list[objectIndex]);
                     yield return new WaitForSeconds(0.025f);
                 }
             }

@@ -44,11 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93285edd0fa328408b5fc086f5cb297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 5122993939485151115, guid: 2bd454fae910a114c949336aad6b97ba, type: 3}
-  mapDimensions: {x: 4, y: 0, z: 4}
-  tileBuffer: 0
+  tile: {fileID: 6957210523319020423, guid: 030d1be2d25b32347b2ee87d79b9bdc0, type: 3}
+  mapDimensions: {x: 64, y: 0, z: 64}
+  tileBuffer: 0.2
   numberOfSubgrids: 0
   baseTileColor: {r: 0.09611963, g: 0.4528302, b: 0.12287294, a: 0}
   highlightedTileColor: {r: 0, g: 0, b: 0, a: 0}
   subgridColor: {r: 0, g: 0, b: 0, a: 0}
   ai: {fileID: 0}
+  peakPositions: []
+  peakHeight: 6
+  peakHeightRange: 4
+  peakAmount: 60

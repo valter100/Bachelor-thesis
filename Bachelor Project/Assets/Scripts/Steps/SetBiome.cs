@@ -5,7 +5,7 @@ using UnityEngine;
 public class SetBiome : Step
 {
     [SerializeField] List<Color> biomeColors = new List<Color>();
-    [SerializeField] List<int> heightDifference = new List<int>();
+    [SerializeField] List<float> heightDifference = new List<float>();
     [SerializeField] List<bool> biomeImpassable = new List<bool>();
 
     public override void GiveTip()
@@ -31,6 +31,14 @@ public class SetBiome : Step
 
     public void ChangeBiome(int biomeIndex)
     {
+        StartStep();
+
+        if (biomeIndex == 2)
+        {
+            float waterHeight = CalculateWaterHeight();
+            heightDifference[biomeIndex] = waterHeight - 0.5f;
+        }
+
         foreach (Tile[,] subgrid in grid.SelectedGrids())
         {
             foreach (Tile tile in subgrid)
@@ -47,6 +55,27 @@ public class SetBiome : Step
                 tile.SetImpassable(biomeImpassable[biomeIndex]);
             }
         }
+    }
+
+    public int CalculateWaterHeight()
+    {
+        float lowestHeight = float.MaxValue;
+
+        foreach (Tile[,] subgrid in grid.SelectedGrids())
+        {
+            foreach (Tile tile in subgrid)
+            {
+                if (tile == null)
+                    continue;
+
+                if(tile.Height() < lowestHeight)
+                {
+                    lowestHeight = tile.Height();
+                }
+            }
+        }
+
+        return (int)lowestHeight;
     }
 
     public void ChangeBiomeOnSpecificGrid(Tile[,] subgrid, int biomeIndex)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Step : MonoBehaviour
+public class Step : MonoBehaviour
 {
     [SerializeField] protected AI clappy;
     [SerializeField] protected int index;
@@ -13,6 +13,9 @@ public abstract class Step : MonoBehaviour
     TextHandler textHandler;
     [SerializeField] protected List<GameObject> UIElements;
     protected List<int> userAnswers = new List<int>();
+
+    public delegate void StepStart();
+    public static event StepStart OnStepStart;
 
     protected virtual void Start()
     {
@@ -32,6 +35,18 @@ public abstract class Step : MonoBehaviour
     public virtual void DoAction(int áctionIndex)
     {
        
+    }
+
+    public virtual void StartStep()
+    {
+        try
+        {
+            OnStepStart();
+        }
+        catch
+        {
+
+        }
     }
 
     public int Index() => index;

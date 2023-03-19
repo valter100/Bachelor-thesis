@@ -27,6 +27,10 @@ public class Grid : MonoBehaviour
     [SerializeField] int peakHeight;
     [SerializeField] int peakHeightRange;
     [SerializeField] int peakAmount;
+
+    public delegate void GridCreation();
+    public static event GridCreation OnGridCreate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,9 @@ public class Grid : MonoBehaviour
 
     public void CreateGrid()
     {
+        if (locked)
+            return;
+
         if (baseGrid != null)
         {
             foreach (Tile tile in baseGrid)
@@ -54,7 +61,7 @@ public class Grid : MonoBehaviour
 
         baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
 
-        for(int i = 0; i < peakAmount; i++)
+        for (int i = 0; i < peakAmount; i++)
         {
             peakPositions.Add(
                 new Vector3(
@@ -65,6 +72,8 @@ public class Grid : MonoBehaviour
         }
 
         StartCoroutine(_CreateGridRow(0));
+
+        OnGridCreate();
     }
 
     IEnumerator _CreateGridRow(int i)
@@ -82,7 +91,7 @@ public class Grid : MonoBehaviour
             baseGrid[i, j].FindClosestPeak(peakPositions);
         }
 
-        if (i == mapDimensions.x -1)
+        if (i == mapDimensions.x - 1)
         {
             StartCoroutine(_PositionGridRow(i));
             yield return null;
@@ -102,12 +111,16 @@ public class Grid : MonoBehaviour
         {
             baseGrid[x, z].gameObject.transform.position = new Vector3(baseGrid[x, z].GetCoordinates().x, 0, baseGrid[x, z].GetCoordinates().y) + new Vector3(x * tileBuffer, 0, z * tileBuffer);
             baseGrid[x, z].SetHeightWithSmoothing(0);
+            baseGrid[x, z].CalculateDifficultyLevel();
             baseGrid[x, z].StartSpawnAnimation();
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        locked = false;
+        if (x == mapDimensions.x - 1)
+        {
+            locked = false;
+        }
 
         yield return null;
     }
@@ -364,7 +377,7 @@ public class Grid : MonoBehaviour
         {
             tilesBeforeMerge += grid.Length;
 
-            if (grid[0,0].BiomeIndex() != newBiomeIndex)
+            if (grid[0, 0].BiomeIndex() != newBiomeIndex)
             {
                 FindObjectOfType<SetBiome>().ChangeBiomeOnSpecificGrid(grid, newBiomeIndex);
             }
@@ -431,6 +444,25 @@ public class Grid : MonoBehaviour
         }
 
 
+    }
+
+    public List<Tile> GetTilesAroundTile(Tile tile, int radius)
+    {
+        Vector2 coordinates = tile.GetCoordinates();
+        List<Tile> tiles = new List<Tile>();
+
+        for(int x= -radius; x < radius; x++)
+        {
+            for( int y = -radius; y < radius; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+
+                tiles.Add(baseGrid[(int)coordinates.x + x, (int)coordinates.y + y]);
+            }
+        }
+
+        return tiles;
     }
 
     public void SetLocked(bool state)

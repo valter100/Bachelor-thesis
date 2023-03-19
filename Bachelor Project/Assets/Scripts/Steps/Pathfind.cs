@@ -18,29 +18,33 @@ public class Pathfind : Step
 
     public void PathfindStartToGoal()
     {
-        foreach(Tile tile in closed)
+        if (startTile == null || endTile == null)
+            return;
+
+        StartStep();
+
+        foreach (Tile tile in closed)
         {
-            tile.SetToOldColor();
+            if (tile.Color() == roadColor)
+                tile.SetToOldColor();
         }
 
         open.Clear();
         closed.Clear();
 
-        //Tile[,] map = grid.GetBaseGrid();
-
         startTile.SetH(CalculateDistanceBetweenNodes(startTile, endTile));
-        startTile.SetF(startTile.G() + startTile.H());
+        startTile.SetF(0);
         startTile.SetParent(null);
 
         open.Add(startTile);
 
-        while(open.Count > 0)
+        while (open.Count > 0)
         {
             currentTile = open[0];
 
-            for(int i = 1; i < open.Count; i++)
+            for (int i = 1; i < open.Count; i++)
             {
-                if (open[i].F() < currentTile.F() || 
+                if (open[i].F() < currentTile.F() ||
                     open[i].F() == currentTile.F() && open[i].H() < currentTile.H())
                 {
                     currentTile = open[i];
@@ -50,27 +54,29 @@ public class Pathfind : Step
             open.Remove(currentTile);
             closed.Add(currentTile);
 
-            if(currentTile == endTile)
+            if (currentTile == endTile)
             {
                 RetracePath(startTile, endTile);
                 grid.SetLocked(false);
                 return;
             }
 
-            foreach(Tile neighbour in currentTile.AdjacentTiles())
+            foreach (Tile neighbour in currentTile.AdjacentTiles())
             {
                 if (closed.Contains(neighbour))
                     continue;
 
-                if(CalculateDistanceBetweenNodes(currentTile, neighbour) + currentTile.G() < neighbour.G()||
+
+                if (CalculateDistanceBetweenNodes(currentTile, neighbour) + currentTile.G() < neighbour.G() ||
                     !open.Contains(neighbour))
                 {
-                    neighbour.SetG(CalculateDistanceBetweenNodes(currentTile, neighbour) + currentTile.G());
+                    neighbour.SetG(CalculateDistanceBetweenNodes(neighbour, currentTile) + currentTile.G());
                     neighbour.SetH(CalculateDistanceBetweenNodes(neighbour, endTile));
+                    neighbour.SetF(neighbour.G() + neighbour.H());
                     neighbour.SetParent(currentTile);
                 }
 
-                if(!open.Contains(neighbour) && CalculateHeightBetweenNodes(currentTile, neighbour) <= 1 && !neighbour.Impassable())
+                if (!open.Contains(neighbour) && CalculateHeightBetweenNodes(currentTile, neighbour) <= 1 && !neighbour.Impassable())
                 {
                     open.Add(neighbour);
                 }
@@ -84,23 +90,32 @@ public class Pathfind : Step
     {
         List<Tile> path = new List<Tile>();
         currentTile = end;
-        currentTile.SetColor(roadColor);
 
         while (currentTile != start)
         {
             path.Add(currentTile);
-
-            if(currentTile != end)
-            {
-                currentTile.SetColor(roadColor);
-            }
-
             currentTile = currentTile.Parent();
         }
-        currentTile.SetColor(roadColor);
+
+        path.RemoveAt(0);
         path.Reverse();
 
+        StartCoroutine(ColorPath(path));
+
         return path;
+    }
+
+    IEnumerator ColorPath(List<Tile> path)
+    {
+        foreach (Tile tile in path)
+        {
+            tile.SetColor(roadColor);
+            tile.BumpAnimation();
+            yield return new WaitForSeconds(0.1f);
+        }
+
+
+        yield return null;
     }
 
     public void SetStartTile(Tile tile)
@@ -115,7 +130,7 @@ public class Pathfind : Step
 
     public float CalculateDistanceBetweenNodes(Tile start, Tile goal)
     {
-        return Mathf.Abs(goal.GetCoordinates().x - start.GetCoordinates().x) + Mathf.Abs(goal.GetCoordinates().y - start.GetCoordinates().y);
+        return Mathf.Abs(goal.GetCoordinates().x - start.GetCoordinates().x) + Mathf.Abs(goal.GetCoordinates().y - start.GetCoordinates().y) + Mathf.Abs(goal.Height() - start.Height());
     }
 
     public float CalculateHeightBetweenNodes(Tile start, Tile goal)

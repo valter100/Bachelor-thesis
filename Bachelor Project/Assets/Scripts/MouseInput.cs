@@ -41,6 +41,12 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
+        if(Input.GetMouseButtonDown(1))
+        {
+            creatingSubgrid = false;
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0)) //If we press the left mouse button
         {
             if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
@@ -125,7 +131,7 @@ public class MouseInput : MonoBehaviour
         return null;
     }
 
-    public void CheckForInput() => creatingSubgrid = true;
+    public void CreatingSubgrid() => creatingSubgrid = true;
 
     public Vector2 GetStartCoordinates() => startCoordinates;
     public Vector2 GetEndCoordinates() => endCoordinates;

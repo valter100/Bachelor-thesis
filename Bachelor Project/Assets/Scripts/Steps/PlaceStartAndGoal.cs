@@ -10,8 +10,20 @@ public class PlaceStartAndGoal : Step
     [SerializeField] GameObject startObject;
     [SerializeField] GameObject goalObject;
 
+    private void OnEnable()
+    {
+        Grid.OnGridCreate += DestroyMarkers;
+    }
+
+    private void OnDisable()
+    {
+        Grid.OnGridCreate -= DestroyMarkers;
+    }
+
     public void PlaceStart()
     {
+        StartStep();
+
         if (GameObject.Find("Start"))
         {
             Destroy(GameObject.Find("Start"));
@@ -31,6 +43,15 @@ public class PlaceStartAndGoal : Step
         }
         GameObject goal = Instantiate(goalObject);
         goal.name = "Goal";
+    }
+
+    public void DestroyMarkers()
+    {
+        if (GameObject.Find("Start"))
+            Destroy(GameObject.Find("Start"));
+
+        if (GameObject.Find("Goal"))
+            Destroy(GameObject.Find("Goal"));
     }
 
     public Color StartColor() => startColor;
