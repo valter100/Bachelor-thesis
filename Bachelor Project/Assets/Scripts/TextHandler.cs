@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class TextHandler : MonoBehaviour
 {
-    TextAsset questions, answers;
+    //TextAsset questions, answers;
     string aPath, qPath;
 
 

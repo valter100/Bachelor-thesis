@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
+    protected override void SetText()
+    {
+        question = "Well that looks cool! Do you like it or do you want a new one?";
+        optOne = "New one please!";
+        optTwo = "Keep it!";
+        optThree = "Leave me alone... Creep!!";
+        base.SetText();
+    }
+
     public override void GiveTip()
     {
         base.GiveTip();

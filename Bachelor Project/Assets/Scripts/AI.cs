@@ -14,6 +14,7 @@ public class AI : MonoBehaviour
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
+    public bool inactive = false;
 
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
@@ -69,6 +70,7 @@ public class AI : MonoBehaviour
 
     public void SetInactive()
     {
+        inactive = true;
         gameObject.SetActive(false);
     }
     

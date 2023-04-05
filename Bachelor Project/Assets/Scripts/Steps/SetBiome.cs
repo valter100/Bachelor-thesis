@@ -8,6 +8,17 @@ public class SetBiome : Step
     [SerializeField] List<int> heightDifference = new List<int>();
     [SerializeField] List<bool> biomeImpassable = new List<bool>();
 
+    string biomeName = "";
+
+    protected override void SetText()
+    {
+        question = "Awesome! Now we have some cool " + biomeName + " tiles!";
+        optOne = "Yeah i like them!!";
+        optTwo = "Nah i liked it better before";
+        optThree = "Meh... they are okay i guess..";
+        base.SetText();
+    }
+
     public override void GiveTip()
     {
         base.GiveTip();
