@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class AI : MonoBehaviour
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
+    public bool inactive = false;
 
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
@@ -49,21 +51,9 @@ public class AI : MonoBehaviour
     {
         chatOption = (ChatOption)index;
 
-
-        if (index == 0)
-        {
-           
-        }
-        else if (index == 1)
-        {
-           
-        }
-        else
-        {
-            
-        }
-
         textHandler.SaveAnswers(activeStep.Index(), index, activeStep.Option(index));
+
+        activeStep.DoAction(index);
 
         Toggle(false);
     }
@@ -76,5 +66,16 @@ public class AI : MonoBehaviour
         }
 
         image.gameObject.SetActive(state);
+    }
+
+    public void SetInactive()
+    {
+        inactive = true;
+        gameObject.SetActive(false);
+    }
+    
+    public void SetStep(int index)
+    {
+        activeStep = steps[index];
     }
 }

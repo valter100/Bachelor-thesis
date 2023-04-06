@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class SmoothGrid : Step
 {
+    protected override void SetText()
+    {
+        question = "Let's get that terrain real smoooooth";
+        optOne = "I like it the way it is!";
+        optTwo = "Yes Clappy make it smooth";
+        optThree = "Actually, i like it rougher!";
+        base.SetText();
+    }
+
     public override void GiveTip()
     {
         base.GiveTip();
