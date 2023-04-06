@@ -4113,6 +4113,7 @@ MonoBehaviour:
   activeStep: {fileID: 0}
   tipMessage: {fileID: 2098312161}
   image: {fileID: 1792671636}
+  inactive: 0
   answerAmount: 3
   buttons:
   - {fileID: 1186013748}
@@ -4762,27 +4763,27 @@ PrefabInstance:
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakAmount
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakHeight
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: mapDimensions.x
-      value: 64
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: mapDimensions.z
-      value: 64
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: peakHeightRange
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400293, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}

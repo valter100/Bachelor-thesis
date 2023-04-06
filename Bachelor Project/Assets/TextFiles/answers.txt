@@ -15,3 +15,6 @@ questionIndex:0/answerIndex:1/answer:Get out of my face!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:0/answerIndex:2/answer:I'll let you live, but you're on thin ice...
 questionIndex:0/answerIndex:2/answer:I'll let you live, but you're on thin ice...
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!

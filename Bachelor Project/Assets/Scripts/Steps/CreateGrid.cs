@@ -37,5 +37,12 @@ public class CreateGrid : Step
     public void CreateNewGrid()
     {
         grid.CreateGrid();
+
+        textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());
+        textHandler.SavePreferenses("mapSizeZ" + grid.MapDimensionZ().ToString());
+
+        textHandler.SavePreferenses("peakHeight" + grid.PeakHeight().ToString());
+        textHandler.SavePreferenses("peakHeightRange" + grid.PeakHeightRange().ToString());
+        textHandler.SavePreferenses("peakAmount" + grid.PeakAmount().ToString());
     }
 }

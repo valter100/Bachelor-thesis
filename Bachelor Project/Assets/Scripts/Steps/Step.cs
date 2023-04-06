@@ -9,7 +9,7 @@ public abstract class Step : MonoBehaviour
     protected List<string> options = new List<string>();
     [SerializeField] protected Grid grid;
     [SerializeField] protected bool giveAdvice;
-    TextHandler textHandler;
+    protected TextHandler textHandler;
     [SerializeField] protected List<GameObject> UIElements;
     protected List<int> userAnswers = new List<int>();
 
