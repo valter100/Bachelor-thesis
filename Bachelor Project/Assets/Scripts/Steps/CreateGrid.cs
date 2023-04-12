@@ -9,11 +9,12 @@ public class CreateGrid : Step
 
     private void Start()
     {
+        base.Start();
         LoadPreferences();
     }
     protected override void SetText()
     {
-        question = "Well that looks cool! Do you like it or do you want me to create one for you?";
+        question = "Well that looks cool! Do you like it or do you want me to createa new one for you?";
         optOne = "New one please!";
         optTwo = "Keep it!";
         optThree = "Leave me alone... Creep!!";
@@ -62,6 +63,7 @@ public class CreateGrid : Step
 
     public void CreateNewGrid()
     {
+        clappy.setNextStep();
         grid.CreateGrid();
 
         textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());

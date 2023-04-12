@@ -76,6 +76,4 @@ public class Step : MonoBehaviour
     {
         userAnswers = textHandler.GetAnswerData(index);
     }
-
-
 }

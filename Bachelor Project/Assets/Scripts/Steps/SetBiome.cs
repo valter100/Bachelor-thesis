@@ -10,6 +10,11 @@ public class SetBiome : Step
 
     string biomeName = "";
 
+    private void Start()
+    {
+        base.Start();
+    }
+
     protected override void SetText()
     {
         question = "Awesome! Now we have some cool " + biomeName + " tiles!";
@@ -28,7 +33,7 @@ public class SetBiome : Step
     {
         if (actionIndex == 0)
         {
-
+            //textHandler.
         }
         if (actionIndex == 1)
         {

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class GridSelect : Step
 {
+    int desert, forest, sea;
+
+    SetBiome setBiome;
+
+    private void Start()
+    {
+        base.Start();
+        setBiome = gameObject.GetComponent<SetBiome>();
+    }
 
     protected override void SetText()
     {
@@ -22,15 +31,18 @@ public class GridSelect : Step
     {
         if (actionIndex == 0)
         {
-
+            textHandler.SavePreferenses("desert");
+            setBiome.ChangeBiome(1);
         }
         if (actionIndex == 1)
         {
-
+            textHandler.SavePreferenses("forest");
+            setBiome.ChangeBiome(3);
         }
         if (actionIndex == 2)
         {
-
+            textHandler.SavePreferenses("sea");
+            setBiome.ChangeBiome(2);
         }
     }
 }
