@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class GridSelect : Step
 {
-
-    protected override void SetText()
-    {
-        question = "I see you selected a subgrid, want me to help you with it?";
-        optOne = "Make it Desert";
-        optTwo = "Make it Forest";
-        optThree = "Make it Sea";
-        base.SetText();
-    }
     public override void GiveTip()
     {
         base.GiveTip();

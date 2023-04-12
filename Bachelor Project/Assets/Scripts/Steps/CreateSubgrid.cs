@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class CreateSubgrid : Step
 {
-
-    protected override void SetText()
-    {
-        question = "Do you like subgrids just as much as I do?";
-        optOne = "Sure do Clappy-o!";
-        optTwo = "Pls shut up...";
-        optThree = "Meh....";
-        base.SetText();
-    }
     public override void GiveTip()
     {
         base.GiveTip();

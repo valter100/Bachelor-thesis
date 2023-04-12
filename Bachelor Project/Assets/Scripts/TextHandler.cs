@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using TMPro;
 using UnityEngine;
 
 public class TextHandler : MonoBehaviour
 {
-    //TextAsset questions, answers;
-    string aPath, pPath;
+    TextAsset questions, answers;
+    string aPath, qPath;
 
 
     StreamReader sr;
@@ -23,13 +21,13 @@ public class TextHandler : MonoBehaviour
     void Awake()
     {
         aPath = "Assets/TextFiles/answers.txt";
-        pPath = "Assets/TextFiles/preferences.txt";
+        qPath = "Assets/TextFiles/questions.txt";
         ReadUserData();
     }
 
     void Start()
     {
-
+     
     }
 
     void Update()
@@ -37,106 +35,84 @@ public class TextHandler : MonoBehaviour
 
     }
 
-    public int GetPreferenceAmount(string pref)
+    public string GetQuestion(int index)
     {
+        string question = "";
         List<string> lines = new List<string>();
 
-        using (sr = new StreamReader(pPath))
+        using (sr = new StreamReader(qPath))
         {
+            bool startFound = false;
+
             while (!sr.EndOfStream)
             {
                 var line = sr.ReadLine();
 
                 if (IsNullOrWhiteSpace(line)) continue;
 
-                if (line.Contains(pref)) lines.Add(line);
+                if (!startFound) startFound = line.Contains("index" + index.ToString());
+
+                if (startFound)
+                {
+                    bool isEnd = line.Contains("index" + (index + 1).ToString());
+
+                    if (!isEnd && !line.Contains("index" + index.ToString())) lines.Add(line);
+
+                    if (isEnd) break;
+                }
             }
         }
         sr.Close();
 
-        return lines.Count;
+        question = lines[0];
+
+        return question;
     }
 
-    public int GetPreferenceAmount(string pref, string secondPref)
+    public List<string> GetOptions(int index)
     {
+        List<string> options = new List<string>();
         List<string> lines = new List<string>();
 
-        using (sr = new StreamReader(pPath))
+        using (sr = new StreamReader(qPath))
         {
+            bool startFound = false;
+
             while (!sr.EndOfStream)
             {
                 var line = sr.ReadLine();
 
                 if (IsNullOrWhiteSpace(line)) continue;
 
-                if (line.Contains(pref) || line.Contains(secondPref)) lines.Add(line);
+                if (!startFound) startFound = line.Contains("index" + index.ToString());
+
+                if (startFound)
+                {
+                    bool isEnd = line.Contains("index" + (index + 1).ToString());
+
+                    if (!isEnd && !line.Contains("index" + index.ToString())) lines.Add(line);
+
+                    if (isEnd) break;
+                }
             }
         }
         sr.Close();
 
-        return lines.Count;
-    }
-
-    public int GetPreferences(string pref)
-    {
-        int sum = 0;
-        List<string> lines = new List<string>();
-        List<string> results = new List<string>();
-
-        using (sr = new StreamReader(pPath))
+        for (int i = 1; i < lines.Count; i++)
         {
-            while (!sr.EndOfStream)
-            {
-                var line = sr.ReadLine();
-
-                if (IsNullOrWhiteSpace(line)) continue;
-
-                if (line.Contains(pref)) lines.Add(line);
-            }
-        }
-        sr.Close();
-
-
-        for (int i = 0; i < lines.Count; i++)
-        {
-            string line = lines[i];
-            string result = "";
-
-            foreach (char c in line)
-            {
-                if (pref.Contains(c)) continue;
-
-                result += c;
-            }
-            results.Add(result);
+            options.Add(lines[i]);
         }
 
-        for (int i = 0; i < results.Count; i++)
-        {
-            try
-            {
-                sum += int.Parse(results[i]);
-            }
-            catch 
-            {
-                Debug.Log(results[i]);
-            }
-        }
-
-        return sum;
-    }
-
-    public void SavePreferenses(string pref)
-    {
-        using (FileStream fs = new FileStream(pPath, FileMode.Append, FileAccess.Write))
-        using (sw = new StreamWriter(fs)) sw.WriteLine(pref);
-        sw.Close();
+        return options;
     }
 
     public void SaveAnswers(int index, int answerIndex, string answer)
     {
         using (FileStream fs = new FileStream(aPath, FileMode.Append, FileAccess.Write))
-        using (sw = new StreamWriter(fs)) sw.WriteLine("questionIndex:" + index + "/answerIndex:" + answerIndex + "/answer:" + answer);
+        using (sw = new StreamWriter(fs))
+
+            sw.WriteLine("questionIndex:" + index + "/answerIndex:" + answerIndex + "/answer:" + answer);
+
         sw.Close();
     }
 
@@ -174,7 +150,8 @@ public class TextHandler : MonoBehaviour
 
         for (int i = 0; i < lines.Count; i++)
         {
-            string line = lines[i];
+            string line;
+            line = lines[i];
             List<float> values = new List<float>();
 
             if (IsNullOrWhiteSpace(line)) continue;

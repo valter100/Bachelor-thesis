@@ -28,18 +28,10 @@ public class Grid : MonoBehaviour
     [SerializeField] int peakHeightRange;
     [SerializeField] int peakAmount;
 
-
     public delegate void GridCreation();
     public static event GridCreation OnGridCreate;
 
-
-    public int MapDimensionX() => (int)mapDimensions.x;
-    public int MapDimensionZ() => (int)mapDimensions.z;
-    public int PeakHeight() => peakHeight;
-    public int PeakAmount() => peakAmount;
-    public int PeakHeightRange() => peakHeightRange;
-
-
+    // Start is called before the first frame update
     void Start()
     {
         subgridColor = UnityEngine.Random.ColorHSV();

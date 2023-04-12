@@ -6,37 +6,33 @@ public class Step : MonoBehaviour
 {
     [SerializeField] protected AI clappy;
     [SerializeField] protected int index;
+    [SerializeField] protected string question;
     protected List<string> options = new List<string>();
     [SerializeField] protected Grid grid;
     [SerializeField] protected bool giveAdvice;
-    protected TextHandler textHandler;
+    TextHandler textHandler;
     [SerializeField] protected List<GameObject> UIElements;
     protected List<int> userAnswers = new List<int>();
 
-
     public delegate void StepStart();
     public static event StepStart OnStepStart;
-	
-    protected string question, optOne, optTwo, optThree;
-
 
     protected virtual void Start()
     {
         clappy = FindObjectOfType<AI>();
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = clappy.gameObject.GetComponent<TextHandler>();
-        SetText();
+        SetQuestion();
+        SetOptions();
         GetUserAnswers();
     }
 
     public virtual void GiveTip()
     {
-        if (clappy.inactive) return;
-
         clappy.GiveTip(this);
     }
 
-    public virtual void DoAction(int actionIndex)
+    public virtual void DoAction(int áctionIndex)
     {
        
     }
@@ -65,17 +61,18 @@ public class Step : MonoBehaviour
         }
     }
 
-    protected virtual void SetText()
+    private void SetQuestion()
     {
-        options.Add(optOne);
-        options.Add(optTwo);
-        options.Add(optThree);
+        question = textHandler.GetQuestion(index);
+    }
+
+    private void SetOptions()
+    {
+        options = textHandler.GetOptions(index);
     }
 
     private void GetUserAnswers()
     {
         userAnswers = textHandler.GetAnswerData(index);
     }
-
-
 }
