@@ -10,6 +10,7 @@ public class Pathfind : Step
     //Color startColor;
     //Color endColor;
     [SerializeField] Color roadColor;
+    [SerializeField] List<Tile> pathBack = new List<Tile>();
 
     Tile currentTile;
 
@@ -56,7 +57,7 @@ public class Pathfind : Step
 
             if (currentTile == endTile)
             {
-                RetracePath(startTile, endTile);
+                pathBack = RetracePath(startTile, endTile);
                 grid.SetLocked(false);
                 return;
             }

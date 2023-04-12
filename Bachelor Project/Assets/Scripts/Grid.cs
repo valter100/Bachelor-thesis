@@ -473,6 +473,10 @@ public class Grid : MonoBehaviour
         return tiles;
     }
 
+    public void AddToBaseGrid(Tile newTile)
+    {
+        baseGrid[(int)newTile.GetCoordinates().x, (int)newTile.GetCoordinates().y] = newTile;
+    }
     public void SetLocked(bool state)
     {
         locked = state;

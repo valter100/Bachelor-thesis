@@ -8,8 +8,8 @@ public class Tile : MonoBehaviour
     [SerializeField] Vector2 coordinates;
     [SerializeField] float height = 0;
     [SerializeField] float heightScale;
-    
-    List<Tile> adjacentTiles;
+
+    [SerializeField] List<Tile> adjacentTiles;
     Grid grid;
     Tile[,] subgrid;
     bool partOfSubgrid;
@@ -56,6 +56,13 @@ public class Tile : MonoBehaviour
         previousColor = baseColor;
     }
 
+    private void OnDestroy()
+    {
+        foreach (Tile tile in adjacentTiles)
+        {
+            tile.AdjacentTiles().Remove(this);
+        }
+    }
     public void SetAdjacentTiles(Grid grid)
     {
         for (int i = -1; i <= 0; i++)
@@ -94,6 +101,11 @@ public class Tile : MonoBehaviour
     {
         transform.localScale = new Vector3(1, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 1);
         transform.position = new Vector3(transform.position.x, height - (float)(transform.localScale.y * 0.5), transform.position.z);
+        this.height = height;
+    }
+
+    public void SetHeightWithoutTransform(float height)
+    {
         this.height = height;
     }
 

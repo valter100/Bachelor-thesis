@@ -47,7 +47,7 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) //If we press the left mouse button
+        if (Input.GetMouseButtonDown(0) && !GameObject.FindGameObjectWithTag("Tool")) //If we press the left mouse button
         {
             if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
             {
@@ -84,6 +84,9 @@ public class MouseInput : MonoBehaviour
 
             foreach (Tile tile in baseGrid.GetBaseGrid())
             {
+                if (!tile)
+                    continue;
+
                 tile.UnHighlight();
             }
 
