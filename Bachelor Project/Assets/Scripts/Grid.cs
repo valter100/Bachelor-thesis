@@ -84,6 +84,43 @@ public class Grid : MonoBehaviour
         OnGridCreate();
     }
 
+    public void CreateGrid(int mapsizeX, int mapSizeZ, int peakHeight, int peakHeightRange, int peakAmount)
+    {
+        if (locked)
+            return;
+
+        if (baseGrid != null)
+        {
+            foreach (Tile tile in baseGrid)
+            {
+                Destroy(tile.gameObject);
+            }
+            subgridList.Clear();
+            peakPositions.Clear();
+        }
+
+
+        mapDimensions.x = mapsizeX;
+        mapDimensions.z = mapSizeZ;
+        //int tilesCreatedEachFrame = 1;
+
+        baseGrid = new Tile[mapsizeX, mapSizeZ];
+
+        for (int i = 0; i < peakAmount; i++)
+        {
+            peakPositions.Add(
+                new Vector3(
+                    (int)UnityEngine.Random.Range(0, mapsizeX),
+                    peakHeight + UnityEngine.Random.Range(-peakHeightRange, peakHeightRange),
+                    (int)UnityEngine.Random.Range(0, mapSizeZ
+                    )));
+        }
+
+        StartCoroutine(_CreateGridRow(0));
+
+        OnGridCreate();
+    }
+
     IEnumerator _CreateGridRow(int i)
     {
         locked = true;

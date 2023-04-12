@@ -59,13 +59,13 @@ public class StartStep : Step
             int peakHeightRange = peakPreferenses[1] / peakPreferenses[3];
             int peakAmount = peakPreferenses[2] / peakPreferenses[3];
 
-            // GenerateTerrainUsingPreferences();
+            grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
 
-            Debug.Log("mapx " + mapSizeX);
-            Debug.Log("mapz " + mapSizeZ);
-            Debug.Log("peak height " + peakHeight);
-            Debug.Log("peak height range " + peakHeightRange);
-            Debug.Log("peak anount " + peakAmount);
+            //Debug.Log("mapx " + mapSizeX);
+            //Debug.Log("mapz " + mapSizeZ);
+            //Debug.Log("peak height " + peakHeight);
+            //Debug.Log("peak height range " + peakHeightRange);
+            //Debug.Log("peak anount " + peakAmount);
         }
         if (actionIndex == 1)
         {
