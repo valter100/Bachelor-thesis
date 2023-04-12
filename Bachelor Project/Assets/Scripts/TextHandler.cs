@@ -119,7 +119,7 @@ public class TextHandler : MonoBehaviour
             }
             catch 
             {
-                Debug.Log(results[i]);
+                //Debug.Log(results[i]);
             }
         }
 

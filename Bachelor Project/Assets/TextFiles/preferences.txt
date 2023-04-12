@@ -18,3 +18,8 @@ mapSizeZ16
 peakHeight6
 peakHeightRange4
 peakAmount60
+mapSizeX64
+mapSizeZ64
+peakHeight6
+peakHeightRange4
+peakAmount60
