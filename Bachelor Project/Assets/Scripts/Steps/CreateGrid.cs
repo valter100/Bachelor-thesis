@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
+    [SerializeField] GameObject areYouSureWindow;
     protected override void SetText()
     {
         question = "Well that looks cool! Do you like it or do you want a new one?";
@@ -20,6 +21,15 @@ public class CreateGrid : Step
 
     public override void DoAction(int actionIndex)
     {
+        if (grid.Locked())
+            return;
+
+        if (grid.GetBaseGrid() != null)
+        {
+            areYouSureWindow.SetActive(true);
+            return;
+        }
+
         if (actionIndex == 0)
         {
 
@@ -37,6 +47,7 @@ public class CreateGrid : Step
 
     public void CreateNewGrid()
     {
+        FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid();
 
         textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());

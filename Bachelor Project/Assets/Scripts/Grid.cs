@@ -205,7 +205,8 @@ public class Grid : MonoBehaviour
         sizeX = (int)Mathf.Abs(startCoordinates.x - endCoordinates.x);
         sizeY = (int)Mathf.Abs(startCoordinates.y - endCoordinates.y);
 
-        Tile[,] tempGrid = new Tile[sizeX, sizeY];
+        Debug.Log("Start: " + startCoordinates + " End: " + endCoordinates);
+        Debug.Log("Size X: " + sizeX + " Size Y: " + sizeY);
 
         int i = 0;
         int j = 0;
@@ -223,6 +224,20 @@ public class Grid : MonoBehaviour
         if (startY > endY)
         {
             (startY, endY) = (endY, startY);
+        }
+
+        endX++;
+        sizeX++;
+        endY++;
+        sizeY++;
+
+        Tile[,] tempGrid = new Tile[sizeX, sizeY];
+
+        if(startCoordinates == endCoordinates)
+        {
+            tempGrid = new Tile[1, 1];
+            tempGrid[0, 0] = getTileByCoordinate((int)startCoordinates.x, (int)startCoordinates.y);
+            return tempGrid;
         }
 
         for (int x = startX; x < endX; x++)
@@ -334,7 +349,7 @@ public class Grid : MonoBehaviour
                         newBiomeIndex = SelectedGrids()[0][i, j].BiomeIndex();
                     }
 
-                    gridColor = SelectedGrids()[0][0, 0].Color();
+                    gridColor = SelectedGrids()[0][i, j].Color();
                     foundColor = true;
                     break;
                 }

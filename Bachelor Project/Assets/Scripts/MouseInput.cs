@@ -41,7 +41,7 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             creatingSubgrid = false;
             return;
@@ -51,16 +51,16 @@ public class MouseInput : MonoBehaviour
         {
             if (clickedTile.PartOfSubgrid()) //And the tile we clicked is part of a subgrid
             {
-                if(selectedGrids.Contains(clickedTile.Subgrid()))
+                if (selectedGrids.Contains(clickedTile.Subgrid()))
                 {
                     DeselectSubgrid(); //We deselect the grid and end the update
                     return;
                 }
-                else if(!selectedGrids.Contains(clickedTile.Subgrid()) && Input.GetKey(KeyCode.LeftShift))
+                else if (!selectedGrids.Contains(clickedTile.Subgrid()) && Input.GetKey(KeyCode.LeftShift))
                 {
                     SelectSubgrid();
                 }
-                else if(!selectedGrids.Contains(clickedTile.Subgrid()) && !Input.GetKey(KeyCode.LeftShift))
+                else if (!selectedGrids.Contains(clickedTile.Subgrid()) && !Input.GetKey(KeyCode.LeftShift))
                 {
                     DeselectSubgrid();
                     SelectSubgrid(); //We select the tile's subgrid
@@ -93,7 +93,7 @@ public class MouseInput : MonoBehaviour
                 {
                     endCoordinates = tileHit.transform.gameObject.GetComponent<Tile>().GetCoordinates();
                 }
-                highlightedTiles = baseGrid.GetTilesBetween(startCoordinates, endCoordinates + new Vector2(1,1));
+                highlightedTiles = baseGrid.GetTilesBetween(startCoordinates, endCoordinates/* + new Vector2(1, 1)*/);
 
                 foreach (Tile tile in highlightedTiles)
                 {
