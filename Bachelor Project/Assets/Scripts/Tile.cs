@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour
     bool highlighted;
 
     Color highlightedColor;
-    Color baseColor;
+    [SerializeField] Color baseColor;
     Color previousColor;
     Color selectedColor;
 
@@ -194,6 +194,10 @@ public class Tile : MonoBehaviour
         biomeIndex = newIndex;
     }
 
+    public void ReapplyColor()
+    {
+        SetColor(baseColor);
+    }
 
     public void Highlight()
     {

@@ -32,6 +32,7 @@ public class CreateGrid : Step
         {
 
         }
+        CreateNewGrid();
     }
 
     public void CreateNewGrid()

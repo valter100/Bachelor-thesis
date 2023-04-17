@@ -2630,7 +2630,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905602190
 GameObject:
@@ -3511,8 +3511,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6026f398064076a43af4b394a1ce71f8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4446,7 +4446,7 @@ GameObject:
   - component: {fileID: 1792671635}
   - component: {fileID: 1792671636}
   m_Layer: 5
-  m_Name: AI Image
+  m_Name: Clappy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5144,7 +5144,7 @@ Transform:
   m_Children:
   - {fileID: 130742867}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1986185357
 MonoBehaviour:
@@ -5926,7 +5926,7 @@ PrefabInstance:
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8270947397553136580, guid: 7958eeaed3b93984ba081d2254312772,
         type: 3}
@@ -6011,7 +6011,7 @@ PrefabInstance:
     - target: {fileID: 4241007527122400291, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400291, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}
@@ -6072,6 +6072,16 @@ PrefabInstance:
         type: 3}
       propertyPath: tileBuffer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: mapDimensions.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241007527122400292, guid: 8a035e24ec1bed7499216828133920dd,
+        type: 3}
+      propertyPath: mapDimensions.z
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4241007527122400293, guid: 8a035e24ec1bed7499216828133920dd,
         type: 3}

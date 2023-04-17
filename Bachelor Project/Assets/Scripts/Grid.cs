@@ -13,8 +13,11 @@ public class Grid : MonoBehaviour
     List<Tile[,]> selectedGrids = new List<Tile[,]>();
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
+    [SerializeField] int numberOfPlains;
+    [SerializeField] int numberOfForests;
+    [SerializeField] int numberOfSeas;
+    [SerializeField] int numberOfDeserts;
     bool locked;
-
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
@@ -476,6 +479,79 @@ public class Grid : MonoBehaviour
     public void SetLocked(bool state)
     {
         locked = state;
+    }
+
+    [ContextMenu("RecolorGrid")]
+    public void Recolor()
+    {
+        baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
+
+        for(int i = 0; i < mapDimensions.x; i++)
+        {
+            for(int j = 0; j < mapDimensions.z; j++)
+            {
+                Debug.Log(i + "," + j);
+                baseGrid[i, j] = GameObject.Find((i+1) + "," + (j+1)).GetComponent<Tile>();
+            }
+        }
+
+        foreach(Tile tile in baseGrid)
+        {
+            tile.ReapplyColor();
+        }
+    }
+
+    [ContextMenu("CalculateSubgridTypes")]
+    public void CalculateSubgridTypes()
+    {
+        Debug.Log("Calculating subgrids!");
+        numberOfForests = numberOfDeserts = numberOfSeas = 0;
+
+        foreach (Tile[,] subgrid in subgridList)
+        {
+            bool foundColor = false;
+            for (int i = 0; i < subgrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < subgrid.GetLength(1); j++)
+                {
+                    if (subgrid[i, j] != null)
+                    {
+                        int gridBiomeIndex = 0;
+
+                        if (subgrid[i, j].BiomeIndex() > 0)
+                        {
+                            gridBiomeIndex = subgrid[i, j].BiomeIndex();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        if(gridBiomeIndex == 1)
+                        {
+                            numberOfDeserts++;
+                        }
+                        else if(gridBiomeIndex == 2)
+                        {
+                            numberOfSeas++;
+                        }
+                        else if(gridBiomeIndex == 3)
+                        {
+                            numberOfForests++;
+                        }
+
+                        foundColor = true;
+                        break;
+                    }
+                }
+                if (foundColor)
+                    break;
+            }
+            if(!foundColor)
+            {
+                numberOfPlains++;
+            }
+        }
     }
 
     public Vector2 MapDimensions() => mapDimensions;
