@@ -529,11 +529,11 @@ public class Grid : MonoBehaviour
             totalTiles++;
         }
 
-        plainPercentage = (float)plainTiles / (float)totalTiles * 10;
-        desertPercentage = (float)desertTiles / (float)totalTiles * 10;
-        seaPercentage = (float)seaTiles / (float)totalTiles * 10;
-        forestPercentage = (float)forestTiles / (float)totalTiles * 10;
-        percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 10;
+        plainPercentage = (float)plainTiles / (float)totalTiles * 100;
+        desertPercentage = (float)desertTiles / (float)totalTiles * 100;
+        seaPercentage = (float)seaTiles / (float)totalTiles * 100;
+        forestPercentage = (float)forestTiles / (float)totalTiles * 100;
+        percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 100;
 
         //foreach (Tile[,] subgrid in subgridList)
         //{
