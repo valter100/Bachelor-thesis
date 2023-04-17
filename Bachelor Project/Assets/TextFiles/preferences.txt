@@ -108,3 +108,8 @@ mapSizeZ32
 peakHeight3
 peakHeightRange2
 peakAmount25
+mapSizeX32
+mapSizeZ32
+peakHeight3
+peakHeightRange2
+peakAmount25

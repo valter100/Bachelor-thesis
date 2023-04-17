@@ -17,6 +17,7 @@ public class Grid : MonoBehaviour
     [SerializeField] float forestPercentage;
     [SerializeField] float seaPercentage;
     [SerializeField] float desertPercentage;
+    [SerializeField] float percentageOfTilesWithObjects;
     bool locked;
 
     [SerializeField] Color baseTileColor;
@@ -509,6 +510,7 @@ public class Grid : MonoBehaviour
         int forestTiles = 0;
         int seaTiles = 0;
         int desertTiles = 0;
+        int objectTiles = 0;
 
         foreach(Tile tile in baseGrid)
         {
@@ -521,6 +523,9 @@ public class Grid : MonoBehaviour
             else if (tile.BiomeIndex() == 3)
                 forestTiles++;
 
+            if (tile.PlacedObject())
+                objectTiles++;
+
             totalTiles++;
         }
 
@@ -528,6 +533,7 @@ public class Grid : MonoBehaviour
         desertPercentage = (float)desertTiles / (float)totalTiles * 10;
         seaPercentage = (float)seaTiles / (float)totalTiles * 10;
         forestPercentage = (float)forestTiles / (float)totalTiles * 10;
+        percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 10;
 
         //foreach (Tile[,] subgrid in subgridList)
         //{
