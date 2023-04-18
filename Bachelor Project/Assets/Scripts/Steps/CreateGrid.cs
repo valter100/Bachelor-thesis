@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
-    
 
-    private void Start()
-    {
-        base.Start();
-    }
+    [SerializeField] GameObject areYouSureWindow;
+
     protected override void SetText()
     {
         question = "Well that looks cool! Do you like it or do you want me to createa new one for you?";
@@ -27,6 +24,15 @@ public class CreateGrid : Step
 
     public override void DoAction(int actionIndex)
     {
+        if (grid.Locked())
+            return;
+
+        if (grid.GetBaseGrid() != null)
+        {
+            areYouSureWindow.SetActive(true);
+            return;
+        }
+
         if (actionIndex == 0)
         {
             CreateNewGridWithPreferences();
@@ -45,12 +51,14 @@ public class CreateGrid : Step
         {
             clappy.SetInactive();
         }
+        CreateNewGrid();
     }
 
 
     public void CreateNewGrid()
     {
         clappy.setNextStep();
+        FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid();
 
         textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());

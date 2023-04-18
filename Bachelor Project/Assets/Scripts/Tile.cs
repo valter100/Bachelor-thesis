@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour
     bool highlighted;
 
     Color highlightedColor;
-    Color baseColor;
+    [SerializeField] Color baseColor;
     Color previousColor;
     Color selectedColor;
 
@@ -93,7 +93,7 @@ public class Tile : MonoBehaviour
     public void SetHeight(float height)
     {
         transform.localScale = new Vector3(1, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 1);
-        transform.position = new Vector3(transform.position.x, height - (float)(transform.localScale.y * 0.5), transform.position.z);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(height - (float)(transform.localScale.y * 0.5), 0, Mathf.Infinity), transform.position.z);
         this.height = height;
     }
 
@@ -194,6 +194,10 @@ public class Tile : MonoBehaviour
         biomeIndex = newIndex;
     }
 
+    public void ReapplyColor()
+    {
+        SetColor(baseColor);
+    }
 
     public void Highlight()
     {

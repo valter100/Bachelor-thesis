@@ -13,8 +13,12 @@ public class Grid : MonoBehaviour
     List<Tile[,]> selectedGrids = new List<Tile[,]>();
     List<Tile[,]> subgridList = new List<Tile[,]>();
     [SerializeField] int numberOfSubgrids;
+    [SerializeField] float plainPercentage;
+    [SerializeField] float forestPercentage;
+    [SerializeField] float seaPercentage;
+    [SerializeField] float desertPercentage;
+    [SerializeField] float percentageOfTilesWithObjects;
     bool locked;
-
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
@@ -238,7 +242,8 @@ public class Grid : MonoBehaviour
         sizeX = (int)Mathf.Abs(startCoordinates.x - endCoordinates.x);
         sizeY = (int)Mathf.Abs(startCoordinates.y - endCoordinates.y);
 
-        Tile[,] tempGrid = new Tile[sizeX, sizeY];
+        Debug.Log("Start: " + startCoordinates + " End: " + endCoordinates);
+        Debug.Log("Size X: " + sizeX + " Size Y: " + sizeY);
 
         int i = 0;
         int j = 0;
@@ -256,6 +261,20 @@ public class Grid : MonoBehaviour
         if (startY > endY)
         {
             (startY, endY) = (endY, startY);
+        }
+
+        endX++;
+        sizeX++;
+        endY++;
+        sizeY++;
+
+        Tile[,] tempGrid = new Tile[sizeX, sizeY];
+
+        if(startCoordinates == endCoordinates)
+        {
+            tempGrid = new Tile[1, 1];
+            tempGrid[0, 0] = getTileByCoordinate((int)startCoordinates.x, (int)startCoordinates.y);
+            return tempGrid;
         }
 
         for (int x = startX; x < endX; x++)
@@ -367,7 +386,7 @@ public class Grid : MonoBehaviour
                         newBiomeIndex = SelectedGrids()[0][i, j].BiomeIndex();
                     }
 
-                    gridColor = SelectedGrids()[0][0, 0].Color();
+                    gridColor = SelectedGrids()[0][i, j].Color();
                     foundColor = true;
                     break;
                 }
@@ -513,6 +532,106 @@ public class Grid : MonoBehaviour
     public void SetLocked(bool state)
     {
         locked = state;
+    }
+
+    [ContextMenu("RecolorGrid")]
+    public void Recolor()
+    {
+        baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
+
+        for(int i = 0; i < mapDimensions.x; i++)
+        {
+            for(int j = 0; j < mapDimensions.z; j++)
+            {
+                Debug.Log(i + "," + j);
+                baseGrid[i, j] = GameObject.Find((i+1) + "," + (j+1)).GetComponent<Tile>();
+            }
+        }
+
+        foreach(Tile tile in baseGrid)
+        {
+            tile.ReapplyColor();
+        }
+    }
+
+    [ContextMenu("CalculateSubgridPercentage")]
+    public void CalculateSubgridTypes()
+    {
+        int totalTiles = 0;
+        int plainTiles = 0;
+        int forestTiles = 0;
+        int seaTiles = 0;
+        int desertTiles = 0;
+        int objectTiles = 0;
+
+        foreach(Tile tile in baseGrid)
+        {
+            if (tile.BiomeIndex() == 0)
+                plainTiles++;
+            else if (tile.BiomeIndex() == 1)
+                desertTiles++;
+            else if (tile.BiomeIndex() == 2)
+                seaTiles++;
+            else if (tile.BiomeIndex() == 3)
+                forestTiles++;
+
+            if (tile.PlacedObject())
+                objectTiles++;
+
+            totalTiles++;
+        }
+
+        plainPercentage = (float)plainTiles / (float)totalTiles * 100;
+        desertPercentage = (float)desertTiles / (float)totalTiles * 100;
+        seaPercentage = (float)seaTiles / (float)totalTiles * 100;
+        forestPercentage = (float)forestTiles / (float)totalTiles * 100;
+        percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 100;
+
+        //foreach (Tile[,] subgrid in subgridList)
+        //{
+        //    bool foundColor = false;
+        //    for (int i = 0; i < subgrid.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < subgrid.GetLength(1); j++)
+        //        {
+        //            if (subgrid[i, j] != null)
+        //            {
+        //                int gridBiomeIndex = 0;
+
+        //                if (subgrid[i, j].BiomeIndex() > 0)
+        //                {
+        //                    gridBiomeIndex = subgrid[i, j].BiomeIndex();
+        //                }
+        //                else
+        //                {
+        //                    continue;
+        //                }
+
+        //                if(gridBiomeIndex == 1)
+        //                {
+        //                    numberOfDeserts++;
+        //                }
+        //                else if(gridBiomeIndex == 2)
+        //                {
+        //                    numberOfSeas++;
+        //                }
+        //                else if(gridBiomeIndex == 3)
+        //                {
+        //                    numberOfForests++;
+        //                }
+
+        //                foundColor = true;
+        //                break;
+        //            }
+        //        }
+        //        if (foundColor)
+        //            break;
+        //    }
+        //    if(!foundColor)
+        //    {
+        //        numberOfPlains++;
+        //    }
+        //}
     }
 
     public Vector2 MapDimensions() => mapDimensions;
