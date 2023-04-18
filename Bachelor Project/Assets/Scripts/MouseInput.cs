@@ -76,6 +76,7 @@ public class MouseInput : MonoBehaviour
     public IEnumerator CreateSubgrid()
     {
         Tile[,] highlightedTiles = null;
+        bool canceled = false;
 
         while (Input.GetMouseButton(0))
         {
@@ -85,6 +86,12 @@ public class MouseInput : MonoBehaviour
             foreach (Tile tile in baseGrid.GetBaseGrid())
             {
                 tile.UnHighlight();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                canceled = true;
+                break;
             }
 
             if (Physics.Raycast(ray, out tileHit, Mathf.Infinity))
@@ -106,7 +113,8 @@ public class MouseInput : MonoBehaviour
 
         if (highlightedTiles.Length > 0 || highlightedTiles.LongLength > 0)
         {
-            baseGrid.CreateSubgrid(highlightedTiles);
+            if (!canceled)
+                baseGrid.CreateSubgrid(highlightedTiles);
         }
 
         creatingSubgrid = false;
