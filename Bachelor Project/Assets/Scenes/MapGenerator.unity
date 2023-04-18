@@ -5098,6 +5098,7 @@ GameObject:
   - component: {fileID: 1986185356}
   - component: {fileID: 1986185355}
   - component: {fileID: 1986185357}
+  - component: {fileID: 1986185358}
   m_Layer: 0
   m_Name: 'AI '
   m_TagString: Untagged
@@ -5156,6 +5157,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cf39f287866b9d49a9992d4e543f37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1986185358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986185354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4480c6b914f31b94d8ee4e397ff73416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1987538468

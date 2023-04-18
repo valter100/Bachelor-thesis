@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
-    int[] mapSizePreferense = new int[3];
-    int[] peakPreferenses = new int[4];
+    
 
     private void Start()
     {
         base.Start();
-        LoadPreferences();
     }
     protected override void SetText()
     {
@@ -21,17 +19,6 @@ public class CreateGrid : Step
         base.SetText();
     }
 
-    void LoadPreferences()
-    {
-        mapSizePreferense[0] = textHandler.GetPreferences("mapSizeX");
-        mapSizePreferense[1] = textHandler.GetPreferences("mapSizeZ");
-        mapSizePreferense[2] = textHandler.GetPreferenceAmount("mapSizeX");
-
-        peakPreferenses[0] = textHandler.GetPreferences("peakHeight");
-        peakPreferenses[1] = textHandler.GetPreferences("peakHeightRange");
-        peakPreferenses[2] = textHandler.GetPreferences("peakAmount");
-        peakPreferenses[3] = textHandler.GetPreferenceAmount("peakAmount");
-    }
 
     public override void GiveTip()
     {
@@ -76,12 +63,12 @@ public class CreateGrid : Step
 
     public void CreateNewGridWithPreferences()
     {
-        int mapSizeX = mapSizePreferense[0] / mapSizePreferense[2];
-        int mapSizeZ = mapSizePreferense[1] / mapSizePreferense[2];
+        int mapSizeX = preferenceHandler.mapSizeXPref / preferenceHandler.numberOfMapSizePref;
+        int mapSizeZ = preferenceHandler.mapSizeZPref / preferenceHandler.numberOfMapSizePref;
 
-        int peakHeight = peakPreferenses[0] / peakPreferenses[3];
-        int peakHeightRange = peakPreferenses[1] / peakPreferenses[3];
-        int peakAmount = peakPreferenses[2] / peakPreferenses[3];
+        int peakHeight = preferenceHandler.peakHeightPref / preferenceHandler.numberOfPeakPref;
+        int peakHeightRange = preferenceHandler.peakHeightRangePref / preferenceHandler.numberOfPeakPref;
+        int peakAmount = preferenceHandler.peakAmountPref / preferenceHandler.numberOfPeakPref;
 
         grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }

@@ -10,6 +10,7 @@ public class Step : MonoBehaviour
     [SerializeField] protected Grid grid;
     [SerializeField] protected bool giveAdvice;
     protected TextHandler textHandler;
+    protected PreferenceHandler preferenceHandler;
     [SerializeField] protected List<GameObject> UIElements;
     protected List<int> userAnswers = new List<int>();
 
@@ -25,6 +26,7 @@ public class Step : MonoBehaviour
         clappy = FindObjectOfType<AI>();
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = clappy.gameObject.GetComponent<TextHandler>();
+        preferenceHandler = clappy.gameObject.GetComponent<PreferenceHandler>();
         SetText();
         GetUserAnswers();
     }
