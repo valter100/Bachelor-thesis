@@ -9,7 +9,7 @@ public class HoverTip : MonoBehaviour
     [SerializeField] TextMeshProUGUI tipText;
     [SerializeField] RectTransform tipWindow;
 
-    public static Action<string, Vector2> OnMouseHover;
+    public static Action<string, Vector2, float> OnMouseHover;
     public static Action OnMouseLostFocus;
 
     private void OnEnable()
@@ -29,13 +29,13 @@ public class HoverTip : MonoBehaviour
         HideTip();
     }
 
-    public void ShowTip(string tip, Vector2 mousePos)
+    public void ShowTip(string tip, Vector2 mousePos, float offset)
     {
         tipText.text = tip;
 
         tipWindow.sizeDelta = new Vector2(tipText.preferredWidth > 200 ? 200 : tipText.preferredWidth, tipText.preferredHeight);
         tipWindow.gameObject.SetActive(true);
-        tipWindow.transform.position = new Vector2(mousePos.x + tipWindow.sizeDelta.x * 2, mousePos.y);
+        tipWindow.transform.position = new Vector2(mousePos.x + tipWindow.sizeDelta.x/2 + offset, mousePos.y + 20);
     }
 
     public void HideTip()
