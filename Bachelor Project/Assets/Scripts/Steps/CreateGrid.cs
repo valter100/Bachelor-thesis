@@ -44,30 +44,27 @@ public class CreateGrid : Step
         if (grid.Locked())
             return;
 
+        if (actionIndex == 0)
+        {
+            CreateNewGridWithPreferences();
+            return;
+        }
+        if (actionIndex == 1)
+        {
+            return;
+        }
+        if (actionIndex == 2)
+        {
+            clappy.SetInactive();
+            return;
+        }
+
         if (grid.GetBaseGrid() != null)
         {
             areYouSureWindow.SetActive(true);
             return;
         }
 
-        if (actionIndex == 0)
-        {
-            CreateNewGridWithPreferences();
-
-            //Debug.Log("mapx " + mapSizeX);
-            //Debug.Log("mapz " + mapSizeZ);
-            //Debug.Log("peak height " + peakHeight);
-            //Debug.Log("peak height range " + peakHeightRange);
-            //Debug.Log("peak anount " + peakAmount);
-        }
-        if (actionIndex == 1)
-        {
-
-        }
-        if (actionIndex == 2)
-        {
-            clappy.SetInactive();
-        }
         ActivateSizeWindow();
     }
 
@@ -94,12 +91,12 @@ public class CreateGrid : Step
 
     public void CreateNewGridWithPreferences()
     {
-        int mapSizeX = preferenceHandler.mapSizeXPref / preferenceHandler.numberOfMapSizePref;
-        int mapSizeZ = preferenceHandler.mapSizeZPref / preferenceHandler.numberOfMapSizePref;
+        int mapSizeX = preferenceHandler.mapSizeXPref;
+        int mapSizeZ = preferenceHandler.mapSizeZPref;
 
-        int peakHeight = preferenceHandler.peakHeightPref / preferenceHandler.numberOfPeakPref;
-        int peakHeightRange = preferenceHandler.peakHeightRangePref / preferenceHandler.numberOfPeakPref;
-        int peakAmount = preferenceHandler.peakAmountPref / preferenceHandler.numberOfPeakPref;
+        int peakHeight = preferenceHandler.peakHeightPref;
+        int peakHeightRange = preferenceHandler.peakHeightRangePref;
+        int peakAmount = preferenceHandler.peakAmountPref;
 
         grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }

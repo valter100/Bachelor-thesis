@@ -85,4 +85,6 @@ public class AI : MonoBehaviour
     {
         activeStep = steps[activeStep.Index() + 1];
     }
+
+    public Step GetStep() => activeStep;
 }

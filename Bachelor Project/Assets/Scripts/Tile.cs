@@ -280,6 +280,8 @@ public class Tile : MonoBehaviour
 
     IEnumerator PlaceObjects(GameObject go)
     {
+        grid.SetLocked(true);
+
         float progress = 0;
 
         Vector3 goalPosition = go.transform.position;
@@ -299,6 +301,7 @@ public class Tile : MonoBehaviour
             yield return 0;
         }
 
+        grid.SetLocked(false);
 
         yield return null;
     }

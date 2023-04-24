@@ -20,7 +20,7 @@ public class Shovel : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -14,7 +14,14 @@ public class MouseInput : MonoBehaviour
     List<Tile[,]> selectedGrids = new List<Tile[,]>();
     [SerializeField] Color selectedGridColor;
 
+    AI clappy;
+
     Vector2 startCoordinates, endCoordinates;
+
+    private void Start()
+    {
+        clappy = FindObjectOfType<AI>();
+    }
 
     void Update()
     {

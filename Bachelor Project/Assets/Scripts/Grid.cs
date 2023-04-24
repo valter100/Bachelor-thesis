@@ -19,7 +19,7 @@ public class Grid : MonoBehaviour
     [SerializeField] float seaPercentage;
     [SerializeField] float desertPercentage;
     [SerializeField] float percentageOfTilesWithObjects;
-    bool locked;
+    [SerializeField] bool locked;
 
     [SerializeField] Color baseTileColor;
     [SerializeField] Color highlightedTileColor;
@@ -602,6 +602,16 @@ public class Grid : MonoBehaviour
         seaPercentage = (float)seaTiles / (float)totalTiles * 100;
         forestPercentage = (float)forestTiles / (float)totalTiles * 100;
         percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 100;
+    }
+
+    [ContextMenu("RemoveScripts")]
+    public void RemoveScripts()
+    {
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).GetComponent<Tile>());
+            Destroy(transform.GetChild(i).GetComponent<BoxCollider>());
+        }
     }
 
     public void RotateWithMouse()

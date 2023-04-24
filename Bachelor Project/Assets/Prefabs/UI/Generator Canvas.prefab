@@ -6477,6 +6477,31 @@ PrefabInstance:
       objectReference: {fileID: 4401783018607524525}
     - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
         type: 3}
+      propertyPath: steps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
+        type: 3}
+      propertyPath: steps.Array.data[0]
+      value: 
+      objectReference: {fileID: 4401783017555059234}
+    - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
+        type: 3}
+      propertyPath: steps.Array.data[1]
+      value: 
+      objectReference: {fileID: 4401783016803576241}
+    - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
+        type: 3}
+      propertyPath: steps.Array.data[2]
+      value: 
+      objectReference: {fileID: 4401783016950541119}
+    - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
+        type: 3}
+      propertyPath: steps.Array.data[3]
+      value: 
+      objectReference: {fileID: 4401783017232238750}
+    - target: {fileID: 3257243960752372217, guid: 79267eb5bbbffb646bf359ebaad9243e,
+        type: 3}
       propertyPath: buttons.Array.data[0]
       value: 
       objectReference: {fileID: 4401783017925913464}
@@ -6611,6 +6636,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10de9e7565b08dc4b84d66c448d0662b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4401783017232238750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3257243959790284960, guid: 79267eb5bbbffb646bf359ebaad9243e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162571138936584254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2266b181491c38749bceacfcaace3c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4401783017555059234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3257243959517829660, guid: 79267eb5bbbffb646bf359ebaad9243e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162571138936584254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8301829a9d3ec498df293860cdee28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4401783017945073790 stripped

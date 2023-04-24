@@ -8,6 +8,13 @@ public class TerrainTools : Step
 
     public void CreateTool()
     {
+        GameObject[] tools = GameObject.FindGameObjectsWithTag("Tool");
+
+        for(int i = 0; i < tools.Length; i++)
+        {
+            Destroy(tools[i]);
+        }
+
         StartStep();
 
         Instantiate(tool);
