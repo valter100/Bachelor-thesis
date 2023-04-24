@@ -10,6 +10,8 @@ public class PreferenceHandler : MonoBehaviour
     [SerializeField] public int mapSizeXPref, mapSizeZPref, numberOfMapSizePref;
     [SerializeField] public int peakHeightPref, peakHeightRangePref, peakAmountPref, numberOfPeakPref;
 
+    int setMapSizeX, setMapSizeZ;
+
 
     void Start()
     {
@@ -18,19 +20,34 @@ public class PreferenceHandler : MonoBehaviour
     }
     
 
-    void LoadPreferences()
+    private void LoadPreferences()
     {
+        numberOfMapSizePref = textHandler.GetPreferenceAmount("mapSizeX");
         mapSizeXPref = textHandler.GetPreferences("mapSizeX");
         mapSizeZPref = textHandler.GetPreferences("mapSizeZ");
-        numberOfMapSizePref = textHandler.GetPreferenceAmount("mapSizeX");
+        mapSizeXPref /= numberOfMapSizePref;
+        mapSizeZPref /= numberOfMapSizePref;
 
-        peakHeightPref = textHandler.GetPreferences("peakHeight");
-        peakHeightRangePref = textHandler.GetPreferences("peakHeightRange");
-        peakAmountPref = textHandler.GetPreferences("peakAmount");
         numberOfPeakPref = textHandler.GetPreferenceAmount("peakAmount");
+        peakHeightPref = textHandler.GetPreferences("peakHeight");
+        peakHeightPref /= numberOfPeakPref;
+        peakHeightRangePref = textHandler.GetPreferences("peakHeightRange");
+        peakHeightRangePref /= numberOfPeakPref;
+        peakAmountPref = textHandler.GetPreferences("peakAmount");
+        peakAmountPref /= numberOfPeakPref;
+        
 
         desert = textHandler.GetPreferenceAmount("desert");
         forest = textHandler.GetPreferenceAmount("forest");
         sea = textHandler.GetPreferenceAmount("sea");
+    }
+
+    private void CalculateClosestSizeStep()
+    {
+        if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 16;
+        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
+        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
+        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
+        setMapSizeZ = setMapSizeX;
     }
 }

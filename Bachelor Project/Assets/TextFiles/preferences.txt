@@ -373,3 +373,4 @@ mapSizeZ16
 peakHeight6
 peakHeightRange4
 peakAmount0
+desert
