@@ -57,7 +57,7 @@ public class CreateGrid : Step
 
     public void CreateNewGrid()
     {
-        clappy.setNextStep();
+        //clappy.setNextStep();
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid();
 

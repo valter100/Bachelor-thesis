@@ -408,3 +408,8 @@ mapSizeZ0
 peakHeight6
 peakHeightRange4
 peakAmount0
+mapSizeX0
+mapSizeZ0
+peakHeight6
+peakHeightRange4
+peakAmount0
