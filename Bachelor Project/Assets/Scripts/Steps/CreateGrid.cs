@@ -9,7 +9,7 @@ public class CreateGrid : Step
 
     protected override void SetText()
     {
-        question = "Well that looks cool! Do you like it or do you want me to createa new one for you?";
+        question = "Well that looks cool! Do you like it or do you want me to create a new one for you?";
         optOne = "New one please!";
         optTwo = "Keep it!";
         optThree = "Leave me alone... Creep!!";
@@ -27,21 +27,9 @@ public class CreateGrid : Step
         if (grid.Locked())
             return;
 
-        if (grid.GetBaseGrid() != null)
-        {
-            areYouSureWindow.SetActive(true);
-            return;
-        }
-
         if (actionIndex == 0)
         {
             CreateNewGridWithPreferences();
-
-            //Debug.Log("mapx " + mapSizeX);
-            //Debug.Log("mapz " + mapSizeZ);
-            //Debug.Log("peak height " + peakHeight);
-            //Debug.Log("peak height range " + peakHeightRange);
-            //Debug.Log("peak anount " + peakAmount);
         }
         if (actionIndex == 1)
         {
@@ -51,12 +39,17 @@ public class CreateGrid : Step
         {
             clappy.SetInactive();
         }
-        CreateNewGrid();
     }
 
 
     public void CreateNewGrid()
     {
+        if (grid.GetBaseGrid() != null)
+        {
+            areYouSureWindow.SetActive(true);
+            return;
+        }
+
         clappy.setNextStep();
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid();
@@ -71,12 +64,12 @@ public class CreateGrid : Step
 
     public void CreateNewGridWithPreferences()
     {
-        int mapSizeX = preferenceHandler.mapSizeXPref / preferenceHandler.numberOfMapSizePref;
-        int mapSizeZ = preferenceHandler.mapSizeZPref / preferenceHandler.numberOfMapSizePref;
+        int mapSizeX = preferenceHandler.mapSizeXPref;
+        int mapSizeZ = preferenceHandler.mapSizeZPref;
 
-        int peakHeight = preferenceHandler.peakHeightPref / preferenceHandler.numberOfPeakPref;
-        int peakHeightRange = preferenceHandler.peakHeightRangePref / preferenceHandler.numberOfPeakPref;
-        int peakAmount = preferenceHandler.peakAmountPref / preferenceHandler.numberOfPeakPref;
+        int peakHeight = preferenceHandler.peakHeightPref;
+        int peakHeightRange = preferenceHandler.peakHeightRangePref;
+        int peakAmount = preferenceHandler.peakAmountPref;
 
         grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }

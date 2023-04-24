@@ -37,7 +37,8 @@ public class StartStep : Step
     {
         if (actionIndex == 0)
         {
-            clappy.setNextStep();
+            clappy.SetStep(1);
+            clappy.steps[1].DoAction(0);
         }
         if (actionIndex == 1)
         {

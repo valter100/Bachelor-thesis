@@ -24,6 +24,13 @@ public class SetBiome : Step
         base.SetText();
     }
 
+    public void SetBiomeName(int index)
+    {
+        if (index == 0) biomeName = "Desert";
+        if (index == 1) biomeName = "Sea";
+        if (index == 2) biomeName = "Forest";
+    }
+
     public override void GiveTip()
     {
         base.GiveTip();
