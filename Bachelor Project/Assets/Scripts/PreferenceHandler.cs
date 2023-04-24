@@ -41,13 +41,4 @@ public class PreferenceHandler : MonoBehaviour
         forest = textHandler.GetPreferenceAmount("forest");
         sea = textHandler.GetPreferenceAmount("sea");
     }
-
-    private void CalculateClosestSizeStep()
-    {
-        if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 16;
-        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
-        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
-        else if (mapSizeXPref > 0 && mapSizeXPref < 25) setMapSizeX = 32;
-        setMapSizeZ = setMapSizeX;
-    }
 }
