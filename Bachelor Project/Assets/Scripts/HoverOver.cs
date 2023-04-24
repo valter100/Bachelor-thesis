@@ -22,7 +22,7 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void ShowMessage()
     {
-        HoverTip.OnMouseHover(tipToShow, Input.mousePosition);
+        HoverTip.OnMouseHover(tipToShow, Input.mousePosition, GetComponent<RectTransform>().rect.size.x);
     }
 
     IEnumerator StartTimer()

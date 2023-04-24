@@ -64,7 +64,7 @@ public class Grid : MonoBehaviour
             RotateWithMouse();
     }
 
-    public void CreateGrid()
+    public void CreateGrid(float xSize, float zSize)
     {
         if (locked)
             return;
@@ -80,6 +80,9 @@ public class Grid : MonoBehaviour
         }
 
         //int tilesCreatedEachFrame = 1;
+
+        mapDimensions.x = xSize;
+        mapDimensions.z = zSize;
 
         baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
 
@@ -116,6 +119,9 @@ public class Grid : MonoBehaviour
 
         mapDimensions.x = mapsizeX;
         mapDimensions.z = mapSizeZ;
+        this.peakHeight = peakHeight;
+        this.peakHeightRange = peakHeightRange;
+        this.peakAmount = peakAmount;
         //int tilesCreatedEachFrame = 1;
 
         baseGrid = new Tile[mapsizeX, mapSizeZ];
