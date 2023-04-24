@@ -29,6 +29,8 @@ public class SetBiome : Step
         if (index == 0) biomeName = "Desert";
         if (index == 1) biomeName = "Sea";
         if (index == 2) biomeName = "Forest";
+        SetText();
+        GiveTip();
     }
 
     public override void GiveTip()

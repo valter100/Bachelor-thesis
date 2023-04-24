@@ -46,7 +46,7 @@ public class GridSelect : Step
         if (actionIndex == 2)
         {
             textHandler.SavePreferenses("forest");
-            setBiome.ChangeBiome(3);
+            setBiome.ChangeBiomeNoHeight(3);
             setBiome.SetBiomeName(2);
         }
 
