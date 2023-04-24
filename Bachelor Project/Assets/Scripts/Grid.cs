@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    [SerializeField] bool preferencePicking;
     [SerializeField] GameObject tile;
     [SerializeField] Vector3 mapDimensions;
     [SerializeField] float tileBuffer;
@@ -32,6 +33,8 @@ public class Grid : MonoBehaviour
     [SerializeField] int peakHeightRange;
     [SerializeField] int peakAmount;
 
+    [SerializeField] float rotateSpeed;
+    [SerializeField] float scaleSpeed;
 
     public delegate void GridCreation();
     public static event GridCreation OnGridCreate;
@@ -51,7 +54,14 @@ public class Grid : MonoBehaviour
 
     private void Update()
     {
+        if (!preferencePicking)
+            return;
 
+        if (Input.mouseScrollDelta.y != 0)
+            ScaleWithMouseWheel();
+
+        if (Input.GetMouseButton(0))
+            RotateWithMouse();
     }
 
     public void CreateGrid()
@@ -270,7 +280,7 @@ public class Grid : MonoBehaviour
 
         Tile[,] tempGrid = new Tile[sizeX, sizeY];
 
-        if(startCoordinates == endCoordinates)
+        if (startCoordinates == endCoordinates)
         {
             tempGrid = new Tile[1, 1];
             tempGrid[0, 0] = getTileByCoordinate((int)startCoordinates.x, (int)startCoordinates.y);
@@ -515,9 +525,9 @@ public class Grid : MonoBehaviour
         Vector2 coordinates = tile.GetCoordinates();
         List<Tile> tiles = new List<Tile>();
 
-        for(int x= -radius; x < radius; x++)
+        for (int x = -radius; x < radius; x++)
         {
-            for( int y = -radius; y < radius; y++)
+            for (int y = -radius; y < radius; y++)
             {
                 if (x == 0 && y == 0)
                     continue;
@@ -539,16 +549,16 @@ public class Grid : MonoBehaviour
     {
         baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
 
-        for(int i = 0; i < mapDimensions.x; i++)
+        for (int i = 0; i < mapDimensions.x; i++)
         {
-            for(int j = 0; j < mapDimensions.z; j++)
+            for (int j = 0; j < mapDimensions.z; j++)
             {
                 Debug.Log(i + "," + j);
-                baseGrid[i, j] = GameObject.Find((i+1) + "," + (j+1)).GetComponent<Tile>();
+                baseGrid[i, j] = GameObject.Find((i + 1) + "," + (j + 1)).GetComponent<Tile>();
             }
         }
 
-        foreach(Tile tile in baseGrid)
+        foreach (Tile tile in baseGrid)
         {
             tile.ReapplyColor();
         }
@@ -564,7 +574,7 @@ public class Grid : MonoBehaviour
         int desertTiles = 0;
         int objectTiles = 0;
 
-        foreach(Tile tile in baseGrid)
+        foreach (Tile tile in baseGrid)
         {
             if (tile.BiomeIndex() == 0)
                 plainTiles++;
@@ -586,54 +596,18 @@ public class Grid : MonoBehaviour
         seaPercentage = (float)seaTiles / (float)totalTiles * 100;
         forestPercentage = (float)forestTiles / (float)totalTiles * 100;
         percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 100;
-
-        //foreach (Tile[,] subgrid in subgridList)
-        //{
-        //    bool foundColor = false;
-        //    for (int i = 0; i < subgrid.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < subgrid.GetLength(1); j++)
-        //        {
-        //            if (subgrid[i, j] != null)
-        //            {
-        //                int gridBiomeIndex = 0;
-
-        //                if (subgrid[i, j].BiomeIndex() > 0)
-        //                {
-        //                    gridBiomeIndex = subgrid[i, j].BiomeIndex();
-        //                }
-        //                else
-        //                {
-        //                    continue;
-        //                }
-
-        //                if(gridBiomeIndex == 1)
-        //                {
-        //                    numberOfDeserts++;
-        //                }
-        //                else if(gridBiomeIndex == 2)
-        //                {
-        //                    numberOfSeas++;
-        //                }
-        //                else if(gridBiomeIndex == 3)
-        //                {
-        //                    numberOfForests++;
-        //                }
-
-        //                foundColor = true;
-        //                break;
-        //            }
-        //        }
-        //        if (foundColor)
-        //            break;
-        //    }
-        //    if(!foundColor)
-        //    {
-        //        numberOfPlains++;
-        //    }
-        //}
     }
 
+    public void RotateWithMouse()
+    {
+        transform.Rotate(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime * -1, 0, Space.Self);
+    }
+
+    public void ScaleWithMouseWheel()
+    {
+        float value = Input.mouseScrollDelta.y;
+        transform.localScale += new Vector3(value, value, value) * Time.deltaTime;
+    }
     public Vector2 MapDimensions() => mapDimensions;
     public bool Locked() => locked;
 }
