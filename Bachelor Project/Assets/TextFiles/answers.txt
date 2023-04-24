@@ -29,3 +29,4 @@ questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:4/answerIndex:0/answer:Make it Desert
 questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!

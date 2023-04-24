@@ -119,6 +119,9 @@ public class Grid : MonoBehaviour
 
         mapDimensions.x = mapsizeX;
         mapDimensions.z = mapSizeZ;
+        this.peakHeight = peakHeight;
+        this.peakHeightRange = peakHeightRange;
+        this.peakAmount = peakAmount;
         //int tilesCreatedEachFrame = 1;
 
         baseGrid = new Tile[mapsizeX, mapSizeZ];

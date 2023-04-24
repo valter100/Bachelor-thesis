@@ -10,6 +10,9 @@ public class CreateGrid : Step
     [SerializeField] GameObject gridSizeWindow;
     [SerializeField] TMP_InputField xInput;
     [SerializeField] TMP_InputField zInput;
+    [SerializeField] TMP_InputField peakAmountInput;
+    [SerializeField] TMP_InputField peakHeightInput;
+    [SerializeField] TMP_InputField peakheightRangeInput;
 
     protected override void SetText()
     {
@@ -28,6 +31,12 @@ public class CreateGrid : Step
 
     public void ActivateSizeWindow()
     {
+        xInput.text = preferenceHandler.mapSizeXPref.ToString();
+        zInput.text = preferenceHandler.mapSizeZPref.ToString();
+        peakAmountInput.text = preferenceHandler.peakAmountPref.ToString();
+        peakHeightInput.text = preferenceHandler.peakHeightPref.ToString();
+        peakheightRangeInput.text = preferenceHandler.peakHeightRangePref.ToString();
+
         gridSizeWindow.SetActive(true);
     }
     public override void DoAction(int actionIndex)
@@ -67,7 +76,13 @@ public class CreateGrid : Step
     {
         //clappy.setNextStep();
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
-        grid.CreateGrid(int.Parse(xInput.text), int.Parse(zInput.text));
+        grid.CreateGrid(
+            int.Parse(xInput.text), 
+            int.Parse(zInput.text),
+            int.Parse(peakHeightInput.text),
+            int.Parse(peakheightRangeInput.text),
+            int.Parse(peakAmountInput.text)
+           );
 
         textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());
         textHandler.SavePreferenses("mapSizeZ" + grid.MapDimensionZ().ToString());
