@@ -29,3 +29,53 @@ questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:4/answerIndex:0/answer:Make it Desert
 questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:0/answer:Sure do Clappy-o!
+questionIndex:2/answerIndex:1/answer:Pls shut up...
+questionIndex:2/answerIndex:2/answer:Meh....
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:1/answer:Keep it!
+questionIndex:1/answerIndex:1/answer:Keep it!
+questionIndex:1/answerIndex:1/answer:Keep it!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:1/answerIndex:0/answer:New one please!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:1/answer:Nah i liked it better before

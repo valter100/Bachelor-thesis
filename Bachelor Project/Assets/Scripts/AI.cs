@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class AI : MonoBehaviour
 {
-    [SerializeField] List<Step> steps = new List<Step>();
+    [SerializeField] public List<Step> steps = new List<Step>();
     [SerializeField] Step activeStep;
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
@@ -27,6 +27,7 @@ public class AI : MonoBehaviour
     {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = gameObject.GetComponent<TextHandler>();
+        Toggle(true);
     }
 
     public enum ChatOption
@@ -44,7 +45,7 @@ public class AI : MonoBehaviour
             buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Option(i);
         }
 
-        Toggle(true);
+        //Toggle(true);
     }
 
     public void ChooseOption(int index)
@@ -55,7 +56,7 @@ public class AI : MonoBehaviour
 
         activeStep.DoAction(index);
 
-        Toggle(false);
+        //Toggle(false);
     }
 
     void Toggle(bool state)
@@ -77,6 +78,7 @@ public class AI : MonoBehaviour
     public void SetStep(int index)
     {
         activeStep = steps[index];
+        activeStep.GiveTip();
     }
 
     public void setNextStep()

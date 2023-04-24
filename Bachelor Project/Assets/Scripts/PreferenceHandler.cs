@@ -10,9 +10,6 @@ public class PreferenceHandler : MonoBehaviour
     [SerializeField] public int mapSizeXPref, mapSizeZPref, numberOfMapSizePref;
     [SerializeField] public int peakHeightPref, peakHeightRangePref, peakAmountPref, numberOfPeakPref;
 
-    int setMapSizeX, setMapSizeZ;
-
-
     void Start()
     {
         textHandler = gameObject.GetComponent<TextHandler>();
