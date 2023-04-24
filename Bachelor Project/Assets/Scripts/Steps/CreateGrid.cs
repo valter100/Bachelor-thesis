@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CreateGrid : Step
 {
 
     [SerializeField] GameObject areYouSureWindow;
+    [SerializeField] GameObject gridSizeWindow;
+    [SerializeField] TMP_InputField xInput;
+    [SerializeField] TMP_InputField zInput;
 
     protected override void SetText()
     {
@@ -22,6 +26,10 @@ public class CreateGrid : Step
         base.GiveTip();
     }
 
+    public void ActivateSizeWindow()
+    {
+        gridSizeWindow.SetActive(true);
+    }
     public override void DoAction(int actionIndex)
     {
         if (grid.Locked())
@@ -51,7 +59,7 @@ public class CreateGrid : Step
         {
             clappy.SetInactive();
         }
-        CreateNewGrid();
+        ActivateSizeWindow();
     }
 
 
@@ -59,7 +67,7 @@ public class CreateGrid : Step
     {
         //clappy.setNextStep();
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
-        grid.CreateGrid();
+        grid.CreateGrid(int.Parse(xInput.text), int.Parse(zInput.text));
 
         textHandler.SavePreferenses("mapSizeX" + grid.MapDimensionX().ToString());
         textHandler.SavePreferenses("mapSizeZ" + grid.MapDimensionZ().ToString());

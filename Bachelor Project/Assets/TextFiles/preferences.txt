@@ -413,3 +413,13 @@ mapSizeZ0
 peakHeight6
 peakHeightRange4
 peakAmount0
+mapSizeX20
+mapSizeZ20
+peakHeight6
+peakHeightRange4
+peakAmount0
+mapSizeX15
+mapSizeZ34
+peakHeight6
+peakHeightRange4
+peakAmount10
