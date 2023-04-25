@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300670228566037316}
-  - component: {fileID: 4767789908103801730}
+  - component: {fileID: 8810235237093005733}
   m_Layer: 0
-  m_Name: Fill Up Tool
+  m_Name: Sledgehammer
   m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4767789908103801730
+--- !u!114 &8810235237093005733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9201004099908767682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dd98b3ee8b609842bcbadeae5389504, type: 3}
+  m_Script: {fileID: 11500000, guid: 15fb4d6e973809c4989363e96488af2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8716456997300907195

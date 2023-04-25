@@ -19,7 +19,7 @@ public class SledgeHammer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Destroy(gameObject.transform.parent.gameObject);
+            Destroy(gameObject);
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,7 +37,7 @@ public class SledgeHammer : MonoBehaviour
                 }
                 else if(clickedTile.PlacedObject())
                 {
-                    transform.position = clickedTile.PlacedObject().transform.position;/* + new Vector3(0, clickedTile.transform.localScale.y / 2, 0) + new Vector3(0, transform.localScale.y / 2, 0); ;*/
+                    transform.position = clickedTile.PlacedObject().transform.position + new Vector3(0, clickedTile.PlacedObject().GetComponent<Renderer>().bounds.size.y, 0) + new Vector3(0, transform.localScale.y / 2, 0);
                     if (Input.GetMouseButtonDown(0))
                     {
                         DestroyPlacedObject(clickedTile.PlacedObject());
