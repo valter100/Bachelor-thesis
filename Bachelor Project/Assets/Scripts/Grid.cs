@@ -550,7 +550,6 @@ public class Grid : MonoBehaviour
         locked = state;
     }
 
-    [ContextMenu("RecolorGrid")]
     public void Recolor()
     {
         baseGrid = new Tile[(int)mapDimensions.x, (int)mapDimensions.z];
@@ -604,19 +603,46 @@ public class Grid : MonoBehaviour
         percentageOfTilesWithObjects = (float)objectTiles / (float)totalTiles * 100;
     }
 
-    [ContextMenu("RemoveScripts")]
-    public void RemoveScripts()
+    [ContextMenu("Prepare Grid for preference picking")]
+    public void PrepareForPicking()
     {
+        Recolor();
+
         for(int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i).GetComponent<Tile>());
-            Destroy(transform.GetChild(i).GetComponent<BoxCollider>());
+            DestroyImmediate(transform.GetChild(i).GetComponent<Tile>());
+            DestroyImmediate(transform.GetChild(i).GetComponent<BoxCollider>());
         }
+
+        FindObjectOfType<PreferencePicker>().AddGridToList(this);
+
+        rotateSpeed = 180;
+        scaleSpeed = 15;
     }
 
     public void RotateWithMouse()
     {
         transform.Rotate(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime * -1, 0, Space.Self);
+    }
+
+    public void RotateWithWASD()
+    {
+        if(Input.GetKey(KeyCode.W))
+        {
+            transform.Rotate(rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.Self);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Rotate(rotateSpeed * Time.deltaTime * -1, 0, 0, Space.Self);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(0, rotateSpeed * Time.deltaTime * -1, 0, Space.Self);
+        }
     }
 
     public void ScaleWithMouseWheel()
