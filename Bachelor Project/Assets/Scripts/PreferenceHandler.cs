@@ -12,7 +12,7 @@ public class PreferenceHandler : MonoBehaviour
 
     void Start()
     {
-        textHandler = gameObject.GetComponent<TextHandler>();
+        textHandler = FindObjectOfType<TextHandler>();
         LoadPreferences();
     }
 

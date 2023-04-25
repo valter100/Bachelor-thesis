@@ -25,7 +25,7 @@ public class Step : MonoBehaviour
     {
         clappy = FindObjectOfType<AI>();
         grid = GameObject.Find("Grid").GetComponent<Grid>();
-        textHandler = clappy.gameObject.GetComponent<TextHandler>();
+        textHandler = FindObjectOfType<TextHandler>();
         preferenceHandler = clappy.gameObject.GetComponent<PreferenceHandler>();
         SetText();
         GetUserAnswers();

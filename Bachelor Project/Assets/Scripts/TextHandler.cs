@@ -22,14 +22,10 @@ public class TextHandler : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(this);
         aPath = "Assets/TextFiles/answers.txt";
         pPath = "Assets/TextFiles/preferences.txt";
         ReadUserData();
-    }
-
-    void Start()
-    {
-
     }
 
     void Update()
