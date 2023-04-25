@@ -129,6 +129,9 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
+                if(tile.PlacedObject())
+                    Destroy(tile.PlacedObject());
+
                 tile.SetBiome(biomeIndex, false);
                 tile.SetColor(biomeColors[biomeIndex]);
                 tile.SetImpassable(biomeImpassable[biomeIndex]);
