@@ -30,7 +30,14 @@ public class GridSelect : Step
 
     public override void DoAction(int actionIndex)
     {
-        int selectedGridPercentage = grid.SelectedGrids().Count / (grid.MapDimensionX() * grid.MapDimensionZ());
+        int totalTiles = 0;
+        foreach (Tile[,] grid in grid.SelectedGrids())
+        {
+            totalTiles += grid.Length;
+        }
+
+        int selectedGridPercentage = (int)((float)totalTiles * 100 / ((float)grid.MapDimensionX() * (float)grid.MapDimensionZ()));
+        
 
         if (actionIndex == 0)
         {
