@@ -155,6 +155,9 @@ public class TextHandler : MonoBehaviour
         sw = new StreamWriter(aPath);
         sw.WriteLine();
         sw.Close();
+        sw = new StreamWriter(pPath);
+        sw.WriteLine();
+        sw.Close();
     }
 
     private void ReadUserData()

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GridSelect : Step
 {
-    int desert, forest, sea;
-
     SetBiome setBiome;
     HandleObjects handleObjects;
 
@@ -31,21 +30,23 @@ public class GridSelect : Step
 
     public override void DoAction(int actionIndex)
     {
+        int selectedGridPercentage = grid.SelectedGrids().Count / (grid.MapDimensionX() * grid.MapDimensionZ());
+
         if (actionIndex == 0)
         {
-            textHandler.SavePreferenses("desert");
+            textHandler.SavePreferenses("desert" + selectedGridPercentage.ToString());
             setBiome.ChangeBiome(1);
             setBiome.SetBiomeName(0);
         }
         if (actionIndex == 1)
         {
-            textHandler.SavePreferenses("sea");
+            textHandler.SavePreferenses("sea" + selectedGridPercentage.ToString());
             setBiome.ChangeBiome(2);
             setBiome.SetBiomeName(1);
         }
         if (actionIndex == 2)
         {
-            textHandler.SavePreferenses("forest");
+            textHandler.SavePreferenses("forest" + selectedGridPercentage.ToString());
             setBiome.ChangeBiomeNoHeight(3);
             setBiome.SetBiomeName(2);
         }
