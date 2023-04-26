@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6bfab16f387f95e4bb60f866299be241, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.26852533, g: 0.46447325, b: 0.6146784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -774,6 +774,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 345.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5977623548068296827, guid: b6863fd1b7af2f44da1f58348bc4eb27,
+        type: 3}
+      propertyPath: tipToShow
+      value: Sledgehammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977623548068296827, guid: b6863fd1b7af2f44da1f58348bc4eb27,
+        type: 3}
+      propertyPath: scaleSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977623548068296827, guid: b6863fd1b7af2f44da1f58348bc4eb27,
+        type: 3}
+      propertyPath: hoverScaleIncrease
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6863fd1b7af2f44da1f58348bc4eb27, type: 3}
 --- !u!114 &1241422153 stripped
@@ -1058,6 +1073,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Subgrid Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812073516555457781, guid: 8665d2c9d0eeba642847d49670653bfa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3812073516874870914, guid: 8665d2c9d0eeba642847d49670653bfa,
         type: 3}
