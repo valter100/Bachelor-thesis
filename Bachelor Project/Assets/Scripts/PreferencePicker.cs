@@ -14,6 +14,7 @@ public class PreferencePicker : MonoBehaviour
     [SerializeField] GameObject clappy;
     [SerializeField] TextHandler textHandler;
     [SerializeField] TMP_Text gridCountText;
+    [SerializeField] Canvas startCanvas;
     Grid currentGrid;
     int gridsSwipedOn;
     int totalGrids;
@@ -22,11 +23,19 @@ public class PreferencePicker : MonoBehaviour
     {
         gridsSwipedOn = 0;
         totalGrids = grids.Count;
-        ActivateNewGrid();
     }
 
     private void Update()
     {
+        if (startCanvas.gameObject.activeSelf == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            startCanvas.gameObject.SetActive(false);
+            ActivateNewGrid();
+        }
+
+        if (startCanvas.gameObject.activeSelf)
+            return;
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             SendGridAway(notPickedTransform.position);
@@ -37,6 +46,8 @@ public class PreferencePicker : MonoBehaviour
             SendGridAway(pickedTransform.position);
             clappy.GetComponent<Animator>().Play("Cheer");
         }
+
+
     }
 
     public void ActivateNewGrid()

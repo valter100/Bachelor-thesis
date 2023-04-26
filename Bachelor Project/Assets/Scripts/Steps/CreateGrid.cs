@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CreateGrid : Step
 {
-
     [SerializeField] GameObject areYouSureWindow;
     [SerializeField] GameObject gridSizeWindow;
     [SerializeField] TMP_InputField xInput;
@@ -68,10 +67,10 @@ public class CreateGrid : Step
         ActivateSizeWindow();
     }
 
-
     public void CreateNewGrid()
     {
         //clappy.setNextStep();
+        SetUIActive(true);
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid(
             int.Parse(xInput.text), 
