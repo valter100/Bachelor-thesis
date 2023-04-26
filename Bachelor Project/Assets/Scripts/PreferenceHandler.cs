@@ -6,7 +6,7 @@ public class PreferenceHandler : MonoBehaviour
 {
     TextHandler textHandler;
 
-    [SerializeField] public int desertPercenteagePref, forestPerentagePref, seaPercentagePref;
+    [SerializeField] public int desertPercentagePref, forestPercentagePref, seaPercentagePref;
     [SerializeField] public int mapSizeXPref, mapSizeZPref, numberOfMapSizePref;
     [SerializeField] public int peakHeightPref, peakHeightRangePref, peakAmountPref, numberOfPeakPref;
 
@@ -30,8 +30,8 @@ public class PreferenceHandler : MonoBehaviour
         if (numberOfPeakPref > 0) peakAmountPref = textHandler.GetPreferences("peakAmount");
 
 
-        if (textHandler.GetPreferenceAmount("desert") > 0) desertPercenteagePref = textHandler.GetPreferences("desert") / textHandler.GetPreferenceAmount("desert");
-        if (textHandler.GetPreferenceAmount("forest") > 0) forestPerentagePref = textHandler.GetPreferences("forest") / textHandler.GetPreferenceAmount("forest");
+        if (textHandler.GetPreferenceAmount("desert") > 0) desertPercentagePref = textHandler.GetPreferences("desert") / textHandler.GetPreferenceAmount("desert");
+        if (textHandler.GetPreferenceAmount("forest") > 0) forestPercentagePref = textHandler.GetPreferences("forest") / textHandler.GetPreferenceAmount("forest");
         if (textHandler.GetPreferenceAmount("sea") > 0) seaPercentagePref = textHandler.GetPreferences("sea") / textHandler.GetPreferenceAmount("sea");
     }
 }

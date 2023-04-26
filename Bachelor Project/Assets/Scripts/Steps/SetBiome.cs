@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SetBiome : Step
 {
@@ -9,6 +10,8 @@ public class SetBiome : Step
     [SerializeField] List<bool> biomeImpassable = new List<bool>();
 
     string biomeName = "";
+    string extraQuestion = "";
+    bool offerHelp = false;
 
     private void Start()
     {
@@ -17,20 +20,30 @@ public class SetBiome : Step
 
     protected override void SetText()
     {
-        question = "Awesome! Now we have some cool " + biomeName + " tiles!";
-        optOne = "Yeah i like them!!";
-        optTwo = "Nah i liked it better before";
-        optThree = "Meh... they are okay i guess..";
+        question = "Awesome! Now we have some cool " + biomeName + " tiles!" + extraQuestion;
+        optOne = "";
+        optTwo = "";
+        optThree = "";
         base.SetText();
     }
 
     public void SetBiomeName(int index)
     {
-        if (index == 0) biomeName = "Desert";
-        if (index == 1) biomeName = "Sea";
-        if (index == 2) biomeName = "Forest";
+        CheckBiomePercentage(index);
+        if (index == 0) biomeName = "desert";
+        if (index == 1) biomeName = "sea";
+        if (index == 2) biomeName = "forest";
         SetText();
+        if (offerHelp) SetOptions();
         GiveTip();
+    }
+
+    private void SetOptions()
+    {
+        optOne = "No i like it the way it is";
+        optTwo = "Sure add some more " + biomeName;
+        optThree = "Actully add a lot more of " + biomeName;
+        base.SetText();
     }
 
     public override void GiveTip()
@@ -42,7 +55,7 @@ public class SetBiome : Step
     {
         if (actionIndex == 0)
         {
-            //textHandler.
+
         }
         if (actionIndex == 1)
         {
@@ -50,7 +63,52 @@ public class SetBiome : Step
         }
         if (actionIndex == 2)
         {
-            
+
+        }
+    }
+
+    public void CheckBiomePercentage(int index)
+    {
+        int threshold = 0;
+
+        if (index == 0)
+        {
+            if (grid.DesertPercentage() > preferenceHandler.desertPercentagePref + threshold)
+            {
+                extraQuestion = "It looks like you have less desert tiles than you normally prefer. Would you like me to add some more?";
+                offerHelp = true;
+            }
+            else if (grid.DesertPercentage() < preferenceHandler.desertPercentagePref - threshold)
+            {
+                extraQuestion = "It looks like you have more desert tiles than you normally prefer. Would you like me to change some of them to something else?";
+                offerHelp = true;
+            }
+        }
+        if (index == 1)
+        {
+            if (grid.SeaPercentage() > preferenceHandler.seaPercentagePref + threshold)
+            {
+                extraQuestion = "It looks like you have less sea tiles than you normally prefer. Would you like me to add some more?";
+                offerHelp = true;
+            }
+            else if (grid.SeaPercentage() < preferenceHandler.seaPercentagePref - threshold)
+            {
+                extraQuestion = "It looks like you have more sea tiles than you normally prefer. Would you like me to change some of them to something else?";
+                offerHelp = true;
+            }
+        }
+        if (index == 2)
+        {
+            if (grid.ForestPercentage() > preferenceHandler.forestPercentagePref + threshold)
+            {
+                extraQuestion = "It looks like you have less forest tiles than you normally prefer. Would you like me to add some more?";
+                offerHelp = true;
+            }
+            else if (grid.ForestPercentage() < preferenceHandler.forestPercentagePref - threshold)
+            {
+                extraQuestion = "It looks like you have more forest tiles than you normally prefer. Would you like me to change some of them to something else?";
+                offerHelp = true;
+            }
         }
     }
 
@@ -71,7 +129,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.PlacedObject())
+                if (tile.PlacedObject())
                     Destroy(tile.PlacedObject());
 
                 tile.SetBiome(biomeIndex, true);
@@ -93,7 +151,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.Height() < lowestHeight)
+                if (tile.Height() < lowestHeight)
                 {
                     lowestHeight = tile.Height();
                 }
@@ -129,7 +187,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.PlacedObject())
+                if (tile.PlacedObject())
                     Destroy(tile.PlacedObject());
 
                 tile.SetBiome(biomeIndex, false);

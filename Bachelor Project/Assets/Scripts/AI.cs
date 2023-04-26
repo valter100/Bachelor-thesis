@@ -59,7 +59,7 @@ public class AI : MonoBehaviour
         //Toggle(false);
     }
 
-    void Toggle(bool state)
+    public void Toggle(bool state)
     {
         foreach (Button button in buttons)
         {
@@ -74,7 +74,7 @@ public class AI : MonoBehaviour
         inactive = true;
         gameObject.SetActive(false);
     }
-    
+
     public void SetStep(int index)
     {
         activeStep = steps[index];

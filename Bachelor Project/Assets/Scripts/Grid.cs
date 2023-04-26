@@ -45,6 +45,9 @@ public class Grid : MonoBehaviour
     public int PeakHeight() => peakHeight;
     public int PeakAmount() => peakAmount;
     public int PeakHeightRange() => peakHeightRange;
+    public int DesertPercentage() => (int)desertPercentage;
+    public int ForestPercentage() => (int)forestPercentage;
+    public int SeaPercentage() => (int)seaPercentage;
 
 
     void Start()
@@ -608,7 +611,7 @@ public class Grid : MonoBehaviour
     {
         Recolor();
 
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             DestroyImmediate(transform.GetChild(i).GetComponent<Tile>());
             DestroyImmediate(transform.GetChild(i).GetComponent<BoxCollider>());
@@ -627,7 +630,7 @@ public class Grid : MonoBehaviour
 
     public void RotateWithWASD()
     {
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             transform.Rotate(rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
         }
