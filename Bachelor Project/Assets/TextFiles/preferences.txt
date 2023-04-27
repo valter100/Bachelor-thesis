@@ -365,3 +365,7 @@ sea96
 desert0
 desert0
 desert0
+desert0
+sea0
+forest0
+desert2

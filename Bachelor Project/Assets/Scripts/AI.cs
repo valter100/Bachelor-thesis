@@ -44,8 +44,6 @@ public class AI : MonoBehaviour
         {
             buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Option(i);
         }
-
-        //Toggle(true);
     }
 
     public void ChooseOption(int index)

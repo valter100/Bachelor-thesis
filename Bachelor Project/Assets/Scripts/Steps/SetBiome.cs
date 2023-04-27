@@ -11,6 +11,7 @@ public class SetBiome : Step
 
     string biomeName = "";
     string extraQuestion = "";
+    string extraOptOne, extraOptTwo, extraOptThree;
     bool offerHelp = false;
 
     private void Start()
@@ -21,9 +22,10 @@ public class SetBiome : Step
     protected override void SetText()
     {
         question = "Awesome! Now we have some cool " + biomeName + " tiles!" + extraQuestion;
-        optOne = "";
-        optTwo = "";
-        optThree = "";
+        optOne = "" + extraOptOne;
+        optTwo = "" + extraOptTwo;
+        optThree = "" + extraOptThree;
+        options.Clear();
         base.SetText();
     }
 
@@ -33,17 +35,16 @@ public class SetBiome : Step
         if (index == 0) biomeName = "desert";
         if (index == 1) biomeName = "sea";
         if (index == 2) biomeName = "forest";
-        SetText();
         if (offerHelp) SetOptions();
+        SetText();
         GiveTip();
     }
 
     private void SetOptions()
     {
-        optOne = "No i like it the way it is";
-        optTwo = "Sure add some more " + biomeName;
-        optThree = "Actully add a lot more of " + biomeName;
-        base.SetText();
+        extraOptOne = "No i like it the way it is";
+        extraOptTwo = "Sure add some more " + biomeName;
+        extraOptThree = "Actully add a lot more of " + biomeName;
     }
 
     public override void GiveTip()
