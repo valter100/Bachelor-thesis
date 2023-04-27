@@ -60,5 +60,6 @@ public class GridSelect : Step
 
         clappy.SetStep(3);
         handleObjects.PlaceObjectsAction();
+        grid.CalculateSubgridTypes();
     }
 }
