@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class SetBiome : Step
     [SerializeField] List<Color> biomeColors = new List<Color>();
     [SerializeField] List<float> heightDifference = new List<float>();
     [SerializeField] List<bool> biomeImpassable = new List<bool>();
+    List<Tile[,]> selectedSubgrids = new List<Tile[,]>();
+    Queue<Tile> Q = new Queue<Tile>();
     HandleObjects handleObjects;
 
     string biomeName = "";
@@ -58,7 +61,7 @@ public class SetBiome : Step
     {
         if (!offerHelp) return;
 
-        List<Tile[,]> selectedSubgrids = grid.SelectedGrids();
+        selectedSubgrids = grid.SelectedGrids();
         Tile[,] randomSubgrid = selectedSubgrids[Random.Range(0, selectedSubgrids.Count)];
 
 
@@ -76,7 +79,7 @@ public class SetBiome : Step
 
             if (reduce)
             {
-                int x = 0;
+                int x = 1;
                 int z = 0;
                 for (int i = tileAmount; i > 0; i--)
                 {
@@ -86,6 +89,7 @@ public class SetBiome : Step
                         x++;
                         if (x >= randomSubgrid.GetLength(0))
                         {
+                            if (tileAmount < randomSubgrid.GetLength(1)) continue;
                             x = 0;
                             z++;
                         }
@@ -97,23 +101,32 @@ public class SetBiome : Step
             }
             else
             {
-                Vector2 startpos = randomSubgrid[randomSubgrid.GetLength(0) - 1, randomSubgrid.GetLength(1) - 1].GetCoordinates();
-                Tile[,] basegrid = grid.GetBaseGrid();
-                int x = 0;
-                int z = 0;
-                for (int i = tileAmount; i > 0; i--)
+                Tile startpos = randomSubgrid[randomSubgrid.GetLength(0) / 2, randomSubgrid.GetLength(1) / 2];
+                List<Tile> tileList = new List<Tile>();
+
+                foreach (Tile t in randomSubgrid)
                 {
+                    tileList.Add(t);
+                }
+
+                bool done = false;
+                int x = 0;
+
+                while (!done)
+                {
+                    int goal = tileAmount;
                     try
                     {
-                        if ((int)startpos.x + x < basegrid.GetLength(0) && (int)startpos.y + z < basegrid.GetLength(1))
-                            newGrid.Add(basegrid[(int)startpos.x + x, (int)startpos.y + z]);
-                        x++;
-                        if (x >= randomSubgrid.GetLength(0))
+                        newGrid = grid.GetTilesAroundTile(startpos, x++);
+
+                        foreach (Tile t in newGrid)
                         {
-                            x = 0;
-                            z++;
+                            if (tileList.Contains(t)) continue;
+
+                            goal--;
                         }
-                        tileAmount--;
+
+                        if (goal <= 0) done = true;
                     }
                     catch
                     {
@@ -121,20 +134,33 @@ public class SetBiome : Step
                 }
             }
 
-            if (changeIndex != 3) ChangeBiomeOnSpecificGrid(newGrid, changeIndex);
+            Vector2 startPosition = new Vector2(Mathf.Infinity, Mathf.Infinity);
+            Vector2 endPosition = new Vector2(Mathf.NegativeInfinity, Mathf.NegativeInfinity);
+
+            foreach (Tile tile in newGrid)
+            {
+                if(tile.GetCoordinates().x < startPosition.x)
+                {
+                    if (tile.GetCoordinates().y < startPosition.y) startPosition = tile.GetCoordinates();
+                }
+
+                if(tile.GetCoordinates().x > startPosition.x)
+                {
+                    if (tile.GetCoordinates().y > startPosition.y) endPosition = tile.GetCoordinates();
+                }
+            }
+
+            Tile[,] newSubgrid = grid.GetTilesBetween(startPosition, endPosition);
+
+            grid.CreateSubgrid(newSubgrid);
+            grid.AddSelectedGrid(newSubgrid);
+            if (changeIndex != 3) ChangeBiomeOnSpecificGrid(newSubgrid, changeIndex);
             else ChangeBiomeNoHeight(newGrid, 3);
             handleObjects.PlaceObjectsAction();
         }
         if (actionIndex == 2)
         {
-            if (reduce)
-            {
-                ChangeBiomeNoHeight(3);
-            }
-            else
-            {
-
-            }
+            ChangeBiomeNoHeight(3);
         }
     }
 
@@ -151,8 +177,7 @@ public class SetBiome : Step
                 reduce = false;
                 percentageDifferece = preferenceHandler.desertPercentagePref - grid.DesertPercentage();
                 changeIndex = 1;
-                extraOptTwo = "Sure add some more " + biomeName;
-                extraOptThree = "Actully add a lot more of " + biomeName;
+                extraOptTwo = "Sure add some more desert";
             }
             else if (grid.DesertPercentage() > preferenceHandler.desertPercentagePref - threshold)
             {
@@ -161,7 +186,7 @@ public class SetBiome : Step
                 reduce = true;
                 percentageDifferece = preferenceHandler.desertPercentagePref - grid.DesertPercentage();
                 changeIndex = 3;
-                extraOptTwo = "Sure remove some " + biomeName;
+                extraOptTwo = "Sure remove some desert";
             }
         }
         if (index == 1)
@@ -173,8 +198,7 @@ public class SetBiome : Step
                 reduce = false;
                 percentageDifferece = preferenceHandler.seaPercentagePref - grid.SeaPercentage();
                 changeIndex = 2;
-                extraOptTwo = "Sure add some more " + biomeName;
-                extraOptThree = "Actully add a lot more of " + biomeName;
+                extraOptTwo = "Sure add some more sea";
             }
             else if (grid.SeaPercentage() > preferenceHandler.seaPercentagePref - threshold)
             {
@@ -183,7 +207,7 @@ public class SetBiome : Step
                 reduce = true;
                 percentageDifferece = preferenceHandler.seaPercentagePref - grid.SeaPercentage();
                 changeIndex = 3;
-                extraOptTwo = "Sure remove some " + biomeName;
+                extraOptTwo = "Sure remove some sea";
             }
         }
         if (index == 2)
@@ -195,8 +219,7 @@ public class SetBiome : Step
                 reduce = false;
                 percentageDifferece = preferenceHandler.forestPercentagePref - grid.ForestPercentage();
                 changeIndex = 3;
-                extraOptTwo = "Sure add some more " + biomeName;
-                extraOptThree = "Actully add a lot more of " + biomeName;
+                extraOptTwo = "Sure add some more forest";
             }
             else if (grid.ForestPercentage() > preferenceHandler.forestPercentagePref - threshold)
             {
@@ -205,7 +228,7 @@ public class SetBiome : Step
                 reduce = true;
                 percentageDifferece = preferenceHandler.forestPercentagePref - grid.ForestPercentage();
                 changeIndex = 2;
-                extraOptTwo = "Sure remove some " + biomeName;
+                extraOptTwo = "Sure remove some forest";
             }
         }
     }
@@ -276,22 +299,22 @@ public class SetBiome : Step
         }
     }
 
-    public void ChangeBiomeOnSpecificGrid(List<Tile> subgrid, int biomeIndex)
-    {
-        foreach (Tile tile in subgrid)
-        {
-            if (tile == null)
-                continue;
+    //public void ChangeBiomeOnSpecificGrid(List<Tile> subgrid, int biomeIndex)
+    //{
+    //    foreach (Tile tile in subgrid)
+    //    {
+    //        if (tile == null)
+    //            continue;
 
-            if (tile.PlacedObject())
-                Destroy(tile.PlacedObject());
+    //        if (tile.PlacedObject())
+    //            Destroy(tile.PlacedObject());
 
-            tile.SetBiome(biomeIndex, true);
-            tile.SetColor(biomeColors[biomeIndex]);
-            tile.SetHeight(heightDifference[biomeIndex]);
-            tile.SetImpassable(biomeImpassable[biomeIndex]);
-        }
-    }
+    //        tile.SetBiome(biomeIndex, true);
+    //        tile.SetColor(biomeColors[biomeIndex]);
+    //        tile.SetHeight(heightDifference[biomeIndex]);
+    //        tile.SetImpassable(biomeImpassable[biomeIndex]);
+    //    }
+    //}
 
     public void ChangeBiomeNoHeight(int biomeIndex)
     {

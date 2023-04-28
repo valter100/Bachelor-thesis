@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
     [SerializeField] Vector2 coordinates;
     [SerializeField] float height = 0;
     [SerializeField] float heightScale;
-    
+
     List<Tile> adjacentTiles;
     Grid grid;
     Tile[,] subgrid;
@@ -19,7 +19,7 @@ public class Tile : MonoBehaviour
     GameObject placedObject;
     int biomeIndex;
     int peakHeight;
-    
+
     bool visited;
     bool impassable;
     bool highlighted;
@@ -123,7 +123,7 @@ public class Tile : MonoBehaviour
 
         while (progress < 1)
         {
-            if(1 - progress < 0.1)
+            if (1 - progress < 0.1)
             {
                 progress = 1;
             }
@@ -177,9 +177,9 @@ public class Tile : MonoBehaviour
 
     public void SetBiome(int newIndex, bool rememberOldTransform)
     {
-        if(!rememberOldTransform)
+        if (!rememberOldTransform)
         {
-            if(oldPosition != Vector3.zero && oldScale != Vector3.zero)
+            if (oldPosition != Vector3.zero && oldScale != Vector3.zero)
             {
                 transform.localScale = oldScale;
                 transform.position = oldPosition;
@@ -262,7 +262,7 @@ public class Tile : MonoBehaviour
 
     public void InstantiateObjectOnTile(GameObject go)
     {
-        GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y/2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
+        GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y / 2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
 
         placedObject = instantiatedGo;
         placedObject.transform.parent = transform;
@@ -359,7 +359,7 @@ public class Tile : MonoBehaviour
 
     public void AddDifficulty(float addedDifficulty)
     {
-        difficultyLevel+=addedDifficulty;
+        difficultyLevel += addedDifficulty;
     }
 
     public GameObject PlacedObject() => placedObject;
@@ -371,6 +371,7 @@ public class Tile : MonoBehaviour
     public void SetF(float value) { fValue = value; }
     public void SetG(float value) { gValue = value; }
     public void SetH(float value) { hValue = value; }
+    public void SetVisited(bool state) { visited = state; }
     public void SetParent(Tile newParent) { parent = newParent; }
 
     public List<Tile> AdjacentTiles() => adjacentTiles;
@@ -384,6 +385,8 @@ public class Tile : MonoBehaviour
     public float F() => fValue;
     public float G() => gValue;
     public float H() => hValue;
+
+    public bool Visited() => visited;
     public Tile Parent() => parent;
 
 }
