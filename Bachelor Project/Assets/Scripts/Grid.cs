@@ -538,10 +538,12 @@ public class Grid : MonoBehaviour
         {
             for (int y = -radius; y < radius; y++)
             {
-                if (x == 0 && y == 0)
+                if (x == 0 && y == 0 || coordinates.x + x <= 0 || coordinates.x + x >= mapDimensions.x || coordinates.y + y <= 0 || coordinates.y + y >= mapDimensions.z)
                     continue;
 
+
                 tiles.Add(baseGrid[(int)coordinates.x + x, (int)coordinates.y + y]);
+
             }
         }
 

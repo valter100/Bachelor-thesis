@@ -29,7 +29,7 @@ public class SetBiome : Step
 
     protected override void SetText()
     {
-        question = "Awesome! Now we have some cool " + biomeName + " tiles!" + extraQuestion;
+        question = "Awesome! Now we have some cool " + biomeName + " tiles! " + extraQuestion;
         optOne = "" + extraOptOne;
         optTwo = "" + extraOptTwo;
         optThree = "" + extraOptThree;
@@ -39,6 +39,7 @@ public class SetBiome : Step
 
     public void SetBiomeName(int index)
     {
+        grid.CalculateSubgridTypes();
         CheckBiomePercentage(index);
         if (index == 0) biomeName = "desert";
         if (index == 1) biomeName = "sea";
@@ -89,7 +90,7 @@ public class SetBiome : Step
                         x++;
                         if (x >= randomSubgrid.GetLength(0))
                         {
-                            if (tileAmount < randomSubgrid.GetLength(1)) continue;
+                            if (tileAmount < randomSubgrid.GetLength(0)) continue;
                             x = 0;
                             z++;
                         }
@@ -122,7 +123,7 @@ public class SetBiome : Step
                         foreach (Tile t in newGrid)
                         {
                             if (tileList.Contains(t)) continue;
-
+                           
                             goal--;
                         }
 
@@ -167,7 +168,9 @@ public class SetBiome : Step
     public void CheckBiomePercentage(int index)
     {
         int threshold = 0;
-        int p = grid.DesertPercentage();
+        int a = grid.DesertPercentage();
+        int b = grid.ForestPercentage();
+        int c = grid.SeaPercentage();
         if (index == 0)
         {
             if (grid.DesertPercentage() < preferenceHandler.desertPercentagePref + threshold)
