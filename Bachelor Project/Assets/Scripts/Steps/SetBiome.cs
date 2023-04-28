@@ -90,7 +90,7 @@ public class SetBiome : Step
                         x++;
                         if (x >= randomSubgrid.GetLength(0))
                         {
-                            if (tileAmount < randomSubgrid.GetLength(0)) continue;
+                            if (tileAmount - i < randomSubgrid.GetLength(0) || tileAmount - i < randomSubgrid.GetLength(1)) continue;
                             x = 0;
                             z++;
                         }
@@ -113,11 +113,16 @@ public class SetBiome : Step
                 bool done = false;
                 int x = 0;
 
+                newGrid.Add(startpos);
+
                 while (!done)
                 {
                     int goal = tileAmount;
+
                     try
                     {
+                        if(goal <= 0 || x > grid.MapDimensions().x) done = true;
+
                         newGrid = grid.GetTilesAroundTile(startpos, x++);
 
                         foreach (Tile t in newGrid)
@@ -126,8 +131,6 @@ public class SetBiome : Step
                            
                             goal--;
                         }
-
-                        if (goal <= 0) done = true;
                     }
                     catch
                     {
@@ -145,9 +148,9 @@ public class SetBiome : Step
                     if (tile.GetCoordinates().y < startPosition.y) startPosition = tile.GetCoordinates();
                 }
 
-                if(tile.GetCoordinates().x > startPosition.x)
+                if(tile.GetCoordinates().x > endPosition.x)
                 {
-                    if (tile.GetCoordinates().y > startPosition.y) endPosition = tile.GetCoordinates();
+                    if (tile.GetCoordinates().y > endPosition.y) endPosition = tile.GetCoordinates();
                 }
             }
 
