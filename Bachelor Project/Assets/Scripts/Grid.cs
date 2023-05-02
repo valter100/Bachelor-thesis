@@ -460,9 +460,23 @@ public class Grid : MonoBehaviour
         {
             tilesBeforeMerge += grid.Length;
 
-            if (grid[0, 0].BiomeIndex() != newBiomeIndex)
+            bool foundTile = false;
+            for(int i = 0; i < grid.GetLength(0); i++)
             {
-                FindObjectOfType<SetBiome>().ChangeBiomeOnSpecificGrid(grid, newBiomeIndex);
+                for(int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (grid[i, j] == null)
+                        continue;
+
+                    if (grid[i, j].BiomeIndex() != newBiomeIndex)
+                    {
+                        FindObjectOfType<SetBiome>().ChangeBiomeOnSpecificGrid(grid, newBiomeIndex);
+                        foundTile = true;
+                        break;
+                    }
+                }
+                if (foundTile)
+                    break;
             }
 
             foreach (Tile tile in grid)

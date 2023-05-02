@@ -31,12 +31,14 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         StartCoroutine(HoverScaleLerp(transform.localScale, startScale, scaleSpeed));
 
-        HoverTip.OnMouseLostFocus();
+        if (tipToShow != "")
+            HoverTip.OnMouseLostFocus();
     }
 
     public void ShowMessage()
     {
-        HoverTip.OnMouseHover(tipToShow, Input.mousePosition, GetComponent<RectTransform>().rect.size.x);
+        if (tipToShow != "")
+            HoverTip.OnMouseHover(tipToShow, Input.mousePosition, GetComponent<RectTransform>().rect.size.x);
     }
 
     IEnumerator StartTimer()
@@ -50,7 +52,7 @@ public class HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         float progress = 0;
 
-        while(progress < 1)
+        while (progress < 1)
         {
             transform.localScale = Vector3.Lerp(startScale, endScale, progress);
 

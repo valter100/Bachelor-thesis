@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,15 +13,29 @@ public class PreferencePicker : MonoBehaviour
     [SerializeField] Transform baseTransform;
     [SerializeField] GameObject clappy;
     [SerializeField] TextHandler textHandler;
+    [SerializeField] TMP_Text gridCountText;
+    [SerializeField] Canvas startCanvas;
     Grid currentGrid;
+    int gridsSwipedOn;
+    int totalGrids;
 
     private void Start()
     {
-        ActivateNewGrid();
+        gridsSwipedOn = 0;
+        totalGrids = grids.Count;
     }
 
     private void Update()
     {
+        if (startCanvas.gameObject.activeSelf == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            startCanvas.gameObject.SetActive(false);
+            ActivateNewGrid();
+        }
+
+        if (startCanvas.gameObject.activeSelf)
+            return;
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             SendGridAway(notPickedTransform.position);
@@ -31,12 +46,17 @@ public class PreferencePicker : MonoBehaviour
             SendGridAway(pickedTransform.position);
             clappy.GetComponent<Animator>().Play("Cheer");
         }
+
+
     }
 
     public void ActivateNewGrid()
     {
         if (currentGrid)
+        {
             currentGrid.gameObject.SetActive(false);
+            grids.Remove(currentGrid);
+        }
 
         if(grids.Count == 0)
         {
@@ -47,7 +67,7 @@ public class PreferencePicker : MonoBehaviour
         int randomIndex = Random.Range(0, grids.Count);
 
         currentGrid = grids[randomIndex];
-        grids.RemoveAt(randomIndex);
+        clappy.GetComponent<Animator>().Play("Cheer");
 
         StartCoroutine(MoveGridToStartPosition());
     }
@@ -59,6 +79,9 @@ public class PreferencePicker : MonoBehaviour
 
     public void SendGridAway(Vector3 targetPosition)
     {
+        gridsSwipedOn++;
+        gridCountText.text = gridsSwipedOn + " / " + totalGrids;
+
         StartCoroutine(moveGrid(targetPosition));
     }
 
@@ -100,7 +123,6 @@ public class PreferencePicker : MonoBehaviour
         parentTransform.gameObject.SetActive(true);
 
         parentTransform.gameObject.transform.localScale = Vector3.zero;
-        //currentGrid.gameObject.transform.position = startTransform.position;
 
         float progress = 0f;
 
