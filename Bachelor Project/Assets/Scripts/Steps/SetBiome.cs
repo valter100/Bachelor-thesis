@@ -80,7 +80,7 @@ public class SetBiome : Step
 
             if (reduce)
             {
-                int x = 1;
+                int x = 0;
                 int z = 0;
                 for (int i = tileAmount; i > 0; i--)
                 {
@@ -90,7 +90,7 @@ public class SetBiome : Step
                         x++;
                         if (x >= randomSubgrid.GetLength(0))
                         {
-                            if (tileAmount - i < randomSubgrid.GetLength(0) || tileAmount - i < randomSubgrid.GetLength(1)) continue;
+                            if ( i < randomSubgrid.GetLength(0)) continue;
                             x = 0;
                             z++;
                         }
@@ -121,14 +121,14 @@ public class SetBiome : Step
 
                     try
                     {
-                        if(goal <= 0 || x > grid.MapDimensions().x) done = true;
+                        if (goal <= 0 || x > grid.MapDimensions().x) done = true;
 
                         newGrid = grid.GetTilesAroundTile(startpos, x++);
 
                         foreach (Tile t in newGrid)
                         {
                             if (tileList.Contains(t)) continue;
-                           
+
                             goal--;
                         }
                     }
@@ -143,12 +143,12 @@ public class SetBiome : Step
 
             foreach (Tile tile in newGrid)
             {
-                if(tile.GetCoordinates().x < startPosition.x)
+                if (tile.GetCoordinates().x < startPosition.x)
                 {
                     if (tile.GetCoordinates().y < startPosition.y) startPosition = tile.GetCoordinates();
                 }
 
-                if(tile.GetCoordinates().x > endPosition.x)
+                if (tile.GetCoordinates().x > endPosition.x)
                 {
                     if (tile.GetCoordinates().y > endPosition.y) endPosition = tile.GetCoordinates();
                 }
@@ -158,8 +158,7 @@ public class SetBiome : Step
 
             grid.CreateSubgrid(newSubgrid);
             grid.AddSelectedGrid(newSubgrid);
-            if (changeIndex != 3) ChangeBiomeOnSpecificGrid(newSubgrid, changeIndex);
-            else ChangeBiomeNoHeight(newGrid, 3);
+            ChangeBiomeOnSpecificGrid(newSubgrid, changeIndex);
             handleObjects.PlaceObjectsAction();
         }
         if (actionIndex == 2)
@@ -305,22 +304,6 @@ public class SetBiome : Step
         }
     }
 
-    //public void ChangeBiomeOnSpecificGrid(List<Tile> subgrid, int biomeIndex)
-    //{
-    //    foreach (Tile tile in subgrid)
-    //    {
-    //        if (tile == null)
-    //            continue;
-
-    //        if (tile.PlacedObject())
-    //            Destroy(tile.PlacedObject());
-
-    //        tile.SetBiome(biomeIndex, true);
-    //        tile.SetColor(biomeColors[biomeIndex]);
-    //        tile.SetHeight(heightDifference[biomeIndex]);
-    //        tile.SetImpassable(biomeImpassable[biomeIndex]);
-    //    }
-    //}
 
     public void ChangeBiomeNoHeight(int biomeIndex)
     {
