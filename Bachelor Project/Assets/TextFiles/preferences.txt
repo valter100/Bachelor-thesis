@@ -99,3 +99,13 @@ mapSizeZ32
 peakHeight6
 peakHeightRange4
 peakAmount5
+mapSizeX32
+mapSizeZ32
+peakHeight12
+peakHeightRange2
+peakAmount34
+desert4
+forest26
+sea0
+forest26
+forest71

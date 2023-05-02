@@ -169,10 +169,8 @@ public class SetBiome : Step
 
     public void CheckBiomePercentage(int index)
     {
-        int threshold = 0;
-        int a = grid.DesertPercentage();
-        int b = grid.ForestPercentage();
-        int c = grid.SeaPercentage();
+        int threshold = 20;
+        
         if (index == 0)
         {
             if (grid.DesertPercentage() < preferenceHandler.desertPercentagePref + threshold)
