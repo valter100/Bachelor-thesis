@@ -37,6 +37,7 @@ public class StartStep : Step
     {
         if (actionIndex == 0)
         {
+            
             CreateNewGridWithPreferences();
             clappy.SetStep(1);
         }
@@ -52,6 +53,7 @@ public class StartStep : Step
 
     public void CreateNewGridWithPreferences()
     {
+        FindObjectOfType<CreateGrid>().SetUIActive(true);
         int mapSizeX = preferenceHandler.mapSizeXPref;
         int mapSizeZ = preferenceHandler.mapSizeZPref;
 
@@ -61,4 +63,6 @@ public class StartStep : Step
 
         grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }
+
+
 }
