@@ -372,3 +372,5 @@ questionIndex:4/answerIndex:1/answer:Make it Sea
 questionIndex:5/answerIndex:1/answer:Sure add some more sea
 questionIndex:4/answerIndex:0/answer:Make it Desert
 questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:0/answerIndex:1/answer:Get out of my face!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!

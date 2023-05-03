@@ -33,8 +33,6 @@ public class Step : MonoBehaviour
 
     public virtual void GiveTip()
     {
-        if (clappy.inactive) return;
-
         clappy.GiveTip(this);
     }
 

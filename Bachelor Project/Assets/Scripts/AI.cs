@@ -14,7 +14,7 @@ public class AI : MonoBehaviour
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
-    public bool inactive = false;
+    private bool inactive;
 
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
@@ -28,6 +28,7 @@ public class AI : MonoBehaviour
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = gameObject.GetComponent<TextHandler>();
         Toggle(true);
+        inactive = false;
     }
 
     public enum ChatOption
