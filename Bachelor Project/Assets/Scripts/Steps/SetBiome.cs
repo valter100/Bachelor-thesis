@@ -121,8 +121,6 @@ public class SetBiome : Step
 
                     try
                     {
-                        if (goal <= 0 || x > grid.MapDimensions().x) done = true;
-
                         newGrid = grid.GetTilesAroundTile(startpos, x++);
 
                         foreach (Tile t in newGrid)
@@ -131,9 +129,12 @@ public class SetBiome : Step
 
                             goal--;
                         }
+
+                        if (goal <= 0 || x > grid.MapDimensions().x) done = true;
                     }
                     catch
                     {
+                        if (x > grid.MapDimensions().x) done = true;
                     }
                 }
             }

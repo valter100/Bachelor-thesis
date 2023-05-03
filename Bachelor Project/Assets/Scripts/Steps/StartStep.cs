@@ -37,8 +37,8 @@ public class StartStep : Step
     {
         if (actionIndex == 0)
         {
+            CreateNewGridWithPreferences();
             clappy.SetStep(1);
-            clappy.steps[1].DoAction(0);
         }
         if (actionIndex == 1)
         {
@@ -48,5 +48,17 @@ public class StartStep : Step
         {
             
         }
+    }
+
+    public void CreateNewGridWithPreferences()
+    {
+        int mapSizeX = preferenceHandler.mapSizeXPref;
+        int mapSizeZ = preferenceHandler.mapSizeZPref;
+
+        int peakHeight = preferenceHandler.peakHeightPref;
+        int peakHeightRange = preferenceHandler.peakHeightRangePref;
+        int peakAmount = preferenceHandler.peakAmountPref;
+
+        grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }
 }
