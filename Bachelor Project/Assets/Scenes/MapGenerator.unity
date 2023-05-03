@@ -694,10 +694,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4401783016748729550, guid: b6863fd1b7af2f44da1f58348bc4eb27,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 173.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401783016748729550, guid: b6863fd1b7af2f44da1f58348bc4eb27,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -404.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4401783016803576241, guid: b6863fd1b7af2f44da1f58348bc4eb27,
         type: 3}
       propertyPath: UIElements.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4401783016803576241, guid: b6863fd1b7af2f44da1f58348bc4eb27,
         type: 3}
@@ -713,17 +723,17 @@ PrefabInstance:
         type: 3}
       propertyPath: UIElements.Array.data[2]
       value: 
-      objectReference: {fileID: 1914050625}
+      objectReference: {fileID: 1238766577}
     - target: {fileID: 4401783016803576241, guid: b6863fd1b7af2f44da1f58348bc4eb27,
         type: 3}
       propertyPath: UIElements.Array.data[3]
       value: 
-      objectReference: {fileID: 1238766577}
+      objectReference: {fileID: 427013445}
     - target: {fileID: 4401783016803576241, guid: b6863fd1b7af2f44da1f58348bc4eb27,
         type: 3}
       propertyPath: UIElements.Array.data[4]
       value: 
-      objectReference: {fileID: 427013445}
+      objectReference: {fileID: 608848854}
     - target: {fileID: 4401783016803576241, guid: b6863fd1b7af2f44da1f58348bc4eb27,
         type: 3}
       propertyPath: UIElements.Array.data[5]
@@ -955,12 +965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c8e5270e026be4fa0ca4af8619b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1914050625 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4401783017129743787, guid: b6863fd1b7af2f44da1f58348bc4eb27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1241422152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1483273720580573338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1211,7 +1215,7 @@ PrefabInstance:
     - target: {fileID: 3812073516555457781, guid: 8665d2c9d0eeba642847d49670653bfa,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3812073516623432968, guid: 8665d2c9d0eeba642847d49670653bfa,
         type: 3}
