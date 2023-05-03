@@ -391,6 +391,7 @@ public class Tile : MonoBehaviour
     public void SetF(float value) { fValue = value; }
     public void SetG(float value) { gValue = value; }
     public void SetH(float value) { hValue = value; }
+    public void SetVisited(bool state) { visited = state; }
     public void SetParent(Tile newParent) { parent = newParent; }
 
     public List<Tile> AdjacentTiles() => adjacentTiles;
@@ -404,6 +405,8 @@ public class Tile : MonoBehaviour
     public float F() => fValue;
     public float G() => gValue;
     public float H() => hValue;
+
+    public bool Visited() => visited;
     public Tile Parent() => parent;
 
 }

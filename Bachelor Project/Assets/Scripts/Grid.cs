@@ -44,6 +44,9 @@ public class Grid : MonoBehaviour
     public int PeakHeight() => peakHeight;
     public int PeakAmount() => peakAmount;
     public int PeakHeightRange() => peakHeightRange;
+    public int DesertPercentage() => (int)desertPercentage;
+    public int ForestPercentage() => (int)forestPercentage;
+    public int SeaPercentage() => (int)seaPercentage;
 
 
     void Start()
@@ -564,10 +567,12 @@ public class Grid : MonoBehaviour
         {
             for (int y = -radius; y < radius; y++)
             {
-                if (x == 0 && y == 0)
+                if (x == 0 && y == 0 || coordinates.x + x < 0 || coordinates.x + x > mapDimensions.x || coordinates.y + y < 0 || coordinates.y + y > mapDimensions.z)
                     continue;
 
+
                 tiles.Add(baseGrid[(int)coordinates.x + x, (int)coordinates.y + y]);
+
             }
         }
 
@@ -648,6 +653,7 @@ public class Grid : MonoBehaviour
         rotateSpeed = 180;
         scaleSpeed = 15;
     }
+
     public Vector2 MapDimensions() => mapDimensions;
     public bool Locked() => locked;
 }

@@ -44,8 +44,6 @@ public class AI : MonoBehaviour
         {
             buttons[i].GetComponentInChildren<TMP_Text>().text = currentStep.Option(i);
         }
-
-        //Toggle(true);
     }
 
     public void ChooseOption(int index)
@@ -59,7 +57,7 @@ public class AI : MonoBehaviour
         //Toggle(false);
     }
 
-    void Toggle(bool state)
+    public void Toggle(bool state)
     {
         foreach (Button button in buttons)
         {
@@ -74,7 +72,7 @@ public class AI : MonoBehaviour
         inactive = true;
         gameObject.SetActive(false);
     }
-    
+
     public void SetStep(int index)
     {
         activeStep = steps[index];

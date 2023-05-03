@@ -146,6 +146,7 @@ public class TextHandler : MonoBehaviour
         return true;
     }
 
+    [ContextMenu("ResetClappy")]
     public void ResetClappysMemory()
     {
         sw = new StreamWriter(aPath);
