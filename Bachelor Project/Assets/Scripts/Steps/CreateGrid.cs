@@ -13,15 +13,16 @@ public class CreateGrid : Step
     [SerializeField] TMP_InputField peakHeightInput;
     [SerializeField] TMP_InputField peakheightRangeInput;
 
+
     protected override void SetText()
     {
         question = "Well that looks cool! Might look even better with a river or moutain! would you like me to fix that for you?";
         optOne = "A river sounds pretty cool";
         optTwo = "Wouldn't say no to a moutain";
         optThree = "Leave me alone... Creep!!";
+
         base.SetText();
     }
-
 
     public override void GiveTip()
     {
@@ -68,11 +69,10 @@ public class CreateGrid : Step
 
     public void CreateNewGrid()
     {
-        //clappy.setNextStep();
         SetUIActive(true);
         FindObjectOfType<CreateSubgrid>().SetUIActive(true);
         grid.CreateGrid(
-            int.Parse(xInput.text), 
+            int.Parse(xInput.text),
             int.Parse(zInput.text),
             int.Parse(peakHeightInput.text),
             int.Parse(peakheightRangeInput.text),

@@ -37,6 +37,8 @@ public class AI : MonoBehaviour
 
     public void GiveTip(Step currentStep)
     {
+        if (inactive) return;
+
         tipMessage.text = currentStep.Question();
         activeStep = currentStep;
 
@@ -48,6 +50,8 @@ public class AI : MonoBehaviour
 
     public void ChooseOption(int index)
     {
+        if (inactive) return;
+
         chatOption = (ChatOption)index;
 
         textHandler.SaveAnswers(activeStep.Index(), index, activeStep.Option(index));
