@@ -24,6 +24,7 @@ public class Tile : MonoBehaviour
     bool impassable;
     bool highlighted;
 
+    Color plainColor;
     Color highlightedColor;
     [SerializeField] Color baseColor;
     Color previousColor;
@@ -117,11 +118,24 @@ public class Tile : MonoBehaviour
 
         height += (int)((peakHeight / (distanceToPeak + 1) * heightScale));
 
-        transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
+        transform.localScale = new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
         transform.position = new Vector3(transform.position.x, (int)(transform.localScale.y * 0.5), transform.position.z);
 
         if (biomeIndex == 2)
-            FindObjectOfType<SetBiome>().ChangeBiomeOfTileNoHeight(this, 3);
+        {
+            SetColor(plainColor);
+            biomeIndex = 0;
+        }
+
+        if (placedObject)
+        {
+            Destroy(placedObject);
+        }
+
+        if (biomeIndex != 2)
+        {
+            impassable = false;
+        }
 
         StartSpawnAnimation();
 
@@ -172,6 +186,7 @@ public class Tile : MonoBehaviour
 
     public void SetColors(Color baseColor, Color highlightedColor)
     {
+        plainColor = baseColor;
         oldBaseColor = baseColor;
         oldPreviousColor = previousColor;
         oldSelectedColor = selectedColor;

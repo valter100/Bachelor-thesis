@@ -68,7 +68,7 @@ public class HandleObjects : Step
                     List<GameObject> list = biomeObjects[listIndex];
                     int objectIndex = Random.Range(0, list.Count);
                     tile.InstantiateObjectOnTile(list[objectIndex]);
-                    yield return new WaitForSeconds(0.025f);
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
         }

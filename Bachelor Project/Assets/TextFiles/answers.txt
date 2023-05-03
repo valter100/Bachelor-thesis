@@ -452,3 +452,183 @@ questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
 questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:0/answerIndex:1/answer:Don't need your help right now!
+questionIndex:0/answerIndex:1/answer:Don't need your help right now!
+questionIndex:0/answerIndex:1/answer:Don't need your help right now!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:2/answer:I think i'd rather work alone
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river

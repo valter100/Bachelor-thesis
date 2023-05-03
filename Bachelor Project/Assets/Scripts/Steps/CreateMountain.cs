@@ -9,7 +9,7 @@ public class CreateMountain : Step
 
     public void RandomizePeakLocation()
     {
-        peakHeight = Random.Range(1, 6);
+        peakHeight = Random.Range(1, 5);
         peakLocation = new Vector3(Random.Range(0, grid.GetBaseGrid().GetLength(0)), 0, Random.Range(0, grid.GetBaseGrid().GetLength(1)));
     }
 
