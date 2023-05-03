@@ -121,7 +121,7 @@ public class MouseInput : MonoBehaviour
         if (highlightedTiles.Length > 0 || highlightedTiles.LongLength > 0)
         {
             if (!canceled)
-                baseGrid.CreateSubgrid(highlightedTiles);
+                baseGrid.CreateSubgrid(highlightedTiles, true);
         }
 
         creatingSubgrid = false;

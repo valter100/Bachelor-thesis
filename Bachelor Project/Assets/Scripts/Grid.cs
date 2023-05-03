@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField] bool preferencePicking;
     [SerializeField] GameObject tile;
     [SerializeField] Vector3 mapDimensions;
     [SerializeField] float tileBuffer;
@@ -53,18 +52,6 @@ public class Grid : MonoBehaviour
     void Start()
     {
         subgridColor = UnityEngine.Random.ColorHSV();
-    }
-
-    private void Update()
-    {
-        if (!preferencePicking)
-            return;
-
-        if (Input.mouseScrollDelta.y != 0)
-            ScaleWithMouseWheel();
-
-        if (Input.GetMouseButton(0))
-            RotateWithMouse();
     }
 
     public void CreateGrid(float xSize, float zSize)
@@ -125,7 +112,6 @@ public class Grid : MonoBehaviour
         this.peakHeight = peakHeight;
         this.peakHeightRange = peakHeightRange;
         this.peakAmount = peakAmount;
-        //int tilesCreatedEachFrame = 1;
 
         baseGrid = new Tile[mapsizeX, mapSizeZ];
 
@@ -193,16 +179,43 @@ public class Grid : MonoBehaviour
         yield return null;
     }
 
-    public void CreateSubgrid(Tile[,] subgrid)
+    public void CreateSubgridFromList(List<Tile> tileList, bool setColor)
+    {
+        int squareRoot = (int)Mathf.Sqrt(tileList.Count) + 1;
+        Tile[,] tempArray = new Tile[squareRoot, squareRoot];
+
+        int tileCount = 0;
+
+        for (int i = 0; i < squareRoot; i++)
+        {
+            for (int j = 0; j < squareRoot; j++)
+            {
+                tempArray[i, j] = tileList[tileCount++];
+                if (tileCount >= tileList.Count)
+                    break;
+            }
+            if (tileCount >= tileList.Count)
+                break;
+        }
+
+        CreateSubgrid(tempArray, setColor);
+    }
+
+    public Tile[,] CreateSubgrid(Tile[,] subgrid, bool setColor)
     {
         foreach (Tile tile in subgrid)
         {
+            if (tile == null)
+                continue;
+
             if (tile.PartOfSubgrid())
             {
+                Debug.Log(tile.gameObject.name);
                 tile.RemoveFromSubgrid();
             }
 
-            tile.SetColor(subgridColor);
+            if (setColor)
+                tile.SetColor(subgridColor);
             tile.SetPartOfSubgrid(subgrid);
         }
 
@@ -213,6 +226,8 @@ public class Grid : MonoBehaviour
         RemoveEmptySubgrids();
 
         numberOfSubgrids = subgridList.Count;
+
+        return subgrid;
     }
 
     public Tile[,] GetSubgrid(int index)
@@ -227,7 +242,7 @@ public class Grid : MonoBehaviour
     }
 
     public Tile[,] GetBaseGrid() => baseGrid;
-    public Tile getTileByCoordinate(int x, int y) => baseGrid[x, y];
+    public Tile GetTileByCoordinate(int x, int y) => baseGrid[x, y];
 
     public void SetGridDimension(int x, int y, int z)
     {
@@ -292,7 +307,7 @@ public class Grid : MonoBehaviour
         if (startCoordinates == endCoordinates)
         {
             tempGrid = new Tile[1, 1];
-            tempGrid[0, 0] = getTileByCoordinate((int)startCoordinates.x, (int)startCoordinates.y);
+            tempGrid[0, 0] = GetTileByCoordinate((int)startCoordinates.x, (int)startCoordinates.y);
             return tempGrid;
         }
 
@@ -461,9 +476,9 @@ public class Grid : MonoBehaviour
             tilesBeforeMerge += grid.Length;
 
             bool foundTile = false;
-            for(int i = 0; i < grid.GetLength(0); i++)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                for(int j = 0; j < grid.GetLength(1); j++)
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     if (grid[i, j] == null)
                         continue;
@@ -639,36 +654,6 @@ public class Grid : MonoBehaviour
         scaleSpeed = 15;
     }
 
-    public void RotateWithMouse()
-    {
-        transform.Rotate(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime * -1, 0, Space.Self);
-    }
-
-    public void RotateWithWASD()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Rotate(rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.Self);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Rotate(rotateSpeed * Time.deltaTime * -1, 0, 0, Space.Self);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(0, rotateSpeed * Time.deltaTime * -1, 0, Space.Self);
-        }
-    }
-
-    public void ScaleWithMouseWheel()
-    {
-        float value = Input.mouseScrollDelta.y;
-        transform.localScale += new Vector3(value, value, value) * Time.deltaTime;
-    }
     public Vector2 MapDimensions() => mapDimensions;
     public bool Locked() => locked;
 }

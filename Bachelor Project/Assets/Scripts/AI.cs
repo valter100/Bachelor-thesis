@@ -26,7 +26,7 @@ public class AI : MonoBehaviour
     private void Start()
     {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
-        textHandler = gameObject.GetComponent<TextHandler>();
+        textHandler = FindObjectOfType<TextHandler>();
         Toggle(true);
         inactive = false;
     }

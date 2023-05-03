@@ -41,6 +41,7 @@ public class SledgeHammer : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         DestroyPlacedObject(clickedTile.PlacedObject());
+                        clickedTile.SetImpassable(false);
                     }
                 }
             }

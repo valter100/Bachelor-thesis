@@ -66,7 +66,7 @@ public class Tile : MonoBehaviour
 
                 try
                 {
-                    Tile tile = grid.getTileByCoordinate((int)coordinates.x + i, (int)coordinates.y + j);
+                    Tile tile = grid.GetTileByCoordinate((int)coordinates.x + i, (int)coordinates.y + j);
 
                     adjacentTiles.Add(tile);
 
@@ -106,6 +106,26 @@ public class Tile : MonoBehaviour
 
         transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
         transform.position += new Vector3(0, height - (float)(transform.localScale.y * 0.5), 0);
+    }
+
+    public Tile SetHeightWithNewPeak(Vector2 peakPosition, float peakHeight)
+    {
+        float distanceToPeak = Vector2.Distance(coordinates, peakPosition);
+
+        if (distanceToPeak > peakHeight + 3)
+            return null;
+
+        height += (int)((peakHeight / (distanceToPeak + 1) * heightScale));
+
+        transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
+        transform.position = new Vector3(transform.position.x, (int)(transform.localScale.y * 0.5), transform.position.z);
+
+        if (biomeIndex == 2)
+            FindObjectOfType<SetBiome>().ChangeBiomeOfTileNoHeight(this, 3);
+
+        StartSpawnAnimation();
+
+        return this;
     }
 
     public void StartSpawnAnimation()
