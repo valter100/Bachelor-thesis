@@ -20,7 +20,7 @@ public class CreateSubgrid : Step
 
     public override void DoAction(int actionIndex)
     {
-        //grid.CreateSubgrid();
+        
         if (actionIndex == 0)
         {
 

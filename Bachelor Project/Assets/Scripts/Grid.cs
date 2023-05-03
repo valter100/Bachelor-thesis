@@ -52,6 +52,7 @@ public class Grid : MonoBehaviour
     void Start()
     {
         subgridColor = UnityEngine.Random.ColorHSV();
+        ai = FindObjectOfType<AI>().GetComponent<AI>();
     }
 
     public void CreateGrid(float xSize, float zSize)
@@ -361,8 +362,8 @@ public class Grid : MonoBehaviour
 
     public void DeselectSubgrids()
     {
-        if (selectedGrids.Count == 0 || locked)
-            return;
+        if (selectedGrids.Count == 0 || locked) return;
+        
 
         for (int i = 0; i < SelectedGrids().Count; i++)
         {

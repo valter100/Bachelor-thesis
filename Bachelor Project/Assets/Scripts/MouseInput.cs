@@ -61,6 +61,7 @@ public class MouseInput : MonoBehaviour
                 if (selectedGrids.Contains(clickedTile.Subgrid()))
                 {
                     DeselectSubgrid(); //We deselect the grid and end the update
+                    if (selectedGrids.Count == 0) clappy.SetStep(1);
                     return;
                 }
                 else if (!selectedGrids.Contains(clickedTile.Subgrid()) && Input.GetKey(KeyCode.LeftShift))
@@ -76,6 +77,7 @@ public class MouseInput : MonoBehaviour
             else //If we did not click on a tile that is a part of a subgrid
             {
                 DeselectSubgrid(); //We try to deselect the currently selected subgrid
+                if (selectedGrids.Count == 0) clappy.SetStep(1);
             }
         }
     }
