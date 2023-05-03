@@ -25,9 +25,9 @@ public class PreferenceHandler : MonoBehaviour
 
 
         numberOfPeakPref = textHandler.GetPreferenceAmount("peakAmount");
-        if (numberOfPeakPref > 0) peakHeightPref = textHandler.GetPreferences("peakHeight");
-        if (numberOfPeakPref > 0) peakHeightRangePref = textHandler.GetPreferences("peakHeightRange");
-        if (numberOfPeakPref > 0) peakAmountPref = textHandler.GetPreferences("peakAmount");
+        if (numberOfPeakPref > 0) peakHeightPref = textHandler.GetPreferences("peakHeight") / numberOfPeakPref;
+        if (numberOfPeakPref > 0) peakHeightRangePref = textHandler.GetPreferences("peakHeightRange") / numberOfPeakPref;
+        if (numberOfPeakPref > 0) peakAmountPref = textHandler.GetPreferences("peakAmount") / numberOfPeakPref;
 
 
         if (textHandler.GetPreferenceAmount("desert") > 0) desertPercenteagePref = textHandler.GetPreferences("desert") / textHandler.GetPreferenceAmount("desert");

@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
     [SerializeField] Vector2 coordinates;
     [SerializeField] float height = 0;
     [SerializeField] float heightScale;
-    
+
     List<Tile> adjacentTiles;
     Grid grid;
     Tile[,] subgrid;
@@ -19,7 +19,7 @@ public class Tile : MonoBehaviour
     GameObject placedObject;
     int biomeIndex;
     int peakHeight;
-    
+
     bool visited;
     bool impassable;
     bool highlighted;
@@ -66,7 +66,7 @@ public class Tile : MonoBehaviour
 
                 try
                 {
-                    Tile tile = grid.getTileByCoordinate((int)coordinates.x + i, (int)coordinates.y + j);
+                    Tile tile = grid.GetTileByCoordinate((int)coordinates.x + i, (int)coordinates.y + j);
 
                     adjacentTiles.Add(tile);
 
@@ -108,6 +108,26 @@ public class Tile : MonoBehaviour
         transform.position += new Vector3(0, height - (float)(transform.localScale.y * 0.5), 0);
     }
 
+    public Tile SetHeightWithNewPeak(Vector2 peakPosition, float peakHeight)
+    {
+        float distanceToPeak = Vector2.Distance(coordinates, peakPosition);
+
+        if (distanceToPeak > peakHeight + 3)
+            return null;
+
+        height += (int)((peakHeight / (distanceToPeak + 1) * heightScale));
+
+        transform.localScale += new Vector3(0, (int)Mathf.Clamp(height, 1, Mathf.Infinity), 0);
+        transform.position = new Vector3(transform.position.x, (int)(transform.localScale.y * 0.5), transform.position.z);
+
+        if (biomeIndex == 2)
+            FindObjectOfType<SetBiome>().ChangeBiomeOfTileNoHeight(this, 3);
+
+        StartSpawnAnimation();
+
+        return this;
+    }
+
     public void StartSpawnAnimation()
     {
         StartCoroutine(spawnAnimation());
@@ -123,7 +143,7 @@ public class Tile : MonoBehaviour
 
         while (progress < 1)
         {
-            if(1 - progress < 0.1)
+            if (1 - progress < 0.1)
             {
                 progress = 1;
             }
@@ -177,9 +197,9 @@ public class Tile : MonoBehaviour
 
     public void SetBiome(int newIndex, bool rememberOldTransform)
     {
-        if(!rememberOldTransform)
+        if (!rememberOldTransform)
         {
-            if(oldPosition != Vector3.zero && oldScale != Vector3.zero)
+            if (oldPosition != Vector3.zero && oldScale != Vector3.zero)
             {
                 transform.localScale = oldScale;
                 transform.position = oldPosition;
@@ -262,7 +282,7 @@ public class Tile : MonoBehaviour
 
     public void InstantiateObjectOnTile(GameObject go)
     {
-        GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y/2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
+        GameObject instantiatedGo = Instantiate(go, transform.position + new Vector3(0, transform.localScale.y / 2, 0), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
 
         placedObject = instantiatedGo;
         placedObject.transform.parent = transform;
@@ -359,7 +379,7 @@ public class Tile : MonoBehaviour
 
     public void AddDifficulty(float addedDifficulty)
     {
-        difficultyLevel+=addedDifficulty;
+        difficultyLevel += addedDifficulty;
     }
 
     public GameObject PlacedObject() => placedObject;

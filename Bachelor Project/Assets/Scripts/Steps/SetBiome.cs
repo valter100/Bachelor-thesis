@@ -50,8 +50,51 @@ public class SetBiome : Step
         }
         if (actionIndex == 2)
         {
-            
+
         }
+    }
+
+    public void ChangeBiomeOfGrid(List<Tile> gridList, int biomeIndex)
+    {
+        StartStep();
+
+        if (biomeIndex == 2)
+        {
+            float waterHeight = CalculateWaterHeight();
+            heightDifference[biomeIndex] = waterHeight;
+        }
+
+        foreach (Tile tile in gridList)
+        {
+            if (tile.PlacedObject())
+                Destroy(tile.PlacedObject());
+
+            tile.SetBiome(biomeIndex, true);
+            tile.SetColor(biomeColors[biomeIndex]);
+            tile.SetHeight(heightDifference[biomeIndex]);
+            tile.SetImpassable(biomeImpassable[biomeIndex]);
+        }
+    }
+
+    public void ChangeBiomeOfTile(Tile tile, int biomeIndex)
+    {
+        if (tile.PlacedObject())
+            Destroy(tile.PlacedObject());
+
+        tile.SetBiome(biomeIndex, true);
+        tile.SetColor(biomeColors[biomeIndex]);
+        tile.SetHeight(heightDifference[biomeIndex]);
+        tile.SetImpassable(biomeImpassable[biomeIndex]);
+    }
+
+    public void ChangeBiomeOfTileNoHeight(Tile tile, int biomeIndex)
+    {
+        if (tile.PlacedObject())
+            Destroy(tile.PlacedObject());
+
+        tile.SetBiome(biomeIndex, true);
+        tile.SetColor(biomeColors[biomeIndex]);
+        tile.SetImpassable(biomeImpassable[biomeIndex]);
     }
 
     public void ChangeBiome(int biomeIndex)
@@ -71,7 +114,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.PlacedObject())
+                if (tile.PlacedObject())
                     Destroy(tile.PlacedObject());
 
                 tile.SetBiome(biomeIndex, true);
@@ -93,7 +136,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.Height() < lowestHeight)
+                if (tile.Height() < lowestHeight)
                 {
                     lowestHeight = tile.Height();
                 }
@@ -129,7 +172,7 @@ public class SetBiome : Step
                 if (tile == null)
                     continue;
 
-                if(tile.PlacedObject())
+                if (tile.PlacedObject())
                     Destroy(tile.PlacedObject());
 
                 tile.SetBiome(biomeIndex, false);
