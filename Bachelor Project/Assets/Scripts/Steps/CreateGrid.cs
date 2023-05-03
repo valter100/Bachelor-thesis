@@ -15,10 +15,10 @@ public class CreateGrid : Step
 
     protected override void SetText()
     {
-        question = "Well that looks cool! Do you like it or do you want me to createa new one for you?";
-        optOne = "New one please!";
-        optTwo = "Keep it!";
-        optThree = "Leave me alone... Creep!!";
+        question = "Well that looks cool! Might look even cooler with a river or a mountain, want me to help you with that?";
+        optOne = "Wouldn't say no to a river";
+        optTwo = "A mountain would be cool!";
+        optThree = "I think i'd rather work alone";
         base.SetText();
     }
 
@@ -26,6 +26,7 @@ public class CreateGrid : Step
     public override void GiveTip()
     {
         base.GiveTip();
+
     }
 
     public void ActivateSizeWindow()
@@ -45,11 +46,12 @@ public class CreateGrid : Step
 
         if (actionIndex == 0)
         {
-            CreateNewGridWithPreferences();
+            createRiver.MakeRiver();
             return;
         }
         if (actionIndex == 1)
         {
+            createMoutain.AddPeak();
             return;
         }
         if (actionIndex == 2)
@@ -86,17 +88,5 @@ public class CreateGrid : Step
         textHandler.SavePreferenses("peakHeight" + grid.PeakHeight().ToString());
         textHandler.SavePreferenses("peakHeightRange" + grid.PeakHeightRange().ToString());
         textHandler.SavePreferenses("peakAmount" + grid.PeakAmount().ToString());
-    }
-
-    public void CreateNewGridWithPreferences()
-    {
-        int mapSizeX = preferenceHandler.mapSizeXPref;
-        int mapSizeZ = preferenceHandler.mapSizeZPref;
-
-        int peakHeight = preferenceHandler.peakHeightPref;
-        int peakHeightRange = preferenceHandler.peakHeightRangePref;
-        int peakAmount = preferenceHandler.peakAmountPref;
-
-        grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }
 }

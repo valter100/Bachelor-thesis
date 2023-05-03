@@ -6,6 +6,8 @@ TagManager:
   tags:
   - tile
   - Tool
+  - mascotText
+  - mascot
   layers:
   - Default
   - TransparentFX

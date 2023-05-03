@@ -20,6 +20,8 @@ public class Step : MonoBehaviour
 	
     protected string question, optOne, optTwo, optThree;
 
+    protected CreateMountain createMoutain;
+    protected CreateRiver createRiver;
 
     protected virtual void Start()
     {
@@ -27,14 +29,15 @@ public class Step : MonoBehaviour
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = FindObjectOfType<TextHandler>();
         preferenceHandler = clappy.gameObject.GetComponent<PreferenceHandler>();
+        createMoutain = clappy.GetComponentInChildren<CreateMountain>();
+        createRiver = clappy.GetComponentInChildren<CreateRiver>();
         SetText();
         GetUserAnswers();
+
     }
 
     public virtual void GiveTip()
     {
-        if (clappy.inactive) return;
-
         clappy.GiveTip(this);
     }
 

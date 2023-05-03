@@ -23,8 +23,8 @@ public class StartStep : Step
     {
         question = "Hey there! I see you are trying to create some terrain! Would you like some help with that?";
         optOne = "Please help me Clappy!";
-        optTwo = "Get out of my face!";
-        optThree = "I'll let you live, but you're on thin ice...";
+        optTwo = "Don't need your help right now!";
+        optThree = "I'd rather work alone thank you";
         base.SetText();
     }
 
@@ -37,16 +37,28 @@ public class StartStep : Step
     {
         if (actionIndex == 0)
         {
+            FindObjectOfType<CreateGrid>().SetUIActive(true);
+            CreateNewGridWithPreferences();
             clappy.SetStep(1);
-            clappy.steps[1].DoAction(0);
         }
         if (actionIndex == 1)
         {
-            clappy.SetInactive();
+            
         }
         if (actionIndex == 2)
         {
-            
+            clappy.SetInactive();
         }
+    }
+    public void CreateNewGridWithPreferences()
+    {
+        int mapSizeX = preferenceHandler.mapSizeXPref;
+        int mapSizeZ = preferenceHandler.mapSizeZPref;
+
+        int peakHeight = preferenceHandler.peakHeightPref;
+        int peakHeightRange = preferenceHandler.peakHeightRangePref;
+        int peakAmount = preferenceHandler.peakAmountPref;
+
+        grid.CreateGrid(mapSizeX, mapSizeZ, peakHeight, peakHeightRange, peakAmount);
     }
 }

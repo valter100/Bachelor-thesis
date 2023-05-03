@@ -14,7 +14,10 @@ public class AI : MonoBehaviour
     [SerializeField] TMP_Text tipMessage;
     [SerializeField] Image image;
     ChatOption chatOption;
-    public bool inactive = false;
+
+    private bool inactive;
+    GameObject mascotText;
+    GameObject mascot;
 
     [SerializeField] int answerAmount;
     [SerializeField] Button[] buttons;
@@ -27,7 +30,10 @@ public class AI : MonoBehaviour
     {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         textHandler = FindObjectOfType<TextHandler>();
+        mascotText = GameObject.FindGameObjectWithTag("mascotText");
+        mascot = GameObject.FindGameObjectWithTag("mascot");
         Toggle(true);
+        inactive = false;
     }
 
     public enum ChatOption
@@ -37,6 +43,8 @@ public class AI : MonoBehaviour
 
     public void GiveTip(Step currentStep)
     {
+        if (inactive) return;
+
         tipMessage.text = currentStep.Question();
         activeStep = currentStep;
 
@@ -70,7 +78,9 @@ public class AI : MonoBehaviour
     public void SetInactive()
     {
         inactive = true;
-        gameObject.SetActive(false);
+        Toggle(false);
+        mascotText.SetActive(false);
+        mascot.SetActive(false);
     }
 
     public void SetStep(int index)
