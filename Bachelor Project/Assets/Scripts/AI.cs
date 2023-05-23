@@ -32,8 +32,7 @@ public class AI : MonoBehaviour
         textHandler = FindObjectOfType<TextHandler>();
         mascotText = GameObject.FindGameObjectWithTag("mascotText");
         mascot = GameObject.FindGameObjectWithTag("mascot");
-        Toggle(true);
-        inactive = false;
+        SetInactive();
     }
 
     public enum ChatOption

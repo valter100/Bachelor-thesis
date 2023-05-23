@@ -52,7 +52,14 @@ public class Grid : MonoBehaviour
     void Start()
     {
         subgridColor = UnityEngine.Random.ColorHSV();
-        ai = FindObjectOfType<AI>().GetComponent<AI>();
+        try
+        {
+            ai = FindObjectOfType<AI>().GetComponent<AI>();
+        }
+        catch
+        {
+
+        }
     }
 
     public void CreateGrid(float xSize, float zSize)

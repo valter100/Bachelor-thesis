@@ -632,3 +632,250 @@ questionIndex:1/answerIndex:1/answer:A mountain would be cool!
 questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
 questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
 questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure add some more forest
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:2/answer:Actully remove the subgrid with desert
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:5/answerIndex:2/answer:Actully remove the subgrid with sea
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:0/answer:No i like it the way it is
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:0/answer:No i like it the way it is
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:2/answer:Actully remove the subgrid with desert
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure add some more forest
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure add some more forest
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:5/answerIndex:1/answer:Sure add some more sea
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure add some more forest
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure add some more forest
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:0/answer:No i like it the way it is
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure add some more desert
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure remove some desert
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure remove some desert
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:5/answerIndex:1/answer:Sure add some more sea
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure remove some forest
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:0/answer:No i like it the way it is
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:5/answerIndex:1/answer:Sure remove some desert
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:1/answer:Sure remove some forest
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:4/answerIndex:0/answer:Make it Desert
+questionIndex:4/answerIndex:1/answer:Make it Sea
+questionIndex:5/answerIndex:1/answer:Sure add some more sea
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:0/answer:No i like it the way it is
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:5/answerIndex:2/answer:Actully remove the subgrid with forest
+questionIndex:4/answerIndex:2/answer:Make it Forest
+questionIndex:0/answerIndex:0/answer:Please help me Clappy!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:1/answer:A mountain would be cool!
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
+questionIndex:1/answerIndex:0/answer:Wouldn't say no to a river
